@@ -31,7 +31,7 @@ Bemerkung: der oberste Eintrag ist das jüngste Ereignis.
       10;60200245;Stubentor U, Dr.-Karl-Lueger-Platz;Wien;90001;16.3799838;48.2067758
       ```
     - Beispiel GET Request einer Haltestelle: https://www.wienerlinien.at/ogd_realtime/monitor?stopId=147
-        ```
+        ```json
         {
             "data": {
                 "monitors": [
