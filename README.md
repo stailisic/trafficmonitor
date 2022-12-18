@@ -13,7 +13,8 @@ Bemerkung: der oberste Eintrag ist das jüngste Ereignis.
 ### 2022-12-18
 - JSON Struktur festlegen siehe dazu Issue#4
 - Wiki Seite eingerichtet: [JSON Collection](/JSON Collection)
-
+- Branch Struktur erweitert um dev
+- JSON Beispiel auf dev gepusht: aus stopID 147 die relevanten key/values extrahiert
 
 ### 2022-12-17
 - Projektdokumentation erstellt
