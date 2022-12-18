@@ -10,6 +10,11 @@ group project for ODE
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis.
 
 
+### 2022-12-18
+- JSON Struktur festlegen siehe dazu Issue#4
+- Wiki Seite eingerichtet: [JSON Collection](/JSON Collection)
+
+
 ### 2022-12-17
 - Projektdokumentation erstellt
 - Notwendigen Resourcen für Wiener Linien Echtzeitdaten gesammelt:
