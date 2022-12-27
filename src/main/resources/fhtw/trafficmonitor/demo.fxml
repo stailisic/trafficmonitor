@@ -4,14 +4,16 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.trafficmonitor.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="404.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.trafficmonitor.Controller">
    <children>
-      <TableView fx:id="tableViewDemo" layoutX="69.0" layoutY="107.0" prefHeight="200.0" prefWidth="446.0">
+      <TableView fx:id="tableViewDemo" layoutX="69.0" layoutY="107.0" prefHeight="201.0" prefWidth="800.0">
         <columns>
-          <TableColumn fx:id="line" prefWidth="75.0" text="Line" />
-          <TableColumn fx:id="towards" prefWidth="75.0" text="Towards" />
-            <TableColumn fx:id="departureTimePlanned" prefWidth="139.3333740234375" text="DepartureTimePlanned" />
+            <TableColumn fx:id="transportType" prefWidth="75.0" text="Typ" />
+          <TableColumn fx:id="line" minWidth="50.0" prefWidth="100.0" text="Linie" />
+            <TableColumn fx:id="stationName" minWidth="100.0" prefWidth="200.0" text="Stationsname" />
+          <TableColumn fx:id="towards" minWidth="100.0" prefWidth="200.0" text="Richtung" />
+            <TableColumn fx:id="departureTimePlanned1" minWidth="50.0" prefWidth="100.0" text="Abfahrt 1" />
+            <TableColumn fx:id="departureTimePlanned2" minWidth="50.0" prefWidth="100.0" text="Abfahrt 2" />
         </columns>
       </TableView>
    </children>
