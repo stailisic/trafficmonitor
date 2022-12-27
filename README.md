@@ -9,6 +9,10 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis.
 
+### 2022-12-26 + 2022-12-27
+- javafx: Demo TableView + TableColumn created. See in Issue #7 (GUI erstellen)
+
+
 ### 2022-12-20
 - Überlegung#2 siehe in Issue #4 -> alle Haltepunkte anzeigen lassen und in einer TableView anzeigen lassen.
 
