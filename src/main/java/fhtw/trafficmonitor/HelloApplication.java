@@ -2,6 +2,7 @@ package fhtw.trafficmonitor;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -14,15 +15,27 @@ public class HelloApplication extends Application {
     I am on dev branch right now
      */
     @Override
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
+        stage.setTitle("Demonstration TableView with defined Columns");
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }
+
+    /*
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
+       FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 320, 240);
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
-    }
+    }*/
+
+
+
 
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }

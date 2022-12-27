@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fhtw.trafficmonitor.Controller">
+   <children>
+      <TableView fx:id="tableViewDemo" layoutX="69.0" layoutY="107.0" prefHeight="200.0" prefWidth="446.0">
+        <columns>
+          <TableColumn fx:id="line" prefWidth="75.0" text="Line" />
+          <TableColumn fx:id="towards" prefWidth="75.0" text="Towards" />
+            <TableColumn fx:id="departureTimePlanned" prefWidth="139.3333740234375" text="DepartureTimePlanned" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
