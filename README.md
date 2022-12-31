@@ -7,7 +7,18 @@
 group project for ODE
 
 ## Stand des Projekts
-Bemerkung: der oberste Eintrag ist das jüngste Ereignis.
+Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
+
+### 2022-12-31
+- Klasse JsonParse funktioniert soweit und könnte optimiert werden. Wird verwendet um Instanzen zu erstellen anhand der DIVA (= eindeutige ID der Haltestelle)
+  - Methode `getKey` ist die Vorlage zur Extrahierung der Key/Values Attribute. 
+  - Methode `getKeyString` hat die ähnliche Struktur wie getKey, aber mit return-Wert 
+  - Mit der Methode `getKeyString` war es mir nicht möglich die `"timePlanned"` zu extrahieren. Beim Debugging ist mir aufgefallen, dass 
+    - nach `"departures"` (JSONObject)  
+    - die darin enthaltener `"departure"` (JSONArray) nicht weiter hinein schaut und daher 
+    - mir die darhin enthaltene `"departureTime"` (JSONObject) die gesuchte `"timePlanned"` (innerhalb wiederum eines JSONObject) nicht wiedergibt.
+    - Gelöst durch Workaround anhand der Methode `getKeyStringDepartures`
+- Klasse Controller und die demo.fxml angepasst, siehe Kommentar mit Screenshots in Issue #7 (GUI erstellen)
 
 ### 2022-12-26 + 2022-12-27
 - parseJson: 
