@@ -5,8 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
+import org.json.JSONObject;
 
 public class HelloApplication extends Application {
 
@@ -36,6 +35,21 @@ public class HelloApplication extends Application {
 
 
     public static void main(String[] args) {
+        /*
+        // JsonSource jsonSource1 = new JsonSource ("60201198");
+        JsonParse jsonSource1 = new JsonParse("60201198", "U1", "ptMetro");
+        //System.out.println(jsonSource1.getUrl_source());
+        //System.out.println(jsonSource1.getJsonInput());
+        jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
+        System.out.println("Retrieve only selected transportType");
+        jsonSource1.getListLines().forEach(System.out::println);
+        System.out.println("Retrieve records: ");
+        jsonSource1.getKeyStage2();
+        System.out.println(jsonSource1.getListLinesLineRecords().get(0).getLineName());
+        jsonSource1.createController(jsonSource1.getListLinesLineRecords());
+
+         */
+
         launch(args);
     }
 }
