@@ -5,13 +5,15 @@ public class LineRecord {
     private String lineName;
     private String lineStationName;
     private String lineTowards;
-    private String lineDepartureTimePlanned1;
-    private String lineDepartureTimePlanned2;
+    private String lineDepartureTimePlanned1; // Abfahrt CountDown in Minuten
+    private String lineDepartureTimePlanned2; // Abfahrtszeit im Zeitformat hh:mm
     private String lineType;
     private String lineId;
+    private String diva;
 
-    public LineRecord(String lineTransportType, String lineName, String lineStationName, String lineTowards, String lineDepartureTimePlanned1, String lineDepartureTimePlanned2) {
+    public LineRecord(String lineTransportType, String diva,String lineName, String lineStationName, String lineTowards, String lineDepartureTimePlanned1, String lineDepartureTimePlanned2) {
         this.lineTransportType = lineTransportType;
+        this.diva = diva;
         this.lineName = lineName;
         this.lineStationName = lineStationName;
         this.lineTowards = lineTowards;
@@ -49,5 +51,9 @@ public class LineRecord {
 
     public String getLineId() {
         return lineId;
+    }
+
+    public String getDiva() {
+        return diva;
     }
 }

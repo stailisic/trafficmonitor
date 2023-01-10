@@ -35,21 +35,33 @@ public class HelloApplication extends Application {
 
 
     public static void main(String[] args) {
-        /*
-        // JsonSource jsonSource1 = new JsonSource ("60201198");
-        JsonParse jsonSource1 = new JsonParse("60201198", "U1", "ptMetro");
-        //System.out.println(jsonSource1.getUrl_source());
-        //System.out.println(jsonSource1.getJsonInput());
-        jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
-        System.out.println("Retrieve only selected transportType");
-        jsonSource1.getListLines().forEach(System.out::println);
-        System.out.println("Retrieve records: ");
-        jsonSource1.getKeyStage2();
-        System.out.println(jsonSource1.getListLinesLineRecords().get(0).getLineName());
-        jsonSource1.createController(jsonSource1.getListLinesLineRecords());
+        // modify value to enable/disable debugMode
+        int debugMode = 0; // 0=off, 1=on
 
-         */
+        if (debugMode == 1) {
+            /**
+             * demo purpose regarding:
+             * 1. send URL request on basis of known 'diva'
+             * 2. receive json data
+             * 3. parse received json data
+             *
+             * Note: in class JsonParse you can set debugMode to ON/OFF either to display more information
+             */
 
-        launch(args);
+            JsonParse jsonSource1 = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
+            System.out.println(jsonSource1.getUrl_source());
+            System.out.println(jsonSource1.getJsonInput());
+            jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
+
+            //System.out.println("Retrieve only selected transportType");
+            //jsonSource1.getListLines().forEach(System.out::println);
+            //System.out.println("Retrieve records: ");
+            //jsonSource1.getKeyStage2();
+            //System.out.println(jsonSource1.getListLinesLineRecords().get(0).getLineName());
+            //jsonSource1.createController(jsonSource1.getListLinesLineRecords());
+        } else {
+            // launch the GUI
+            launch(args);
+        }
     }
 }

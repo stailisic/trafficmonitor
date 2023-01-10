@@ -13,6 +13,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class JsonParse {
+    enum DebugState {
+        OFF,
+        ON
+    }
+
+    //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
+    private static DebugState debugMode = DebugState.ON;
 
     enum Stage {
         STAGE_LINES,
@@ -20,8 +27,12 @@ public class JsonParse {
     }
 
     private String diva;
+    private String stationName;
+    private String lineName;
+    private String transportType;
     private String url_source = "https://www.wienerlinien.at/ogd_realtime/monitor?stopid=0&diva=";
-    private String jsonInput;
+    private String jsonInput = "";
+
 
     private List<String> listLines = new ArrayList<>();
     private ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
@@ -29,26 +40,41 @@ public class JsonParse {
     public void parseObject(JSONObject json, String key) {
         // System.out.println(json.has(key));
         System.out.println(json.get(key));
-        //return json.get(key).toString();
     }
 
-
-    // ToDo: Delete or leave it (if so, implement it in getKey in exist-part)
-    public  void parseObjectLines(JSONObject json, String key) {
+    /**
+     * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
+     *                  * e.g. [{"name":"U1",...,"direction":"H"}] <-- including the square brackets
+     *                  * substring -> remove square brackets (at the beginning and end) and therefore
+     *                  * add the modified { content } into the ArrayList.
+     * @param json ... e.g.
+     * @param key
+     */
+    public void parseObjectLines(JSONObject json, String key) {
         addListLines(json.get(key).toString().substring(1,json.get(key).toString().length() -1));
     }
 
-    // ToDo: depending on method parseObjectLines
+    /**
+     * add value to listLines
+     * @param string ... String value provided by parseObjectLines
+     */
     public void addListLines(String string) {
         this.listLines.add(string);
     }
 
-
-    public void getKey(JSONObject json, String key, Enum stage, List<String> listLines) {
-
-        /**
-         * Check if particular key exists -> store as boolean value
-         */
+    /**
+     * parsing jsonInput {data: ...} and retrieve ~value~ of requested 'key'
+     *  e.g.: key = lines -> value = [{name: ...}]
+     * @param json
+     * @param key
+     * @param listLines
+     *
+     * Source:
+     * - How to parse dynamic and nested JSON in java? - Rest assured API automation framework
+     *   - https://www.youtube.com/watch?v=ZjZqLUGCWxo
+     */
+    public void getKey(JSONObject json, String key /*, Enum stage*/ , List<String> listLines) {
+        //Check if particular key exists -> store as boolean value
         boolean exists = json.has(key);
         Iterator<?> keys;  // Iterator use generic concept
         String nextKeys;
@@ -58,13 +84,11 @@ public class JsonParse {
             while (keys.hasNext()) {
                 nextKeys = (String) keys.next();
                 try {
-                    /**
-                     * Check if the next key is either an Object or Array
-                     */
+                    //Check if the next key is either an Object or Array
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
 
                         if (exists == false) {
-                            getKey(json.getJSONObject(nextKeys), key, stage, listLines);
+                            getKey(json.getJSONObject(nextKeys), key, /*stage,*/ listLines);
                         }
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
@@ -74,37 +98,27 @@ public class JsonParse {
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
                             if (exists == false) {
-                                getKey(innerJson, key, stage, listLines);
+                                getKey(innerJson, key, /*stage,*/ listLines);
                             }
                         }
-
                     }
                 } catch (Exception e) {
-                    // Todo: handle exception
+                    System.out.println("Validation next key - ERROR.");
                 }
             }
-
         } else { // exists part
-            if (JsonParse.Stage.STAGE_LINES.equals(stage)) {
-                /**
-                 * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
-                 * e.g. [{"name":"U1",...,"direction":"H"}] <-- including the square brackets
-                 * substring -> remove square brackets and add { content } into the ArrayList.
-                 *
-                 * ToDo: Decide if you want to use method parseObjectLines or the nested command.
-                 */
-                //parseObjectLines(json, key);
-                listLines.add(json.get(key).toString().substring(1,json.get(key).toString().length() -1));
+            /* if (JsonParse.Stage.STAGE_LINES.equals(stage)) { */
+                parseObjectLines(json, key);
+            /*
             }
             else if (stage.equals(JsonParse.Stage.STAGE_LINES_INNER)) {
-                //json.get(key).toString();
                 parseObject(json, key);
             }
             parseObject(json, key);
+
+             */
         }
-
     }
-
 
     public String getKeyString(JSONObject json, String key, List<String> listLines) {
 
@@ -142,43 +156,49 @@ public class JsonParse {
 
                     }
                 } catch (Exception e) {
-                    // Todo: handle exception
+                    System.out.println("Validation next key - ERROR.");
                 }
             }
-
         } else { // exists part
-
             return json.get(key).toString();
-
         }
-
         return json.toString();
     }
 
     public String getKeyStringDepartures(JSONObject json, String key) {
         String result = "";
-        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, key, this.listLines));
-        //System.out.println("DEBUG " + jsonObjectDepartures.toString());
+        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures", this.listLines));
 
-        //System.out.println("DEBUG " + jsonObjectDepartures.get("departure").toString());
+        if (debugMode.equals(DebugState.ON)) {
+            System.out.println("DEBUG " + jsonObjectDepartures.toString());
+            System.out.println("DEBUG " + jsonObjectDepartures.get("departure").toString());
+        }
+
         JSONArray jsonArrayDeparture = new JSONArray(jsonObjectDepartures.get("departure").toString());
         for (int i = 0; i < jsonArrayDeparture.length(); i++) {
-
             String jsonArrayString = jsonArrayDeparture.get(i).toString();
             JSONObject innerJson = new JSONObject(jsonArrayString);
 
             JSONObject innerJsonTimePlanned = new JSONObject(innerJson.get("departureTime").toString());
 
-            //System.out.println("DEBUG " + innerJsonTimePlanned.get("timePlanned").toString());
+            if (debugMode.equals(DebugState.ON)) {
+                System.out.println("DEBUG " + innerJsonTimePlanned.get(key).toString());
+            }
 
-            result += innerJsonTimePlanned.get("timePlanned").toString() + "\n";
+            result += innerJsonTimePlanned.get(key).toString() + "\n";
         }
-
         return result;
     }
 
-    public JsonParse(String diva) {
+    /**
+     * Constructor
+     * @param diva  provided by
+     */
+    public JsonParse(String diva, String stationName, String lineName, String transportType) {
         this.diva = diva;
+        this.stationName = stationName;
+        this.lineName = lineName;
+        this.transportType = transportType;
         this.url_source = url_source + diva;
 
         try {
@@ -208,6 +228,9 @@ public class JsonParse {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        this.listLines = new ArrayList<>();
+        this.listLinesLineRecords = FXCollections.observableArrayList();
     }
 
     /**
@@ -217,6 +240,8 @@ public class JsonParse {
      * @param lineName
      * @param transportType
      */
+
+    /*
     public JsonParse(String diva, String lineName, String transportType) {
         this.diva = diva;
         System.out.println("Demo: " + getDiva() + " " + lineName + " " + transportType);
@@ -1356,22 +1381,68 @@ public class JsonParse {
                 this.listLinesLineRecords = FXCollections.observableArrayList();
     }
 
+     */
+
     /**
-     * retrieve all lines Object (related Haltepunkte) and save them into the ArrayList.
+     * Parse jsonInput of the related Haltepunkt (diva) to stage 1:
+     *  1. retrieve from all 'monitors index' (A)
+     *  2. the inner lines JsonArray (B)
+     *  3. convert it into an JsonObject and save them into the ArrayList.
+     *
+     * The structure of the jsonInput is constructed as follows:
+     * - data (jsonOject)
+     *   - monitors (jsonArray)
+     *(A)  - [0] (jsonObject)
+     *       - locationStop (jsonObject)
+     *   |->  - lines (jsonArray) Note: checked ona sample basis, there seems to be always only index [0]
+     *   |     - [0] (jsonObject): name, towards
+     *   |       - departures (jsonObject)
+     *(B)|         - departure (jsonArray)
+     *   |           - [0] (jsonObject): timePlanned, countdown
+     *   |           - [x] (jsonObject)
+     *   |->       - type, lineId
+     *       - attributes (jsonObject)
+     *(A)  - [1] (jsonObject)
+     *(A)  - [2] (jsonObject)
+     *(A)  - [x] (jsonObject)
+     * - message (jsonObject)
+     *
+     * The ArrayList of type String results in having multiple records:
+     *  [0]: {lines ....}
+     *  [1]: {lines ....}
+     *  [x]: {lines ....}
+     * @param inputJsonObject ... (a) new Object in regard of Haltestelle is selected in UI
+     * @param lineName        ... attribute provided by (a)
+     * @param transportType   ... attribute provided by(a)
      */
     public void getKeyStage1(JSONObject inputJsonObject, String lineName, String transportType) {
-        getKey(inputJsonObject, "lines", JsonParse.Stage.STAGE_LINES, this.listLines);
+        getKey(inputJsonObject, "lines", /*JsonParse.Stage.STAGE_LINES,*/ this.listLines);
 
-        //System.out.println("----- INNER START ");   // debug
-        //this.listLines.forEach(System.out::println); // debug
-        //System.out.println("----- INNER END "); // debug
+        // debug information
+        if (debugMode.equals(DebugState.ON)) {
+            System.out.println("----- getKeyStage1 | INNER START: display all entries of listLines ");
+            this.listLines.forEach(System.out::println); // debug
+            System.out.println("----- getKeyStage1 | INNER END "); // debug
+        }
 
         for (int i=0; i < this.listLines.size(); i++) {
-            if (this.listLines.get(i).contains("\"name\":\"" + lineName + "\"") && this.listLines.get(i).contains("\"type\":\"" + transportType + "\"")){
-                //System.out.println("Remain listLines[" + i + "]" + "\"name\":\"" + lineName + "\"" + "\"type\":\"" + transportType + "\"" + this.listLines.get(i)); // debug
+            if (this.listLines.get(i).contains("\"name\":\"" + lineName + "\"")
+                    && this.listLines.get(i).contains("\"type\":\"" + transportType + "\"")){
+
+                // debug information: display all entries that will remain in listLines
+                if (debugMode.equals(DebugState.ON)) {
+                    System.out.println("\tRemain listLines[" + i + "]"
+                            + "\"name\":\"" + lineName + "\"" + "\"type\":\"" + transportType + "\"" + this.listLines.get(i)); // debug
+                }
+
                 continue;
             } else {
-                //System.out.println("Remove listLines[" + i + "]" + "\"name\":\"" + lineName + "\"" + "\"type\":\"" + transportType + "\"" + this.listLines.get(i)); // debug
+                // debug information: display all entries that will be removed from listLines
+                if (debugMode.equals(DebugState.ON)) {
+                    System.out.println("\tRemove listLines[" + i + "]"
+                            + "\"name\":\"" + lineName + "\"" + "\"type\":\"" + transportType + "\"" + this.listLines.get(i)); // debug
+                }
+
                 this.listLines.remove(i);
                 i = -1;
             }
@@ -1391,139 +1462,24 @@ public class JsonParse {
             this.listLinesLineRecords.add(
                     new LineRecord(
                             getKeyString(inputJsonObjectListLines, "type", this.listLines),
+                            this.diva,
                             getKeyString(inputJsonObjectListLines, "name",  this.listLines),
-                            "Demo",
+                            this.stationName,
                             getKeyString(inputJsonObjectListLines, "towards",  this.listLines),
-                            getKeyStringDepartures(inputJsonObjectListLines, "departures"),
-                            "XYZ"
+                            getKeyStringDepartures(inputJsonObjectListLines, "countdown"),
+                            getKeyStringDepartures(inputJsonObjectListLines, "timePlanned")
+
                     )
             );
 
-
-
-
-
-/*
-            System.out.println(getKeyString(inputJsonObjectListLines, "type", this.listLines));
-            System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
-            System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
-            System.out.println(getKeyStringDepartures(inputJsonObjectListLines, "departures"));
-
- */
-
-            /*
-            JSONObject test = new JSONObject(getKeyStringDepartures(inputJsonObjectListLines, "departures", this.listLines));
-            System.out.println(test.toString());
-
-            System.out.println(test.get("departure").toString());
-            JSONArray test1 = new JSONArray(test.get("departure").toString());
-            for (int j = 0; j < test1.length(); j++) {
-
-                String jsonArrayString = test1.get(j).toString();
-                JSONObject innerJson = new JSONObject(jsonArrayString);
-
-                JSONObject innerJsonTimePlanned = new JSONObject(innerJson.get("departureTime").toString());
-
-                System.out.println(innerJsonTimePlanned.get("timePlanned").toString());
-
-
-            }
-
-             */
-
-
-
-
-
-
-
-
-            //System.out.println(getKeyString(inputJsonObjectListLines, "departureTime", this.listLines));
-            //System.out.println(getKeyString(inputJsonObjectListLines, "timePlanned", this.listLines));
-            //getKey(inputJsonObjectListLines, "timePlanned", Stage.STAGE_LINES, this.listTimePlanned);
-
-/*
-            System.out.println(
-            getKeyString(
-                    new JSONObject(getKeyString(inputJsonObjectListLines, "departures", this.listLines)),
-                            "departureTime",
-                            this.listLines)
-            );
-
- */
-
-
-
-
-
-
-
+            //System.out.println(getKeyString(inputJsonObjectListLines, "type", this.listLines));
+            //System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
+            //System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
 
         }
 
     }
 
-
-
-
-// I think I will not use this anymore, because I implemented this in the constructor
-    public void retrieveJsonSource(String url_source) {
-        try {
-
-            URL url = new URL(url_source);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            //Getting the response code
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-
-                String jsonInput = "";
-                Scanner scanner = new Scanner(url.openStream());
-
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    jsonInput += scanner.nextLine();
-                }
-
-                //Close the scanner
-                scanner.close();
-
-
-                /*
-                //Using the JSON simple library parse the string into a json object
-                JSONParser parse = new JSONParser();
-                JSONObject data_obj = (JSONObject) parse.parse(inline);
-
-                //Get the required object from the above created object
-                JSONObject obj = (JSONObject) data_obj.get("Global");
-
-                //Get the required data using its key
-                System.out.println(obj.get("TotalRecovered"));
-
-                JSONArray arr = (JSONArray) data_obj.get("Countries");
-
-                for (int i = 0; i < arr.size(); i++) {
-
-                    JSONObject new_obj = (JSONObject) arr.get(i);
-
-                    if (new_obj.get("Slug").equals("spain")) {
-                        System.out.println("Total Confirmed: " + new_obj.get("TotalConfirmed"));
-                        break;
-                    }
-                }
-                 */
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
     public String getDiva() {
         return diva;
@@ -1563,6 +1519,14 @@ public class JsonParse {
 
     public void setListLinesLineRecords(ObservableList<LineRecord> listLinesLineRecords) {
         this.listLinesLineRecords = listLinesLineRecords;
+    }
+
+    public String getLineName() {
+        return lineName;
+    }
+
+    public String getTransportType() {
+        return transportType;
     }
 
 }

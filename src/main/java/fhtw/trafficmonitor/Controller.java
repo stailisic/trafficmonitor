@@ -83,24 +83,41 @@ public class Controller implements Initializable {
         towards.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineTowards"));
         departureTimePlanned1.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned1"));
         departureTimePlanned2.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned2"));
-
-
         tableViewDemo.setItems(list);
 
         this.btn_refresh.setOnAction(e -> {
+            btn_refresh.setDisable(true); // grey out button, so user cannot press it right away
+
             if (diva_60201198.isSelected()) {
-                JsonParse jsonParse = new JsonParse("60201198", "U1", "ptMetro");
+                check_list("60201198");
+
+                JsonParse jsonParse = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
                 jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), "U1", "ptMetro");
                 jsonParse.getKeyStage2();
 
                 for (int i = 0; i < jsonParse.getListLinesLineRecords().size(); i++) {
                     list.add(jsonParse.getListLinesLineRecords().get(i));
                 }
+            } else {
+                System.out.println("Nothing selected.");
             }
+
+            tableViewDemo.refresh();
         });
 
 
+
     }
+
+    public void check_list(String diva){
+         for (int i = 0; i < list.size();i++) {
+             if (list.get(i).getDiva().equals(diva)) {
+                 list.remove(i);
+             }
+         }
+
+    }
+
 
 
 }
