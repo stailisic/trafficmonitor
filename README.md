@@ -9,6 +9,12 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+### 2023-01-10
+- Refactoring von Klassen.
+- Klasse JsonParse ist fertig. ToDo: Die Abfahrtszeit in ein lesbares Format anzeigen lassen, derzeit: `2023-01-10T16:43:44.000+0100`
+- Unbenutzte Klassen bzw. Files gelöscht
+- DebugMode verfügbar
+
 ### 2022-12-31
 - Klasse JsonParse funktioniert soweit und könnte optimiert werden. Wird verwendet um Instanzen zu erstellen anhand der DIVA (= eindeutige ID der Haltestelle)
   - Methode `getKey` ist die Vorlage zur Extrahierung der Key/Values Attribute. 
