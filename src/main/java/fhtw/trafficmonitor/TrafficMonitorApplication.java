@@ -7,12 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
-public class HelloApplication extends Application {
-
-    /*
-    adding a comment
-    I am on dev branch right now
-     */
+public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
@@ -21,18 +16,6 @@ public class HelloApplication extends Application {
         stage.show();
 
     }
-
-    /*
-    public void start(Stage stage) throws IOException {
-       FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
-
-
 
     public static void main(String[] args) {
         // modify value to enable/disable debugMode

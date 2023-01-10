@@ -9,13 +9,12 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.shape.Line;
 import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Controller implements Initializable {
+public class TrafficMonitorIndivController implements Initializable {
 
         @FXML
         private TableView<LineRecord> tableViewDemo;
