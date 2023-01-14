@@ -21,10 +21,13 @@ public class JsonParse {
     //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
     private static DebugState debugMode = DebugState.ON;
 
+    /*
     enum Stage {
         STAGE_LINES,
         STAGE_LINES_INNER
     }
+
+     */
 
     private String diva;
     private String stationName;
@@ -1395,12 +1398,12 @@ public class JsonParse {
      *(A)  - [0] (jsonObject)
      *       - locationStop (jsonObject)
      *   |->  - lines (jsonArray) Note: checked ona sample basis, there seems to be always only index [0]
-     *   |     - [0] (jsonObject): name, towards
+     *   |     - [0] (jsonObject): { name, towards
      *   |       - departures (jsonObject)
      *(B)|         - departure (jsonArray)
      *   |           - [0] (jsonObject): timePlanned, countdown
      *   |           - [x] (jsonObject)
-     *   |->       - type, lineId
+     *   |->       - type, lineId }
      *       - attributes (jsonObject)
      *(A)  - [1] (jsonObject)
      *(A)  - [2] (jsonObject)

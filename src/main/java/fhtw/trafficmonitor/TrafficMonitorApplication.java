@@ -19,7 +19,7 @@ public class TrafficMonitorApplication extends Application {
 
     public static void main(String[] args) {
         // modify value to enable/disable debugMode
-        int debugMode = 0; // 0=off, 1=on
+        int debugMode = 1; // 0=off, 1=on
 
         if (debugMode == 1) {
             /**
@@ -30,11 +30,12 @@ public class TrafficMonitorApplication extends Application {
              *
              * Note: in class JsonParse you can set debugMode to ON/OFF either to display more information
              */
-
+            /*
             JsonParse jsonSource1 = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
             System.out.println(jsonSource1.getUrl_source());
             System.out.println(jsonSource1.getJsonInput());
             jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
+            */
 
             //System.out.println("Retrieve only selected transportType");
             //jsonSource1.getListLines().forEach(System.out::println);
@@ -42,6 +43,14 @@ public class TrafficMonitorApplication extends Application {
             //jsonSource1.getKeyStage2();
             //System.out.println(jsonSource1.getListLinesLineRecords().get(0).getLineName());
             //jsonSource1.createController(jsonSource1.getListLinesLineRecords());
+
+            CsvReader ottakring = new CsvReader("Ottakring");
+            ottakring.retrieveDiva();
+            System.out.println("Haltestelle: " + ottakring.getHaltestellenName() + " hat die diva: " + ottakring.getDiva());
+
+
+
+
         } else {
             // launch the GUI
             launch(args);
