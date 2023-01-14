@@ -11,6 +11,7 @@ Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit ste
 
 ### 2023-01-14
 - CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva
+- Neue Klasse CreatePublicTransportLine erstellt zur dynamischen Erstellung der RadioButtons für die Haltestellen einer Linie
 
 ### 2023-01-12
 - aus der CSV-Datei "wienerlienien-ogd-haltestellen.csv" lesen und nach einer bestimmen Adresse suchen, welche dann die dazugehörige Diva ausgibt
