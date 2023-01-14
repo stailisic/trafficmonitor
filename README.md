@@ -9,6 +9,14 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+### 2023-01-14
+- CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva
+
+### 2023-01-12
+- aus der CSV-Datei "wienerlienien-ogd-haltestellen.csv" lesen und nach einer bestimmen Adresse suchen, welche dann die dazugehörige Diva ausgibt
+- ToDo: in der GUI noch die restlichen Haltestellen erstellen. Danach wenn dann eine Haltestelle in der GUI ausgewählt wird -> wird in der CSV File die Haltestelle gesucht und dann die Diva ausgeben. 
+- ToDo: die ausgewählte Diva wird dann in die URL ausgegeben und wir bekommen zu dieser ausgewählten Haltestelle eine JSON Datei mit den Abfahrtszeiten retour. 
+
 ### 2023-01-10
 - Refactoring von Klassen.
 - Klasse JsonParse ist fertig. ToDo: Die Abfahrtszeit in ein lesbares Format anzeigen lassen, derzeit: `2023-01-10T16:43:44.000+0100`
