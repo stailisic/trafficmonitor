@@ -10,16 +10,25 @@ import org.json.JSONObject;
 public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
+        /*
         Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
         stage.setTitle("Demonstration TableView with defined Columns");
         stage.setScene(new Scene(root));
+        stage.show();
+
+         */
+        CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
+
+        Scene scene = new Scene(u4.buildView(), 1024, 800);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
         stage.show();
 
     }
 
     public static void main(String[] args) {
         // modify value to enable/disable debugMode
-        int debugMode = 1; // 0=off, 1=on
+        int debugMode = 0; // 0=off, 1=on
 
         if (debugMode == 1) {
             /**
@@ -44,11 +53,13 @@ public class TrafficMonitorApplication extends Application {
             //System.out.println(jsonSource1.getListLinesLineRecords().get(0).getLineName());
             //jsonSource1.createController(jsonSource1.getListLinesLineRecords());
 
+            /*
             CsvReader ottakring = new CsvReader("Ottakring");
             ottakring.retrieveDiva();
             System.out.println("Haltestelle: " + ottakring.getHaltestellenName() + " hat die diva: " + ottakring.getDiva());
+             */
 
-
+            //CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
 
 
         } else {
