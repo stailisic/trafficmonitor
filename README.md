@@ -9,6 +9,10 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+### 2023-01-15
+- Startfenster erstellt: Auswahl der U-Bahnlinien via button
+- Wenn Button der gewünschten U-Bahnlinie angeklickt wird -> disable btn & Öffnen eines neuen Monitor-Fensters mit allen Haltenstellen, etc.
+
 ### 2023-01-14
 - CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva
 - Neue Klasse CreatePublicTransportLine erstellt zur dynamischen Erstellung der RadioButtons für die Haltestellen einer Linie
