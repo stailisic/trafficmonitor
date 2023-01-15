@@ -34,7 +34,7 @@ public class CreatePublicTransportLine {
 
 
     public Parent buildView () {
-        this.transportLine = transportLine;
+     //   this.transportLine = transportLine;
 
         BorderPane borderPane = createBorderPane();
         AnchorPane anchorPane = createAnchorPane();

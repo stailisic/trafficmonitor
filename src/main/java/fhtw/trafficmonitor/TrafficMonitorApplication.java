@@ -10,18 +10,11 @@ import org.json.JSONObject;
 public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        /*
-        Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
-        stage.setTitle("Demonstration TableView with defined Columns");
+
+        //Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
+        //stage.setTitle("Demonstration TableView with defined Columns");
         stage.setScene(new Scene(root));
-        stage.show();
-
-         */
-        CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
-
-        Scene scene = new Scene(u4.buildView(), 1024, 800);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
         stage.show();
 
     }
