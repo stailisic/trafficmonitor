@@ -1,9 +1,9 @@
 package fhtw.trafficmonitor;
 
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
@@ -38,21 +38,70 @@ public class CreatePublicTransportLine {
 
         BorderPane borderPane = createBorderPane();
         AnchorPane anchorPane = createAnchorPane();
+        TableView tableView = createTableView();
+        ButtonBar buttonBar = createButtonBar();
+        Button btn_refresh = createButton();
+        btn_refresh.setText("Aktualisieren");
+
+        buttonBar.getButtons().add(btn_refresh);
+
 
         borderPane.setTop(anchorPane);
+        borderPane.setCenter(tableView);
+        borderPane.setBottom(buttonBar);
+
         return  borderPane;
 
     }
 
+    private ButtonBar createButtonBar() {
+        ButtonBar buttonBar = new ButtonBar();
+        buttonBar.setPadding(new Insets(10,10,10,0));
+        return buttonBar;
+    }
+
+    private Button createButton(){
+        Button button = new Button();
+        return button;
+    }
+
+    private TableView createTableView(){
+        TableView tableView = new TableView();
+
+        TableColumn type = new TableColumn<>("Typ");
+        type.setPrefWidth(75);
+        TableColumn line = new TableColumn<>("Linie");
+        line.setPrefWidth(75);
+        TableColumn stationName = new TableColumn<>("Stationsname");
+        stationName.setPrefWidth(200);
+        TableColumn towards = new TableColumn("Richtung");
+        towards.setPrefWidth(200);
+        TableColumn departCountdown = new TableColumn<>("Abfahrt Countdown in Minuten");
+        departCountdown.setPrefWidth(200);
+        TableColumn departTime = new TableColumn<>("Abfahrtszeiten");
+        departTime.setPrefWidth(200);
+
+        tableView.getColumns().add(type);
+        tableView.getColumns().add(line);
+        tableView.getColumns().add(stationName);
+        tableView.getColumns().add(towards);
+        tableView.getColumns().add(departCountdown);
+        tableView.getColumns().add(departTime);
+
+        return tableView;
+    }
+
     private BorderPane createBorderPane() {
         BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(1024);
+        borderPane.setPrefHeight(768);
         return borderPane;
     }
 
     private AnchorPane createAnchorPane() {
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setPrefWidth(1024);
-        anchorPane.setPrefHeight(400);
+        anchorPane.setPrefWidth(200);
+        anchorPane.setPrefHeight(200);
 
         for (int i=0; i < this.transportLineButtonsList.size();i++) {
             anchorPane.getChildren().add(this.transportLineButtonsList.get(i));
@@ -80,15 +129,23 @@ public class CreatePublicTransportLine {
         int x = haltestelle_layout_x_pos_start;
         int x_abstand = haltestelle_layout_x_abstand;
 
-
         try {
             String filepath="";
             switch(transportLine) {
                 case "u1":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
+                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv"; // TODO: create, retrieve names from wienerlinien-ogd-haltestellen.csv
+                    break;
+                case "u2":
+                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv"; // TODO: create, retrieve names from wienerlinien-ogd-haltestellen.csv
+                    break;
+                case "u3":
+                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv"; // TODO: create, retrieve names from wienerlinien-ogd-haltestellen.csv
                     break;
                 case "u4":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
+                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv"; // TODO: Check names with wienerlinien-ogd-haltestellen.csv
+                    break;
+                case "u6":
+                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv"; // TODO: create, retrieve names from wienerlinien-ogd-haltestellen.csv
                     break;
                 default:
                     System.out.println("Sorry no file found");

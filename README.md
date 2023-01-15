@@ -12,6 +12,7 @@ Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit ste
 ### 2023-01-15
 - Startfenster erstellt: Auswahl der U-Bahnlinien via button
 - Wenn Button der gewünschten U-Bahnlinie angeklickt wird -> disable btn & Öffnen eines neuen Monitor-Fensters mit allen Haltenstellen, etc.
+- TrafficMonitor Window Layout fertig (Klasse CreatePublicTransportLine) -- TODO: Controls mit JsonParse, etc. verlinken, damit bei Auswahl und Bestätigen (durch Button Aktualisieren) das resultierende JSON in der TableView angezeigt wird
 
 ### 2023-01-14
 - CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva

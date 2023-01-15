@@ -78,9 +78,6 @@ public class TrafficMonitorIndivController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-
-
         transportType.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineTransportType"));
         line.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineName"));
         stationName.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineStationName"));
