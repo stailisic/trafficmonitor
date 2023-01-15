@@ -46,9 +46,6 @@ public class TrafficMonitorController implements Initializable {
     private Label label_u6;
 
 
-
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         // Dropshadow, see: https://www.tutorialspoint.com/javafx/drop_shadow_effect.htm
@@ -83,28 +80,55 @@ public class TrafficMonitorController implements Initializable {
         btn_u6.setStyle("-fx-background-color: #986A39; -fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
         btn_u6.setEffect(dropShadow);
 
-        Stage stage_u4 = new Stage();
+
+        btn_u1.setOnAction(e->{
+            String trafficLineName = "u1";
+            label_u1.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+        });
+
+        btn_u2.setOnAction(e->{
+            String trafficLineName = "u2";
+            label_u2.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+        });
+
+        btn_u3.setOnAction(e->{
+            String trafficLineName = "u3";
+            label_u3.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+        });
+
 
         // Prototype
         btn_u4.setOnAction(e->{
-            String trafficLineName = "u4";
+            try {
+                Stage stage_u4 = new Stage();
+                CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
+                Scene scene = new Scene(u4.buildView(), 1024, 800);
+                stage_u4.setTitle("TrafficMonitor U4");
+                stage_u4.setScene(scene);
 
-            CreatePublicTransportLine u4 = new CreatePublicTransportLine(trafficLineName);
-            Scene scene = new Scene(u4.buildView(), 1024, 800);
-            stage_u4.setTitle("TrafficMonitor " + trafficLineName.toUpperCase());
-            stage_u4.setScene(scene);
+                btn_u4.setDisable(true);
+                String trafficLineName = "u4";
 
-            if (stage_u4.isShowing()) {
-                label_u4.setText("TrafficMonitor window " + trafficLineName.toUpperCase() + " is already open!");
-            } else {
-                // grey out button, so user cannot press it again !!!
-                // TODO: if new window is closed, button should be available again
-                //btn_u4.setDisable(true);
                 label_u4.setText("TrafficMonitor window " + trafficLineName.toUpperCase() + " is now open!");
-                stage_u4.show();
-            }
+                stage_u4.showAndWait();
 
+                if (!stage_u4.isShowing()) {
+                    btn_u4.setDisable(false);
+                    label_u4.setText("");
+                }
+            }
+            catch (Exception exception) {
+                String trafficLineName = "u4";
+                System.out.println("TrafficMonitor window " + trafficLineName.toUpperCase() + " is already open!");
+            }
         });
+
+
+        btn_u6.setOnAction(e->{
+            String trafficLineName = "u6";
+            label_u6.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+        });
+
 
     }
 }
