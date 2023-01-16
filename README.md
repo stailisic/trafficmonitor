@@ -9,6 +9,22 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+### 2023-01-16
+- Controls für das Traffic Monitor Ux Fenster hinzugefügt
+- Bugs: 
+  - TableView: 
+    - Auswahl Haltestelle A und B > Aktualisieren > Ergebnisse OK in TableView
+    - Auswahl Haltestelle B > Aktualisieren > vorheriges Ergebnis von A noch immer drinnen
+    - Expected: Alte Ergebnisse von TableView löschen und Ergebnisse der neuen Auswahl abbilden
+  - LabelInfo: zu unterscheiden und Text entsprechend anzeigen lassen
+    - keine Auswahl: "Keine Auswahl getroffen"
+    - Auswahl, aber außerhalb der Betriebszeiten: "Nicht im Betrieb"
+- Issues:
+  - wenn haltestellennamen_uX_linie.csv am Ende zwei leere Zeilen hat, dann öffnet sich das zweite Fenster (Traffic Monitor Ux) nicht. 
+    - Workaround: nur eine leere Zeile am Ende in der csv-Datei. 
+    - Lösungsvorschlag: Fehlerhandling einbauen 
+- ToDo: Threading, Kommentare, Fehlerhandling 
+
 ### 2023-01-15
 - Startfenster erstellt: Auswahl der U-Bahnlinien via button
 - Wenn Button der gewünschten U-Bahnlinie angeklickt wird -> disable btn & Öffnen eines neuen Monitor-Fensters mit allen Haltenstellen, etc.

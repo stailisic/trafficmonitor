@@ -21,14 +21,6 @@ public class JsonParse {
     //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
     private static DebugState debugMode = DebugState.ON;
 
-    /*
-    enum Stage {
-        STAGE_LINES,
-        STAGE_LINES_INNER
-    }
-
-     */
-
     private String diva;
     private String stationName;
     private String lineName;
@@ -195,7 +187,7 @@ public class JsonParse {
 
     /**
      * Constructor
-     * @param diva  provided by
+     * @param diva  provided if radioButton
      */
     public JsonParse(String diva, String stationName, String lineName, String transportType) {
         this.diva = diva;
@@ -1393,7 +1385,7 @@ public class JsonParse {
      *  3. convert it into an JsonObject and save them into the ArrayList.
      *
      * The structure of the jsonInput is constructed as follows:
-     * - data (jsonOject)
+     * - data (jsonObject)
      *   - monitors (jsonArray)
      *(A)  - [0] (jsonObject)
      *       - locationStop (jsonObject)

@@ -106,8 +106,6 @@ public class TrafficMonitorIndivController implements Initializable {
             tableViewDemo.refresh();
         });
 
-
-
     }
 
     public void check_list(String diva){

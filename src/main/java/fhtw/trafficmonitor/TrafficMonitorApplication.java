@@ -32,12 +32,15 @@ public class TrafficMonitorApplication extends Application {
              *
              * Note: in class JsonParse you can set debugMode to ON/OFF either to display more information
              */
+
             /*
             JsonParse jsonSource1 = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
             System.out.println(jsonSource1.getUrl_source());
             System.out.println(jsonSource1.getJsonInput());
             jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
-            */
+
+             */
+
 
             //System.out.println("Retrieve only selected transportType");
             //jsonSource1.getListLines().forEach(System.out::println);

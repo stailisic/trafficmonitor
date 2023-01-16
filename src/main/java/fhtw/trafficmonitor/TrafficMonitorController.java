@@ -48,8 +48,8 @@ public class TrafficMonitorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Dropshadow, see: https://www.tutorialspoint.com/javafx/drop_shadow_effect.htm
 
+        // Dropshadow, see: https://www.tutorialspoint.com/javafx/drop_shadow_effect.htm
         DropShadow dropShadow = new DropShadow();
         //setting the type of blur for the shadow
         dropShadow.setBlurType(BlurType.GAUSSIAN);
@@ -83,52 +83,60 @@ public class TrafficMonitorController implements Initializable {
 
         btn_u1.setOnAction(e->{
             String trafficLineName = "u1";
-            label_u1.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            //label_u1.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(trafficLineName, btn_u1, label_u1);
         });
 
         btn_u2.setOnAction(e->{
             String trafficLineName = "u2";
-            label_u2.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            //label_u2.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(trafficLineName, btn_u2, label_u2);
         });
 
         btn_u3.setOnAction(e->{
+            //label_u3.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
             String trafficLineName = "u3";
-            label_u3.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
-        });
+            openTrafficMonitorWindow(trafficLineName, btn_u3, label_u3);
 
+        });
 
         // Prototype
         btn_u4.setOnAction(e->{
-            try {
-                Stage stage_u4 = new Stage();
-                CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
-                Scene scene = new Scene(u4.buildView(), 1024, 800);
-                stage_u4.setTitle("TrafficMonitor U4");
-                stage_u4.setScene(scene);
-
-                btn_u4.setDisable(true);
-                String trafficLineName = "u4";
-
-                label_u4.setText("TrafficMonitor window " + trafficLineName.toUpperCase() + " is now open!");
-                stage_u4.showAndWait();
-
-                if (!stage_u4.isShowing()) {
-                    btn_u4.setDisable(false);
-                    label_u4.setText("");
-                }
-            }
-            catch (Exception exception) {
-                String trafficLineName = "u4";
-                System.out.println("TrafficMonitor window " + trafficLineName.toUpperCase() + " is already open!");
-            }
+            String trafficLineName = "u4";
+            openTrafficMonitorWindow(trafficLineName, btn_u4, label_u4);
         });
 
 
         btn_u6.setOnAction(e->{
             String trafficLineName = "u6";
-            label_u6.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            //label_u6.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(trafficLineName, btn_u6, label_u6);
         });
 
 
+    }
+
+    private void openTrafficMonitorWindow(String trafficLineName, Button btn_uX, Label label_uX)  {
+        try {
+            Stage stage = new Stage();
+            CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine(trafficLineName);
+            Scene scene = new Scene(createPublicTransportLine.buildView(), 1024, 800);
+            stage.setTitle("TrafficMonitor " + trafficLineName.toUpperCase());
+            stage.setScene(scene);
+
+            btn_uX.setDisable(true);
+
+            label_uX.setText("TrafficMonitor window " + trafficLineName.toUpperCase() + " is now open!");
+            stage.showAndWait();
+
+            if (!stage.isShowing()) {
+                btn_uX.setDisable(false);
+                label_uX.setText("");
+            }
+        }
+        catch (Exception exception) {
+
+            System.out.println("TrafficMonitor window " + trafficLineName.toUpperCase() + " is already open!");
+        }
     }
 }
