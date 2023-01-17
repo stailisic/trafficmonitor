@@ -60,7 +60,10 @@ public class CreatePublicTransportLine {
             System.out.println("Aktualisieren geklickt");
 
             for(int i=0;i<transportLineButtonsList.size();i++) {
-                if(transportLineButtonsList.get(i).isSelected()) {
+
+                Boolean a = transportLine.isEmpty();
+
+                if(!a && transportLineButtonsList.get(i).isSelected()) {
                     CsvReader csvReader = new CsvReader(transportLineButtonsList.get(i).getText());
                     csvReader.retrieveDiva();
 
@@ -74,11 +77,12 @@ public class CreatePublicTransportLine {
                         list.add(jsonParse.getListLinesLineRecords().get(k));
                     }
 
-                } else {
+                } else if(a){
                     System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
                     infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
                     //System.out.println("Nothing selected.");
                 }
+
             }
 
             tableView.refresh();
