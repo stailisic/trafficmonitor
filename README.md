@@ -9,37 +9,6 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
-### 2023-01-16
-- Controls für das Traffic Monitor Ux Fenster hinzugefügt
-- Bugs: 
-  - TableView: 
-    - Auswahl Haltestelle A und B > Aktualisieren > Ergebnisse OK in TableView
-    - Auswahl Haltestelle B > Aktualisieren > vorheriges Ergebnis von A noch immer drinnen
-    - Expected: Alte Ergebnisse von TableView löschen und Ergebnisse der neuen Auswahl abbilden
-  - LabelInfo: zu unterscheiden und Text entsprechend anzeigen lassen
-    - keine Auswahl: "Keine Auswahl getroffen"
-    - Auswahl, aber außerhalb der Betriebszeiten: "Nicht im Betrieb"
-- Issues:
-  - wenn haltestellennamen_uX_linie.csv am Ende zwei leere Zeilen hat, dann öffnet sich das zweite Fenster (Traffic Monitor Ux) nicht. 
-    - Workaround: nur eine leere Zeile am Ende in der csv-Datei. 
-    - Lösungsvorschlag: Fehlerhandling einbauen 
-- ToDo: Threading, Kommentare, Fehlerhandling 
-
-### 2023-01-15
-- Startfenster erstellt: Auswahl der U-Bahnlinien via button
-- Wenn Button der gewünschten U-Bahnlinie angeklickt wird -> disable btn & Öffnen eines neuen Monitor-Fensters mit allen Haltenstellen, etc.
-  - erledigt: button clicked -> disable button & open 2nd window. If 2nd window is closed -> enable button.
-- TrafficMonitor Window Layout fertig (Klasse CreatePublicTransportLine) -- TODO: Controls mit JsonParse, etc. verlinken, damit bei Auswahl und Bestätigen (durch Button Aktualisieren) das resultierende JSON in der TableView angezeigt wird
-
-### 2023-01-14
-- CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva
-- Neue Klasse CreatePublicTransportLine erstellt zur dynamischen Erstellung der RadioButtons für die Haltestellen einer Linie
-
-### 2023-01-12
-- aus der CSV-Datei "wienerlienien-ogd-haltestellen.csv" lesen und nach einer bestimmen Adresse suchen, welche dann die dazugehörige Diva ausgibt
-- ToDo: in der GUI noch die restlichen Haltestellen erstellen. Danach wenn dann eine Haltestelle in der GUI ausgewählt wird -> wird in der CSV File die Haltestelle gesucht und dann die Diva ausgeben. 
-- ToDo: die ausgewählte Diva wird dann in die URL ausgegeben und wir bekommen zu dieser ausgewählten Haltestelle eine JSON Datei mit den Abfahrtszeiten retour. 
-
 ### 2023-01-10
 - Refactoring von Klassen.
 - Klasse JsonParse ist fertig. ToDo: Die Abfahrtszeit in ein lesbares Format anzeigen lassen, derzeit: `2023-01-10T16:43:44.000+0100`
