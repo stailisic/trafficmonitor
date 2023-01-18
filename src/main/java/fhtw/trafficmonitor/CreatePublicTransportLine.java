@@ -83,7 +83,6 @@ public class CreatePublicTransportLine {
 
                 }
 
-
             }
 
             if(count == 0){
