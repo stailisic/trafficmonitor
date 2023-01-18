@@ -59,11 +59,12 @@ public class CreatePublicTransportLine {
         btn_refresh.setOnAction(e->{
             System.out.println("Aktualisieren geklickt");
 
+            int count = 0;
+
+
             for(int i=0;i<transportLineButtonsList.size();i++) {
 
-                Boolean a = transportLine.isEmpty();
-
-                if(!a && transportLineButtonsList.get(i).isSelected()) {
+                if(transportLineButtonsList.get(i).isSelected()) {
                     CsvReader csvReader = new CsvReader(transportLineButtonsList.get(i).getText());
                     csvReader.retrieveDiva();
 
@@ -73,18 +74,26 @@ public class CreatePublicTransportLine {
                     jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
                     jsonParse.getKeyStage2();
 
+                    count++;
+                    infoLabel.setText(" ");
+
+                    System.out.println("count:" + count);
                     for (int k = 0; k < jsonParse.getListLinesLineRecords().size(); k++) {
                         list.add(jsonParse.getListLinesLineRecords().get(k));
                     }
 
-                } else if(a){
-                    System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    //System.out.println("Nothing selected.");
                 }
+
+                System.out.println("TUT I:" + i);
 
             }
 
+            if(count == 0){
+                //System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
+                System.out.println("Nothing selected.");
+                infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
+
+            }
             tableView.refresh();
 
         });

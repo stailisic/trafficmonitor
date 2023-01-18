@@ -82,9 +82,9 @@ public class JsonParse {
                     //Check if the next key is either an Object or Array
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
 
-                        if (exists == false) {
+
                             getKey(json.getJSONObject(nextKeys), key, /*stage,*/ listLines);
-                        }
+
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
                         JSONArray jsonArray = json.getJSONArray(nextKeys);
@@ -92,9 +92,9 @@ public class JsonParse {
                             String jsonArrayString = jsonArray.get(i).toString();
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
-                            if (exists == false) {
+
                                 getKey(innerJson, key, /*stage,*/ listLines);
-                            }
+
                         }
                     }
                 } catch (Exception e) {
@@ -133,9 +133,8 @@ public class JsonParse {
                      * Check if the next key is either an Object or Array
                      */
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
-                        if (exists == false) {
                             getKeyString(json.getJSONObject(nextKeys), key, listLines);
-                        }
+
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
                         JSONArray jsonArray = json.getJSONArray(nextKeys);
@@ -144,9 +143,9 @@ public class JsonParse {
                             String jsonArrayString = jsonArray.get(i).toString();
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
-                            if (exists == false) {
+
                                 getKeyString(innerJson, key, listLines);
-                            }
+
                         }
 
                     }
