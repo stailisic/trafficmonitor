@@ -27,8 +27,11 @@ public class CreatePublicTransportLine {
     private static int haltestelle_layout_x_abstand = 30;
     private ArrayList <RadioButton> transportLineButtonsList = new ArrayList<>();
 
-    ObservableList<LineRecord> list = FXCollections.observableArrayList();
+    private ObservableList<LineRecord> list = FXCollections.observableArrayList();
 
+    private JsonParse jsonParseMain = new JsonParse();
+    public CreatePublicTransportLine() {
+    }
 
     public CreatePublicTransportLine(String transportLine) {
         this.transportLine = transportLine.toUpperCase();
@@ -61,32 +64,61 @@ public class CreatePublicTransportLine {
 
             for(int i=0;i<transportLineButtonsList.size();i++) {
                 if(transportLineButtonsList.get(i).isSelected()) {
+
                     CsvReader csvReader = new CsvReader(transportLineButtonsList.get(i).getText());
                     csvReader.retrieveDiva();
 
                     checkListForTableViewRefresh(csvReader.getDiva());
 
-                    JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
-                    jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
-                    jsonParse.getKeyStage2();
+                    //JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
+                    JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro",i);
+                    Thread thread = new Thread(jsonParse);
+                    thread.start();
 
-                    for (int k = 0; k < jsonParse.getListLinesLineRecords().size(); k++) {
-                        list.add(jsonParse.getListLinesLineRecords().get(k));
-                    }
+                    System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
+
+
+                    //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
+                    //jsonParse.getKeyStage2();
+
+
+
+
+
 
                 } else {
                     System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
                     infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
                     //System.out.println("Nothing selected.");
                 }
+
+
             }
+
+            for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                list.add(jsonParseMain.getListLinesLineRecords().get(k));
+            }
+
+            /*
+
+            if (!thread.isAlive()) {
+                //JsonParse jsonParse = new JsonParse();
+                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+
+                for (int k = 0; k < jsonParse.getListLinesLineRecords().size(); k++) {
+                    //list.add(jsonParse.getListLinesLineRecords().get(k));
+                    System.out.println(k + " " + jsonParse.getListLinesLineRecords().get(k).getLineName()
+                            + " " + jsonParse.getListLinesLineRecords().get(k).getLineStationName()
+                            + " to " + jsonParse.getListLinesLineRecords().get(k).getLineTowards());
+                }
+
+            }*/
 
             tableView.refresh();
 
         });
 
         return  borderPane;
-
     }
 
     private ButtonBar createButtonBar() {
@@ -130,6 +162,8 @@ public class CreatePublicTransportLine {
         tableView.getColumns().add(departureTimePlanned2);
 
         tableView.setItems(list);
+
+        //tableView.setItems(jsonParseMain.getListLinesLineRecords());
 
         return tableView;
     }
@@ -226,8 +260,8 @@ public class CreatePublicTransportLine {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
+
 
     public void checkListForTableViewRefresh(String diva){
         for (int i = 0; i < list.size();i++) {
@@ -235,8 +269,13 @@ public class CreatePublicTransportLine {
                 list.remove(i);
             }
         }
-
     }
 
+    public ObservableList<LineRecord> getList() {
+        return list;
+    }
 
+    public void setList(ObservableList<LineRecord> list) {
+        this.list = list;
+    }
 }

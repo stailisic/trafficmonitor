@@ -2,6 +2,8 @@ package fhtw.trafficmonitor;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,7 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-public class JsonParse {
+public class JsonParse implements Runnable{
     enum DebugState {
         OFF,
         ON
@@ -27,9 +29,12 @@ public class JsonParse {
     private String transportType;
     private String url_source = "https://www.wienerlinien.at/ogd_realtime/monitor?stopid=0&diva=";
     private String jsonInput = "";
+    private int threadNumber;
 
-
+    // pro Haltestelle
     private List<String> listLines = new ArrayList<>();
+
+    // pro Haltestelle
     private ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
     public void parseObject(JSONObject json, String key) {
@@ -185,17 +190,21 @@ public class JsonParse {
         return result;
     }
 
+    public JsonParse() {
+    }
+
     /**
      * Constructor
      * @param diva  provided if radioButton
      */
-    public JsonParse(String diva, String stationName, String lineName, String transportType) {
+    public JsonParse(String diva, String stationName, String lineName, String transportType, int threadNumber) {
         this.diva = diva;
         this.stationName = stationName;
         this.lineName = lineName;
         this.transportType = transportType;
         this.url_source = url_source + diva;
-
+        this.threadNumber = threadNumber;
+/*
         try {
             URL url = new URL(url_source);
 
@@ -226,7 +235,79 @@ public class JsonParse {
 
         this.listLines = new ArrayList<>();
         this.listLinesLineRecords = FXCollections.observableArrayList();
+
+ */
+
+
     }
+
+    public void getKeyStage0() {
+
+        try {
+            URL url = new URL(url_source);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            // Receiving the response code
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+                Scanner scanner = new Scanner(url.openStream());
+
+                //Write all the JSON data into a string using a scanner
+                while (scanner.hasNext()) {
+                    this.jsonInput += scanner.nextLine();
+                }
+
+                //Close the scanner
+                scanner.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.listLines = new ArrayList<>();
+        //this.listLinesLineRecords = FXCollections.observableArrayList();
+
+        CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine();
+
+        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
+            createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
+        }
+
+
+    }
+
+    @Override
+    public void run () {
+
+        getKeyStage0();
+        getKeyStage1(new JSONObject(this.jsonInput), this.lineName, this.transportType);
+        getKeyStage2();
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** Thread created [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
+        System.out.println(" *******************************************************************************");
+
+
+        /*
+        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
+            //list.add(jsonParse.getListLinesLineRecords().get(k));
+            System.out.println(k + " " + getListLinesLineRecords().get(k).getLineName()
+                    + " " + getListLinesLineRecords().get(k).getLineStationName()
+                    + " to " + getListLinesLineRecords().get(k).getLineTowards());
+        }
+
+         */
+    }
+
 
     /**
      * This constructor uses static JSON source for testing/development reasons.
@@ -235,7 +316,6 @@ public class JsonParse {
      * @param lineName
      * @param transportType
      */
-
     /*
     public JsonParse(String diva, String lineName, String transportType) {
         this.diva = diva;
@@ -1411,7 +1491,7 @@ public class JsonParse {
      * @param transportType   ... attribute provided by(a)
      */
     public void getKeyStage1(JSONObject inputJsonObject, String lineName, String transportType) {
-        getKey(inputJsonObject, "lines", /*JsonParse.Stage.STAGE_LINES,*/ this.listLines);
+        getKey(inputJsonObject, "lines", this.listLines);
 
         // debug information
         if (debugMode.equals(DebugState.ON)) {
@@ -1454,7 +1534,7 @@ public class JsonParse {
 
             JSONObject inputJsonObjectListLines = new JSONObject(this.listLines.get(i));
 
-            this.listLinesLineRecords.add(
+            listLinesLineRecords.add(
                     new LineRecord(
                             getKeyString(inputJsonObjectListLines, "type", this.listLines),
                             this.diva,
@@ -1471,10 +1551,13 @@ public class JsonParse {
             //System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
             //System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
 
+
+
         }
 
-    }
+        listLinesLineRecords.forEach(System.out::println);
 
+    }
 
     public String getDiva() {
         return diva;
@@ -1523,5 +1606,6 @@ public class JsonParse {
     public String getTransportType() {
         return transportType;
     }
+
 
 }
