@@ -77,14 +77,12 @@ public class CreatePublicTransportLine {
                     count++;
                     infoLabel.setText(" ");
 
-                    System.out.println("count:" + count);
                     for (int k = 0; k < jsonParse.getListLinesLineRecords().size(); k++) {
                         list.add(jsonParse.getListLinesLineRecords().get(k));
                     }
 
                 }
 
-                System.out.println("TUT I:" + i);
 
             }
 
