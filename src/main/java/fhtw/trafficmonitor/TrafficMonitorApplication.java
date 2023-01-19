@@ -1,6 +1,7 @@
 package fhtw.trafficmonitor;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,13 +11,16 @@ import org.json.JSONObject;
 public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-
         //Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
-        //stage.setTitle("Demonstration TableView with defined Columns");
+        stage.setTitle("TrafficMonitor HauptMenü");
         stage.setScene(new Scene(root));
-        stage.show();
 
+        // Unfortunately this throws an IllegalArgumentException,
+        // but it's used to close all remaining windows besides main window
+        stage.setOnHidden(e -> Platform.exit());
+
+        stage.show();
     }
 
     public static void main(String[] args) {
@@ -41,7 +45,6 @@ public class TrafficMonitorApplication extends Application {
 
              */
 
-
             //System.out.println("Retrieve only selected transportType");
             //jsonSource1.getListLines().forEach(System.out::println);
             //System.out.println("Retrieve records: ");
@@ -56,7 +59,6 @@ public class TrafficMonitorApplication extends Application {
              */
 
             //CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
-
 
         } else {
             // launch the GUI

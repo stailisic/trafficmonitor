@@ -13,7 +13,7 @@
    <content>
       <BorderPane prefHeight="200.0" prefWidth="200.0">
          <left>
-            <TextArea prefHeight="245.0" prefWidth="200.0" text="Application manual:&#10;asdfasdfasdfasdfsdf" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="textArea_description" prefHeight="245.0" prefWidth="200.0" text="Application manual:&#10;asdfasdfasdfasdfsdf" BorderPane.alignment="CENTER" />
          </left>
          <center>
             <GridPane BorderPane.alignment="CENTER">

@@ -31,6 +31,11 @@ public class CreatePublicTransportLine {
     private static int haltestelle_layout_x_pos_start = 20;
     private static int haltestelle_layout_x_abstand = 30;
 
+    private static String btn_refresh_TooltipText_DE = "Echtzeitdaten via GET-Request holen. Json zerlegen und relevanten Key/Values für die Anzeige abspeichern.";
+    private static String btn_display_TooltipText_DE = "Resultierende Echtzeitdaten anzeigen lassen.";
+    private static String btn_deleteDisplay_TooltipText_DE = "Gespeicherte Echtzeitdaten und Anzeige löschen";
+
+
     /**
      * list of station Names of respective transportLine represented as RadioButtons
      */
@@ -69,12 +74,19 @@ public class CreatePublicTransportLine {
         TableView tableView = createTableView();
         Label infoLabel = createLabel();
         ButtonBar buttonBar = createButtonBar();
+
         Button btn_refresh = createButton();
-        btn_refresh.setText("Aktualisieren");
+        btn_refresh.setText("> Aktualisieren");
+        btn_refresh.setTooltip(new Tooltip(btn_refresh_TooltipText_DE));
+
         Button btn_display = createButton();
         btn_display.setText("Anzeigen");
+        btn_display.setTooltip(new Tooltip(btn_display_TooltipText_DE));
+
         Button btn_deleteDisplay = createButton();
         btn_deleteDisplay.setText("Anzeige löschen");
+        btn_deleteDisplay.setPrefWidth(200);
+        btn_deleteDisplay.setTooltip(new Tooltip(btn_deleteDisplay_TooltipText_DE));
 
         buttonBar.getButtons().add(btn_refresh);
         buttonBar.getButtons().add(btn_display);
@@ -103,8 +115,7 @@ public class CreatePublicTransportLine {
 
             System.out.println("Aktualisieren geklickt");
 
-            infoLabel.setText(" ");
-            infoLabel.setStyle("-fx-background-color: null; -fx-text-fill: #FFFFFF");
+            resetInfoLabel(infoLabel);
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
 
@@ -115,8 +126,11 @@ public class CreatePublicTransportLine {
             }
 
             if (selectedButtons.size() > 0 ) {
+
                 btn_refresh.setDisable(true);
+                btn_refresh.setText("Aktualisieren >");
                 btn_display.setDisable(false);
+                btn_display.setText("> Anzeigen");
 
                 for(int i=0;i<selectedButtons.size();i++) {
                     //if(transportLineButtonsList.get(i).isSelected()) {
@@ -165,14 +179,17 @@ public class CreatePublicTransportLine {
          */
         btn_display.setOnAction(e->{
             btn_refresh.setDisable(false);
+            btn_refresh.setText("> Aktualisieren");
             btn_display.setDisable(true);
+            btn_display.setText("< Anzeigen >");
             btn_deleteDisplay.setDisable(false);
+            btn_deleteDisplay.setText("> Anzeige löschen");
 
             tableView.getItems().removeAll();
             list.clear();
 
             System.out.println("---------------------------------------------------------");
-            System.out.println("1 Entries of list: ");
+            System.out.println("(1) Entries of list: ");
             list.forEach(System.out::println);
             System.out.println("---------------------------------------------------------");
 
@@ -183,7 +200,7 @@ public class CreatePublicTransportLine {
             }
 
             System.out.println("---------------------------------------------------------");
-            System.out.println("2 Entries of list: ");
+            System.out.println("(2) Entries of list: ");
             list.forEach(System.out::println);
             System.out.println("---------------------------------------------------------");
 
@@ -193,6 +210,8 @@ public class CreatePublicTransportLine {
         btn_deleteDisplay.setOnAction(e->{
             btn_refresh.setDisable(false);
             btn_display.setDisable(true);
+
+            resetInfoLabel(infoLabel);
 
             tableView.getItems().removeAll();
             list.clear();
@@ -210,7 +229,7 @@ public class CreatePublicTransportLine {
             }
 
             System.out.println("---------------------------------------------------------");
-            System.out.println("2 Entries of jsonParseMain: ");
+            System.out.println("2 Entries of jsonParseMain.listLinesLineRecords: ");
             jsonParseMain.getListLinesLineRecords().forEach(System.out::println);
             System.out.println("---------------------------------------------------------");
 
@@ -416,7 +435,6 @@ public class CreatePublicTransportLine {
         }
     }
 
-
     /**
      * Method to remove existing lineRecords of respective transportLine.
      * - used, whenever the Button btn_refresh is executed, so only
@@ -438,4 +456,10 @@ public class CreatePublicTransportLine {
     public void setList(ObservableList<LineRecord> list) {
         list = list;
     }
+
+    public void resetInfoLabel(Label infoLabel) {
+        infoLabel.setText(" ");
+        infoLabel.setStyle("-fx-background-color: null; -fx-text-fill: #FFFFFF");
+    }
+
 }

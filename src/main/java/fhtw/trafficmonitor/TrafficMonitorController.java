@@ -1,10 +1,12 @@
 package fhtw.trafficmonitor;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.paint.Color;
@@ -49,9 +51,24 @@ public class TrafficMonitorController implements Initializable {
     @FXML
     private Label label_u6;
 
+    @FXML
+    private TextArea textArea_description;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        String textArea_description_DE = "Bedienungsanleitung:\n" +
+                "Im Fenster \"TrafficMonitor Hauptmenü\" können Sie auf der rechten Seite " +
+                "über die Button-Auswahl die gewünschte U-bahn-Linie auswählen. " +
+                "Für jede Auswahl wird ein eigenes Fenster \"TrafficMonitor Ux\" geöffnet. " +
+                "Mehrere Fenster zu einer U-bahn-Linie ist nicht gestattet. Dies wird einerseits durch " +
+                "die Nichtverfügbarkeit des jeweiligen Buttons bzw. durch einen entsprechenden Hinweis neben den Button verdeutlicht." +
+                "";
+
+        textArea_description.setText(textArea_description_DE);
+        textArea_description.setWrapText(true);
+        textArea_description.setEditable(false);
+        textArea_description.setDisable(false);
+
         // Dropshadow, see: https://www.tutorialspoint.com/javafx/drop_shadow_effect.htm
         DropShadow dropShadow = new DropShadow();
         dropShadow.setBlurType(BlurType.GAUSSIAN); //setting the type of blur for the shadow
@@ -123,6 +140,7 @@ public class TrafficMonitorController implements Initializable {
             btn_uX.setDisable(true);
 
             label_uX.setText("TrafficMonitor window " + transportLineName.toUpperCase() + " is now open!");
+
             stage.showAndWait();
 
             if (!stage.isShowing()) {
