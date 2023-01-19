@@ -35,7 +35,7 @@ public class JsonParse implements Runnable{
     private List<String> listLines = new ArrayList<>();
 
     // pro Haltestelle
-    private ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
+    private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
     public void parseObject(JSONObject json, String key) {
         // System.out.println(json.has(key));
@@ -241,47 +241,7 @@ public class JsonParse implements Runnable{
 
     }
 
-    public void getKeyStage0() {
 
-        try {
-            URL url = new URL(url_source);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            // Receiving the response code
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner scanner = new Scanner(url.openStream());
-
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    this.jsonInput += scanner.nextLine();
-                }
-
-                //Close the scanner
-                scanner.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.listLines = new ArrayList<>();
-        //this.listLinesLineRecords = FXCollections.observableArrayList();
-
-        CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine();
-
-        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
-            createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
-        }
-
-
-    }
 
     @Override
     public void run () {
@@ -1459,6 +1419,49 @@ public class JsonParse implements Runnable{
      */
 
     /**
+     * Method used for instance:
+     * - to retrieve jsonData and store it in String 'jsonInput'
+     */
+    public void getKeyStage0() {
+        try {
+            URL url = new URL(url_source);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            // Receiving the response code
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+                Scanner scanner = new Scanner(url.openStream());
+
+                //Write all the JSON data into a string using a scanner
+                while (scanner.hasNext()) {
+                    this.jsonInput += scanner.nextLine();
+                }
+
+                //Close the scanner
+                scanner.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.listLines = new ArrayList<>();
+        //this.listLinesLineRecords = FXCollections.observableArrayList();
+
+        //CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine();
+        //for (int k = 0; k < getListLinesLineRecords().size(); k++) {
+        //    createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
+        //}
+
+    }
+
+    /**
      * Parse jsonInput of the related Haltepunkt (diva) to stage 1:
      *  1. retrieve from all 'monitors index' (A)
      *  2. the inner lines JsonArray (B)
@@ -1527,7 +1530,7 @@ public class JsonParse implements Runnable{
 
     /**
      * From ArrayList retrieve necessary information on basis of provided attributes
-     * and save them in our observableArrayList which is required for GUI
+     * and save them in our general static observableArrayList which is required for GUI
      */
     public void getKeyStage2() {
         for (int i=0; i < this.listLines.size(); i++) {
@@ -1550,13 +1553,8 @@ public class JsonParse implements Runnable{
             //System.out.println(getKeyString(inputJsonObjectListLines, "type", this.listLines));
             //System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
             //System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
-
-
-
         }
-
         listLinesLineRecords.forEach(System.out::println);
-
     }
 
     public String getDiva() {

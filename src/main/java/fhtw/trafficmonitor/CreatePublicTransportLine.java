@@ -186,6 +186,11 @@ public class CreatePublicTransportLine {
         return anchorPane;
     }
 
+    /**
+     * Method to create a Label with specific settings
+     * - used for the infoLabel as message indicator in general
+     * @return Label with specific setting
+     */
     private Label createLabel() {
         Label label = new Label();
         label.setText("");
@@ -195,6 +200,15 @@ public class CreatePublicTransportLine {
         return label;
     }
 
+    /**
+     * Method to create a RadioButton with specific settings
+     * - used when processing the list for creating the station names (Haltestellennamen) as type of RadioButton
+     * - includes design pattern: size, rotated, custom (x,y)-location of each newly created RadioButton
+     * @param buttonName equals to station name (Haltestellenname)
+     * @param y is the y-value for positioning the RadioButton with (x,y)-coordinates
+     * @param x is the x-value for positioning the RadioButton with (x,y)-coordinates
+     * @return RadioButton with specific setting
+     */
     public RadioButton createButton(String buttonName, int y, int x) {
         RadioButton button = new RadioButton();
         button.setText(buttonName);
@@ -206,6 +220,14 @@ public class CreatePublicTransportLine {
         return button;
     }
 
+    /**
+     * Method to create
+     * - on the basis of provided transportLine, e.g.: u1, u2, u3, u4, u6 (note: transportLine is provided in small case)
+     *   - the list of station names will be created by retrieving from the given *.csv and
+     *   - stored in the ArrayList of type RadioButton
+     * @param transportLine e.g.: u1, u2, u3, u4, u6 (note: transportLine is provided in small case)
+     * @param transportLineButtonsList ArrayList that contains the list of station names (as RadioButtons) of the respective transportLine
+     */
     public void add_transportLineButtons(String transportLine, ArrayList<RadioButton> transportLineButtonsList) {
         int y = haltestelle_layout_y_pos_start;
         int x = haltestelle_layout_x_pos_start;
