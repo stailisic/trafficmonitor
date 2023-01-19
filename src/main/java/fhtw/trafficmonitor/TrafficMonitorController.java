@@ -13,6 +13,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Class used for creating the UI of the first window,
+ * providing the subway lines: U1, U2, U3, U4, U6
+ */
 public class TrafficMonitorController implements Initializable {
 
     @FXML
@@ -48,27 +52,16 @@ public class TrafficMonitorController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         // Dropshadow, see: https://www.tutorialspoint.com/javafx/drop_shadow_effect.htm
         DropShadow dropShadow = new DropShadow();
-        //setting the type of blur for the shadow
-        dropShadow.setBlurType(BlurType.GAUSSIAN);
+        dropShadow.setBlurType(BlurType.GAUSSIAN); //setting the type of blur for the shadow
+        dropShadow.setColor(Color.DARKGREY); //Setting color for the shadow
+        dropShadow.setHeight(2); //Setting the height of the shadow
+        dropShadow.setWidth(2); //Setting the width of the shadow
+        dropShadow.setRadius(2); //Setting the radius of the shadow
+        dropShadow.setSpread(12); //Setting the spread of the shadow
 
-        //Setting color for the shadow
-        dropShadow.setColor(Color.DARKGREY);
-
-        //Setting the height of the shadow
-        dropShadow.setHeight(2);
-
-        //Setting the width of the shadow
-        dropShadow.setWidth(2);
-
-        //Setting the radius of the shadow
-        dropShadow.setRadius(2);
-
-        //Setting the spread of the shadow
-        dropShadow.setSpread(12);
-
+        // apply style (button color, etc.) for each transportLine button
         btn_u1.setStyle("-fx-background-color: #EE1D23; -fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
         btn_u1.setEffect(dropShadow);
         btn_u2.setStyle("-fx-background-color: #A065AA; -fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
@@ -80,53 +73,57 @@ public class TrafficMonitorController implements Initializable {
         btn_u6.setStyle("-fx-background-color: #986A39; -fx-text-fill: #FFFFFF; -fx-font-weight: BOLD");
         btn_u6.setEffect(dropShadow);
 
-
+        /**
+         * btn_uX.setOnAction:
+         * When respective button is clicked
+         *  -> run method to create new respective (2nd) window 'TransportMonitor UX'
+         */
         btn_u1.setOnAction(e->{
-            String trafficLineName = "u1";
-            //label_u1.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
-            openTrafficMonitorWindow(trafficLineName, btn_u1, label_u1);
+            String transportLine = "u1";
+            //label_u1.setText("Button " + transportLine.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(transportLine, btn_u1, label_u1);
         });
 
         btn_u2.setOnAction(e->{
-            String trafficLineName = "u2";
-            //label_u2.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
-            openTrafficMonitorWindow(trafficLineName, btn_u2, label_u2);
+            String transportLineName = "u2";
+            openTrafficMonitorWindow(transportLineName, btn_u2, label_u2);
         });
 
         btn_u3.setOnAction(e->{
-            //label_u3.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
-            String trafficLineName = "u3";
-            openTrafficMonitorWindow(trafficLineName, btn_u3, label_u3);
+            String transportLineName = "u3";
+            openTrafficMonitorWindow(transportLineName, btn_u3, label_u3);
 
         });
 
-        // Prototype
         btn_u4.setOnAction(e->{
-            String trafficLineName = "u4";
-            openTrafficMonitorWindow(trafficLineName, btn_u4, label_u4);
+            String transportLineName = "u4";
+            openTrafficMonitorWindow(transportLineName, btn_u4, label_u4);
         });
-
 
         btn_u6.setOnAction(e->{
-            String trafficLineName = "u6";
-            //label_u6.setText("Button " + trafficLineName.toUpperCase() + " has been pressed.");
-            openTrafficMonitorWindow(trafficLineName, btn_u6, label_u6);
+            String transportLineName = "u6";
+            openTrafficMonitorWindow(transportLineName, btn_u6, label_u6);
         });
-
 
     }
 
-    private void openTrafficMonitorWindow(String trafficLineName, Button btn_uX, Label label_uX)  {
+    /**
+     * Method to create the new (2nd) window 'TransportMonitor UX' for the respective transportLine
+     * @param transportLineName e.g. u1, u2, u3, u4, u6
+     * @param btn_uX respective button labeled with transportLineName
+     * @param label_uX provide message indicating that the button is pressed and the new (2nd) window for respective transportLine is available
+     */
+    private void openTrafficMonitorWindow(String transportLineName, Button btn_uX, Label label_uX)  {
         try {
             Stage stage = new Stage();
-            CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine(trafficLineName);
+            CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine(transportLineName);
             Scene scene = new Scene(createPublicTransportLine.buildView(), 1024, 800);
-            stage.setTitle("TrafficMonitor " + trafficLineName.toUpperCase());
+            stage.setTitle("TrafficMonitor " + transportLineName.toUpperCase());
             stage.setScene(scene);
 
             btn_uX.setDisable(true);
 
-            label_uX.setText("TrafficMonitor window " + trafficLineName.toUpperCase() + " is now open!");
+            label_uX.setText("TrafficMonitor window " + transportLineName.toUpperCase() + " is now open!");
             stage.showAndWait();
 
             if (!stage.isShowing()) {
@@ -136,7 +133,7 @@ public class TrafficMonitorController implements Initializable {
         }
         catch (Exception exception) {
 
-            System.out.println("TrafficMonitor window " + trafficLineName.toUpperCase() + " is already open!");
+            System.out.println("TrafficMonitor window " + transportLineName.toUpperCase() + " is already open!");
         }
     }
 }

@@ -21,27 +21,46 @@ import java.util.ArrayList;
 
 public class CreatePublicTransportLine {
 
-    private String transportLine;
+    private String transportLine; // e.g.: U1, U2, U3, U4, U6
+
+    /**
+     * Layout values for the RadioButtons
+     */
     private static int haltestelle_layout_y_pos_start = 100;
     private static int haltestelle_layout_x_pos_start = 20;
     private static int haltestelle_layout_x_abstand = 30;
+
+    /**
+     * list of station Names of respective transportLine represented as RadioButtons
+     */
     private ArrayList <RadioButton> transportLineButtonsList = new ArrayList<>();
 
-    private ObservableList<LineRecord> list = FXCollections.observableArrayList();
+    /**
+     * list of lineRecords of respective transportLine, used for tableView
+     */
+    private static ObservableList<LineRecord> list = FXCollections.observableArrayList();
 
     private JsonParse jsonParseMain = new JsonParse();
     public CreatePublicTransportLine() {
     }
 
-    public CreatePublicTransportLine(String transportLine) {
-        this.transportLine = transportLine.toUpperCase();
+    /**
+     * Constructor used for instance creation in regard of provided transportLine (e.g. U1)
+     * @param transportLineName (e.g.: u1, u2, u3, u4, u6 <-- provided as small letters)
+     */
+    public CreatePublicTransportLine(String transportLineName) {
+        this.transportLine = transportLine.toUpperCase(); // !!! for further processing, upperCase is required
 
-        add_transportLineButtons(transportLine, this.transportLineButtonsList);
+        add_transportLineButtons(this.transportLine, this.transportLineButtonsList);
 
         System.out.println("Size of button list " + this.transportLineButtonsList.size());
     }
 
 
+    /**
+     * Method to create final TrafficMonitor UX window including functionality of respective buttons
+     * @return custom window representing the respective transportLine UX
+     */
     public Parent buildView () {
      //   this.transportLine = transportLine;
         BorderPane borderPane = createBorderPane();
@@ -59,6 +78,9 @@ public class CreatePublicTransportLine {
         borderPane.setBottom(buttonBar);
         anchorPane.getChildren().add(infoLabel);
 
+        /**
+         * Button 'Aktualisieren'
+         */
         btn_refresh.setOnAction(e->{
             System.out.println("Aktualisieren geklickt");
 
@@ -80,10 +102,6 @@ public class CreatePublicTransportLine {
 
                     //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
                     //jsonParse.getKeyStage2();
-
-
-
-
 
 
                 } else {
@@ -121,17 +139,31 @@ public class CreatePublicTransportLine {
         return  borderPane;
     }
 
+    /**
+     * Method to create a ButtonBar with specific padding settings.
+     * @return ButtonBar with specific padding settings
+     */
     private ButtonBar createButtonBar() {
         ButtonBar buttonBar = new ButtonBar();
         buttonBar.setPadding(new Insets(10,10,10,0));
         return buttonBar;
     }
 
+
+    /**
+     * Method to create Button without any specific settings
+     * @return plain Button
+     */
     private Button createButton(){
         Button button = new Button();
         return button;
     }
 
+    /**
+     * Method to create the general structure of the TableView, which is
+     * used for displaying the lineRecords.
+     * @return custom TableView
+     */
     private TableView createTableView(){
         TableView tableView = new TableView();
 
@@ -168,6 +200,10 @@ public class CreatePublicTransportLine {
         return tableView;
     }
 
+    /**
+     * Method to create an area of type BorderPane with specific settings
+     * @return BorderPane with specific size setting
+     */
     private BorderPane createBorderPane() {
         BorderPane borderPane = new BorderPane();
         borderPane.setPrefWidth(1024);
@@ -175,11 +211,19 @@ public class CreatePublicTransportLine {
         return borderPane;
     }
 
+    /**
+     * Method to create an area of type AnchorPane with specific settings,
+     * in which the station names (each of type RadioButton) are included.
+     * @return AnchorPane with specific setting including the station names represented as RadioButtons
+     */
     private AnchorPane createAnchorPane() {
         AnchorPane anchorPane = new AnchorPane();
         anchorPane.setPrefWidth(200);
         anchorPane.setPrefHeight(200);
 
+        /**
+         * add station names, represented each as RadioButton, to the AnchorPane area
+         */
         for (int i=0; i < this.transportLineButtonsList.size();i++) {
             anchorPane.getChildren().add(this.transportLineButtonsList.get(i));
         }
@@ -285,6 +329,12 @@ public class CreatePublicTransportLine {
     }
 
 
+    /**
+     * Method to remove existing lineRecords of respective transportLine.
+     * - used, whenever the Button btn_refresh is executed, so only
+     *   newly retrieved and lately added records from the ArrayList will be displayed
+     * @param diva
+     */
     public void checkListForTableViewRefresh(String diva){
         for (int i = 0; i < list.size();i++) {
             if (list.get(i).getDiva().equals(diva)) {
@@ -298,6 +348,6 @@ public class CreatePublicTransportLine {
     }
 
     public void setList(ObservableList<LineRecord> list) {
-        this.list = list;
+        list = list;
     }
 }

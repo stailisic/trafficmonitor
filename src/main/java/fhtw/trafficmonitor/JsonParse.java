@@ -34,7 +34,7 @@ public class JsonParse implements Runnable{
     // pro Haltestelle
     private List<String> listLines = new ArrayList<>();
 
-    // pro Haltestelle
+    //
     private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
     public void parseObject(JSONObject json, String key) {
@@ -195,6 +195,7 @@ public class JsonParse implements Runnable{
 
     /**
      * Constructor
+     * - when passing the list of
      * @param diva  provided if radioButton
      */
     public JsonParse(String diva, String stationName, String lineName, String transportType, int threadNumber) {
@@ -237,12 +238,15 @@ public class JsonParse implements Runnable{
         this.listLinesLineRecords = FXCollections.observableArrayList();
 
  */
-
-
     }
 
 
-
+    /**
+     * Threading procedure
+     * 1. getKeyStage0: GET-Request > save json data into String 'jsonInput'
+     * 2. getKeyStage1: parse json data and retrieve necessary key/values -> save in ArrayList 'listLines'
+     * 3. getKeyStage2: pass each entry of ArrayList 'listLines' as new LineRecord into static ArrayList 'listLinesLineRecords'
+     */
     @Override
     public void run () {
 
