@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -72,14 +73,26 @@ public class CreatePublicTransportLine {
         btn_refresh.setText("Aktualisieren");
         Button btn_display = createButton();
         btn_display.setText("Anzeigen");
+        Button btn_deleteDisplay = createButton();
+        btn_deleteDisplay.setText("Anzeige löschen");
 
         buttonBar.getButtons().add(btn_refresh);
         buttonBar.getButtons().add(btn_display);
+        buttonBar.getButtons().add(btn_deleteDisplay);
 
         borderPane.setTop(anchorPane);
         borderPane.setCenter(tableView);
         borderPane.setBottom(buttonBar);
         anchorPane.getChildren().add(infoLabel);
+
+        /**
+         * Starting state of the executable bottom Buttons
+         * setDisable(false): Button clickable
+         * setDisable(true): Button greyed out (not clickable)
+         * */
+        btn_refresh.setDisable(false);
+        btn_display.setDisable(true);
+        btn_deleteDisplay.setDisable(true);
 
 
 
@@ -87,50 +100,49 @@ public class CreatePublicTransportLine {
          * Button 'Aktualisieren'
          */
         btn_refresh.setOnAction(e->{
-            /*
+
+            System.out.println("Aktualisieren geklickt");
+
+            infoLabel.setText(" ");
+            infoLabel.setStyle("-fx-background-color: null; -fx-text-fill: #FFFFFF");
+
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
 
             for(int i=0;i<transportLineButtonsList.size();i++) {
                 if(transportLineButtonsList.get(i).isSelected()) {
-
-                } else {
-                    System.out.println("Button not selected for " + transportLineButtonsList.get(i).getText());
+                    selectedButtons.add(transportLineButtonsList.get(i));
                 }
-
             }
 
-             */
+            if (selectedButtons.size() > 0 ) {
+                btn_refresh.setDisable(true);
+                btn_display.setDisable(false);
 
-            System.out.println("Aktualisieren geklickt");
+                for(int i=0;i<selectedButtons.size();i++) {
+                    //if(transportLineButtonsList.get(i).isSelected()) {
 
-            for(int i=0;i<transportLineButtonsList.size();i++) {
-                if(transportLineButtonsList.get(i).isSelected()) {
+                        CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
+                        csvReader.retrieveDiva();
 
-                    CsvReader csvReader = new CsvReader(transportLineButtonsList.get(i).getText());
-                    csvReader.retrieveDiva();
+                        //JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
+                        JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine , "ptMetro",i);
+                        Thread thread = new Thread(jsonParse);
+                        thread.start();
 
-                    checkListForTableViewRefresh(csvReader.getDiva());
-
-                    //JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
-                    JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro",i);
-                    Thread thread = new Thread(jsonParse);
-                    thread.start();
-
-                    System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
+                        System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
 
 
-                    //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
-                    //jsonParse.getKeyStage2();
+                        //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
+                        //jsonParse.getKeyStage2();
 
-                } else {
-                    System.out.println("Button not selected");
-                    System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
+                    //} else {
+                    //    System.out.println("Button not selected");
+                    //    System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
+                    //    infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
+                    //}
+
 
                 }
-
-
-            }
 
             /*
             for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
@@ -139,6 +151,12 @@ public class CreatePublicTransportLine {
 
             tableView.refresh();
             */
+
+            } else {
+                infoLabel.setText("Keine Haltestelle ausgewählt.");
+                infoLabel.setStyle("-fx-background-color: #EE1D23; -fx-text-fill: #FFFFFF");
+            }
+
         });
 
         /**
@@ -146,6 +164,10 @@ public class CreatePublicTransportLine {
          * - display only of respective transportLine 'UX'
          */
         btn_display.setOnAction(e->{
+            btn_refresh.setDisable(false);
+            btn_display.setDisable(true);
+            btn_deleteDisplay.setDisable(false);
+
             tableView.getItems().removeAll();
             list.clear();
 
@@ -166,6 +188,39 @@ public class CreatePublicTransportLine {
             System.out.println("---------------------------------------------------------");
 
             tableView.refresh();
+        });
+
+        btn_deleteDisplay.setOnAction(e->{
+            btn_refresh.setDisable(false);
+            btn_display.setDisable(true);
+
+            tableView.getItems().removeAll();
+            list.clear();
+
+            System.out.println("---------------------------------------------------------");
+            System.out.println("1 Entries of list: ");
+            list.forEach(System.out::println);
+            System.out.println("---------------------------------------------------------");
+
+            for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
+                    jsonParseMain.getListLinesLineRecords().remove(k);
+                    k=-1;
+                }
+            }
+
+            System.out.println("---------------------------------------------------------");
+            System.out.println("2 Entries of jsonParseMain: ");
+            jsonParseMain.getListLinesLineRecords().forEach(System.out::println);
+            System.out.println("---------------------------------------------------------");
+
+
+            for(int i = 0; i < transportLineButtonsList.size();i++) {
+                transportLineButtonsList.get(i).setSelected(false); // Reset state of RadioButton: 'not selected'
+            }
+
+            tableView.refresh();
+
         });
 
 
