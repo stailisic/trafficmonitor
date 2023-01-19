@@ -70,18 +70,37 @@ public class CreatePublicTransportLine {
         ButtonBar buttonBar = createButtonBar();
         Button btn_refresh = createButton();
         btn_refresh.setText("Aktualisieren");
+        Button btn_display = createButton();
+        btn_display.setText("Anzeigen");
 
         buttonBar.getButtons().add(btn_refresh);
+        buttonBar.getButtons().add(btn_display);
 
         borderPane.setTop(anchorPane);
         borderPane.setCenter(tableView);
         borderPane.setBottom(buttonBar);
         anchorPane.getChildren().add(infoLabel);
 
+
+
         /**
          * Button 'Aktualisieren'
          */
         btn_refresh.setOnAction(e->{
+            /*
+            ArrayList<RadioButton> selectedButtons = new ArrayList<>();
+
+            for(int i=0;i<transportLineButtonsList.size();i++) {
+                if(transportLineButtonsList.get(i).isSelected()) {
+
+                } else {
+                    System.out.println("Button not selected for " + transportLineButtonsList.get(i).getText());
+                }
+
+            }
+
+             */
+
             System.out.println("Aktualisieren geklickt");
 
             for(int i=0;i<transportLineButtonsList.size();i++) {
@@ -103,38 +122,52 @@ public class CreatePublicTransportLine {
                     //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
                     //jsonParse.getKeyStage2();
 
-
                 } else {
+                    System.out.println("Button not selected");
                     System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
                     infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    //System.out.println("Nothing selected.");
+
                 }
 
 
             }
 
+            /*
             for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
                 list.add(jsonParseMain.getListLinesLineRecords().get(k));
             }
 
-            /*
+            tableView.refresh();
+            */
+        });
 
-            if (!thread.isAlive()) {
-                //JsonParse jsonParse = new JsonParse();
-                System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+        /**
+         * - retrieve lineRecords from static list
+         * - display only of respective transportLine 'UX'
+         */
+        btn_display.setOnAction(e->{
+            tableView.getItems().removeAll();
+            list.clear();
 
-                for (int k = 0; k < jsonParse.getListLinesLineRecords().size(); k++) {
-                    //list.add(jsonParse.getListLinesLineRecords().get(k));
-                    System.out.println(k + " " + jsonParse.getListLinesLineRecords().get(k).getLineName()
-                            + " " + jsonParse.getListLinesLineRecords().get(k).getLineStationName()
-                            + " to " + jsonParse.getListLinesLineRecords().get(k).getLineTowards());
+            System.out.println("---------------------------------------------------------");
+            System.out.println("1 Entries of list: ");
+            list.forEach(System.out::println);
+            System.out.println("---------------------------------------------------------");
+
+            for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
+                    list.add(jsonParseMain.getListLinesLineRecords().get(k));
                 }
+            }
 
-            }*/
+            System.out.println("---------------------------------------------------------");
+            System.out.println("2 Entries of list: ");
+            list.forEach(System.out::println);
+            System.out.println("---------------------------------------------------------");
 
             tableView.refresh();
-
         });
+
 
         return  borderPane;
     }

@@ -25,7 +25,7 @@ public class JsonParse implements Runnable{
 
     private String diva;
     private String stationName;
-    private String lineName;
+    private String lineName; // e.g. U1, U2, U3, U4, U6
     private String transportType;
     private String url_source = "https://www.wienerlinien.at/ogd_realtime/monitor?stopid=0&diva=";
     private String jsonInput = "";
@@ -257,6 +257,11 @@ public class JsonParse implements Runnable{
      */
     @Override
     public void run () {
+        /**
+         * Remove any existing LineRecords from ArrayList 'listLinesLineRecords'
+         * in regard of 'lineName' (=transportLine, e.g. U1,U2,U3,U4,U6)
+         */
+        removeLineRecordsFromList();
 
         getKeyStage0();
         getKeyStage1(new JSONObject(this.jsonInput), this.lineName, this.transportType);
@@ -267,17 +272,6 @@ public class JsonParse implements Runnable{
                 + ", " +  lineName
                 + ", " +  transportType );
         System.out.println(" *******************************************************************************");
-
-
-        /*
-        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
-            //list.add(jsonParse.getListLinesLineRecords().get(k));
-            System.out.println(k + " " + getListLinesLineRecords().get(k).getLineName()
-                    + " " + getListLinesLineRecords().get(k).getLineStationName()
-                    + " to " + getListLinesLineRecords().get(k).getLineTowards());
-        }
-
-         */
     }
 
 
@@ -1615,6 +1609,15 @@ public class JsonParse implements Runnable{
 
     public String getTransportType() {
         return transportType;
+    }
+
+    public void removeLineRecordsFromList(){
+        for (int k = 0; k < listLinesLineRecords.size(); k++) {
+            if (listLinesLineRecords.get(k).getLineName().equals(this.lineName)) {
+                listLinesLineRecords.remove(k);
+                k=-1;
+            }
+        }
     }
 
 
