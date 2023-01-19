@@ -9,6 +9,16 @@ group project for ODE
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+
+### 2023-01-18 + 2023-01-19
+- Threading eingebaut: 
+  - Klasse JsonParse mit `implements Runnable` und einiges umgebaut, damit Threading ermöglicht
+  - Klasse CreatePublicTransportLine: neue Buttons für Workflow hinzugefügt, wegen Threading, da keinen Ansatz gefunden, dass nachdem erst alle Thread fertig sind, danach der tableView-Refresh zum Schluss erfolgt.
+    - Szenario 1: Aktualisieren > Anzeigen. 
+    - Szenario 2: Anzeige löschen
+- Bei erneuter Auswahl und somit neuer Einträge > statische Liste `listLinesLineRecords` entsprechend bereinigen, aber nur für die jeweilige Ubahn-Linie
+- Code kommentiert
+
 ### 2023-01-16
 - Controls für das Traffic Monitor Ux Fenster hinzugefügt
 - Bugs: 
