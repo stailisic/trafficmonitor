@@ -34,7 +34,15 @@ public class JsonParse implements Runnable{
     // pro Haltestelle
     private List<String> listLines = new ArrayList<>();
 
-    //
+    /**
+     * Approach:
+     * - collect all created LineRecords into one static list
+     *   - e.g. if U1- and U4-TransportMonitor window is open and
+     *     both have several stations selected, then all records
+     *     are gathered in one list
+     * - for displaying the respective lineRecords for each 'TransportMonitor window UX'
+     *   will be done by filtering the transportLine 'UX'
+     */
     private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
     public void parseObject(JSONObject json, String key) {

@@ -38,7 +38,7 @@ public class CreatePublicTransportLine {
     /**
      * list of lineRecords of respective transportLine, used for tableView
      */
-    private static ObservableList<LineRecord> list = FXCollections.observableArrayList();
+    private ObservableList<LineRecord> list = FXCollections.observableArrayList();
 
     private JsonParse jsonParseMain = new JsonParse();
     public CreatePublicTransportLine() {
@@ -49,7 +49,7 @@ public class CreatePublicTransportLine {
      * @param transportLineName (e.g.: u1, u2, u3, u4, u6 <-- provided as small letters)
      */
     public CreatePublicTransportLine(String transportLineName) {
-        this.transportLine = transportLine.toUpperCase(); // !!! for further processing, upperCase is required
+        this.transportLine = transportLineName.toUpperCase(); // !!! for further processing, upperCase is required
 
         add_transportLineButtons(this.transportLine, this.transportLineButtonsList);
 
@@ -280,19 +280,19 @@ public class CreatePublicTransportLine {
         try {
             String filepath="";
             switch(transportLine) {
-                case "u1":
+                case "U1":
                     filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
                     break;
-                case "u2":
+                case "U2":
                     filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
                     break;
-                case "u3":
+                case "U3":
                     filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv";
                     break;
-                case "u4":
+                case "U4":
                     filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
                     break;
-                case "u6":
+                case "U6":
                     filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv";
                     break;
                 default:

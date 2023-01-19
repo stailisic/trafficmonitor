@@ -104,7 +104,6 @@ public class TrafficMonitorController implements Initializable {
             String transportLineName = "u6";
             openTrafficMonitorWindow(transportLineName, btn_u6, label_u6);
         });
-
     }
 
     /**
@@ -132,7 +131,6 @@ public class TrafficMonitorController implements Initializable {
             }
         }
         catch (Exception exception) {
-
             System.out.println("TrafficMonitor window " + transportLineName.toUpperCase() + " is already open!");
         }
     }
