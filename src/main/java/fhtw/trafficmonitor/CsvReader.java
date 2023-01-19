@@ -14,6 +14,9 @@ public class CsvReader {
         this.haltestellenName = haltestellenName;
     }
 
+    /**
+     * CSV source: https://www.wienerlinien.at/ogd_realtime/doku/ogd/wienerlinien-ogd-haltestellen.csv
+     */
     public void retrieveDiva () {
         String filepath = "src/main/resources/fhtw/trafficmonitor/wienerlinien-ogd-haltestellen.csv";
         try {

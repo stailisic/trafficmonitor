@@ -2,8 +2,6 @@ package fhtw.trafficmonitor;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,7 +19,7 @@ public class JsonParse implements Runnable{
     }
 
     //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
-    private static DebugState debugMode = DebugState.ON;
+    private static final DebugState debugMode = DebugState.ON;
 
     private String diva;
     private String stationName;
@@ -45,10 +43,12 @@ public class JsonParse implements Runnable{
      */
     private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
+    /*
     public void parseObject(JSONObject json, String key) {
         // System.out.println(json.has(key));
         System.out.println(json.get(key));
     }
+     */
 
     /**
      * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
@@ -75,13 +75,12 @@ public class JsonParse implements Runnable{
      *  e.g.: key = lines -> value = [{name: ...}]
      * @param json
      * @param key
-     * @param listLines
      *
      * Source:
      * - How to parse dynamic and nested JSON in java? - Rest assured API automation framework
      *   - https://www.youtube.com/watch?v=ZjZqLUGCWxo
      */
-    public void getKey(JSONObject json, String key /*, Enum stage*/ , List<String> listLines) {
+    public void getKey(JSONObject json, String key /* , List<String> listLines*/) {
         //Check if particular key exists -> store as boolean value
         boolean exists = json.has(key);
         Iterator<?> keys;  // Iterator use generic concept
@@ -96,7 +95,7 @@ public class JsonParse implements Runnable{
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
 
                         if (exists == false) {
-                            getKey(json.getJSONObject(nextKeys), key, /*stage,*/ listLines);
+                            getKey(json.getJSONObject(nextKeys), key /*, listLines*/);
                         }
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
@@ -106,7 +105,7 @@ public class JsonParse implements Runnable{
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
                             if (exists == false) {
-                                getKey(innerJson, key, /*stage,*/ listLines);
+                                getKey(innerJson, key /*, listLines*/);
                             }
                         }
                     }
@@ -115,23 +114,13 @@ public class JsonParse implements Runnable{
                 }
             }
         } else { // exists part
-            /* if (JsonParse.Stage.STAGE_LINES.equals(stage)) { */
                 parseObjectLines(json, key);
-            /*
-            }
-            else if (stage.equals(JsonParse.Stage.STAGE_LINES_INNER)) {
-                parseObject(json, key);
-            }
-            parseObject(json, key);
-
-             */
         }
     }
 
-    public String getKeyString(JSONObject json, String key, List<String> listLines) {
-
-        /**
-         * Check if particular key exists -> store as boolean value
+    public String getKeyString(JSONObject json, String key /*, List<String> listLines*/) {
+        /*
+          Check if particular key exists -> store as boolean value
          */
         boolean exists = json.has(key);
         Iterator<?> keys;  // Iterator use generic concept
@@ -142,12 +131,12 @@ public class JsonParse implements Runnable{
             while (keys.hasNext()) {
                 nextKeys = (String) keys.next();
                 try {
-                    /**
-                     * Check if the next key is either an Object or Array
+                    /*
+                      Check if the next key is either an Object or Array
                      */
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
                         if (exists == false) {
-                            getKeyString(json.getJSONObject(nextKeys), key, listLines);
+                            getKeyString(json.getJSONObject(nextKeys), key /*, listLines*/);
                         }
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
@@ -158,10 +147,9 @@ public class JsonParse implements Runnable{
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
                             if (exists == false) {
-                                getKeyString(innerJson, key, listLines);
+                                getKeyString(innerJson, key /*, listLines*/);
                             }
                         }
-
                     }
                 } catch (Exception e) {
                     System.out.println("Validation next key - ERROR.");
@@ -175,10 +163,10 @@ public class JsonParse implements Runnable{
 
     public String getKeyStringDepartures(JSONObject json, String key) {
         String result = "";
-        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures", this.listLines));
+        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures"/*, this.listLines*/));
 
         if (debugMode.equals(DebugState.ON)) {
-            System.out.println("DEBUG " + jsonObjectDepartures.toString());
+            System.out.println("DEBUG " + jsonObjectDepartures);
             System.out.println("DEBUG " + jsonObjectDepartures.get("departure").toString());
         }
 
@@ -213,41 +201,7 @@ public class JsonParse implements Runnable{
         this.transportType = transportType;
         this.url_source = url_source + diva;
         this.threadNumber = threadNumber;
-/*
-        try {
-            URL url = new URL(url_source);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            // Receiving the response code
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner scanner = new Scanner(url.openStream());
-
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    this.jsonInput += scanner.nextLine();
-                }
-
-                //Close the scanner
-                scanner.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.listLines = new ArrayList<>();
-        this.listLinesLineRecords = FXCollections.observableArrayList();
-
- */
     }
-
 
     /**
      * Threading procedure
@@ -257,9 +211,9 @@ public class JsonParse implements Runnable{
      */
     @Override
     public void run () {
-        /**
-         * Remove any existing LineRecords from ArrayList 'listLinesLineRecords'
-         * in regard of 'lineName' (=transportLine, e.g. U1,U2,U3,U4,U6)
+        /*
+          Remove any existing LineRecords from ArrayList 'listLinesLineRecords'
+          in regard of 'lineName' (=transportLine, e.g. U1,U2,U3,U4,U6)
          */
         removeLineRecordsFromList();
 
@@ -273,7 +227,6 @@ public class JsonParse implements Runnable{
                 + ", " +  transportType );
         System.out.println(" *******************************************************************************");
     }
-
 
     /**
      * This constructor uses static JSON source for testing/development reasons.
@@ -1429,6 +1382,11 @@ public class JsonParse implements Runnable{
      * - to retrieve jsonData and store it in String 'jsonInput'
      */
     public void getKeyStage0() {
+
+        /*
+          Source: https://medium.com/swlh/getting-json-data-from-a-restful-api-using-java-b327aafb3751
+           - part regarding HttpURLConnection used from source above and modified for this purpose
+         */
         try {
             URL url = new URL(url_source);
 
@@ -1444,11 +1402,10 @@ public class JsonParse implements Runnable{
             } else {
                 Scanner scanner = new Scanner(url.openStream());
 
-                //Write all the JSON data into a string using a scanner
+                // store retrieved JSON data into string using a scanner line by line
                 while (scanner.hasNext()) {
                     this.jsonInput += scanner.nextLine();
                 }
-
                 //Close the scanner
                 scanner.close();
             }
@@ -1500,7 +1457,7 @@ public class JsonParse implements Runnable{
      * @param transportType   ... attribute provided by(a)
      */
     public void getKeyStage1(JSONObject inputJsonObject, String lineName, String transportType) {
-        getKey(inputJsonObject, "lines", this.listLines);
+        getKey(inputJsonObject, "lines"/*, this.listLines*/);
 
         // debug information
         if (debugMode.equals(DebugState.ON)) {
@@ -1509,6 +1466,9 @@ public class JsonParse implements Runnable{
             System.out.println("----- getKeyStage1 | INNER END "); // debug
         }
 
+        /*
+           Remove any entries that do not match ptMetro
+         */
         for (int i=0; i < this.listLines.size(); i++) {
             if (this.listLines.get(i).contains("\"name\":\"" + lineName + "\"")
                     && this.listLines.get(i).contains("\"type\":\"" + transportType + "\"")){
@@ -1545,20 +1505,16 @@ public class JsonParse implements Runnable{
 
             listLinesLineRecords.add(
                     new LineRecord(
-                            getKeyString(inputJsonObjectListLines, "type", this.listLines),
+                            getKeyString(inputJsonObjectListLines, "type" /*, this.listLines*/),
                             this.diva,
-                            getKeyString(inputJsonObjectListLines, "name",  this.listLines),
+                            getKeyString(inputJsonObjectListLines, "name" /*, this.listLines*/),
                             this.stationName,
-                            getKeyString(inputJsonObjectListLines, "towards",  this.listLines),
+                            getKeyString(inputJsonObjectListLines, "towards" /*, this.listLines*/),
                             getKeyStringDepartures(inputJsonObjectListLines, "countdown"),
                             getKeyStringDepartures(inputJsonObjectListLines, "timePlanned")
 
                     )
             );
-
-            //System.out.println(getKeyString(inputJsonObjectListLines, "type", this.listLines));
-            //System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
-            //System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
         }
         listLinesLineRecords.forEach(System.out::println);
     }
@@ -1571,46 +1527,21 @@ public class JsonParse implements Runnable{
         this.diva = diva;
     }
 
-    public String getUrl_source() {
-        return url_source;
-    }
-
-    public void setUrl_source(String url_source) {
-        this.url_source = url_source;
-    }
-
-    public String getJsonInput() {
-        return jsonInput;
-    }
-
-    public void setJsonInput(String jsonInput) {
-        this.jsonInput = jsonInput;
-    }
-
-    public List<String> getListLines() {
-        return listLines;
-    }
-
-    public void setListLines(List<String> listLines) {
-        this.listLines = listLines;
-    }
-
     public ObservableList<LineRecord> getListLinesLineRecords() {
         return listLinesLineRecords;
     }
 
+    /*
     public void setListLinesLineRecords(ObservableList<LineRecord> listLinesLineRecords) {
-        this.listLinesLineRecords = listLinesLineRecords;
+        listLinesLineRecords = listLinesLineRecords;
     }
 
-    public String getLineName() {
-        return lineName;
-    }
+     */
 
-    public String getTransportType() {
-        return transportType;
-    }
-
+    /**
+     * remove any LineRecords in static ArrayList listLinesLineRecords
+     * in regard of given 'lineName'
+     */
     public void removeLineRecordsFromList(){
         for (int k = 0; k < listLinesLineRecords.size(); k++) {
             if (listLinesLineRecords.get(k).getLineName().equals(this.lineName)) {
@@ -1619,6 +1550,5 @@ public class JsonParse implements Runnable{
             }
         }
     }
-
 
 }

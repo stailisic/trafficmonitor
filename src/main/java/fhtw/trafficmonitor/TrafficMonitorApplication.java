@@ -11,12 +11,11 @@ import org.json.JSONObject;
 public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
-        //Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
         Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
         stage.setTitle("TrafficMonitor HauptMenü");
         stage.setScene(new Scene(root));
 
-        // Unfortunately this throws an IllegalArgumentException,
+        // 2023-01-19: line added. Unfortunately this throws an IllegalArgumentException,
         // but it's used to close all remaining windows besides main window
         stage.setOnHidden(e -> Platform.exit());
 

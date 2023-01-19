@@ -1,15 +1,13 @@
 package fhtw.trafficmonitor;
 
 public class LineRecord {
-    private String lineTransportType;
-    private String lineName;
-    private String lineStationName;
-    private String lineTowards;
-    private String lineDepartureTimePlanned1; // Abfahrt CountDown in Minuten
-    private String lineDepartureTimePlanned2; // Abfahrtszeit im Zeitformat hh:mm
-    private String lineType;
-    private String lineId;
-    private String diva;
+    private String lineTransportType;   // e.g. ptMetro
+    private String lineName;            // e.g. U1, U2, U3, U4, U6
+    private String lineStationName;     // e.g. Schwedenplatz, Vorgartenstraße (RadioButtons)
+    private String lineTowards;         // Endstation/s e.g. in regard of U4 Heiligenstadt and Hütteldorf
+    private String lineDepartureTimePlanned1; // departure countdown in minutes
+    private String lineDepartureTimePlanned2; // departure time in some sort of date/time format
+    private String diva;                // ID of respective station name
 
     public LineRecord(String lineTransportType, String diva,String lineName, String lineStationName, String lineTowards, String lineDepartureTimePlanned1, String lineDepartureTimePlanned2) {
         this.lineTransportType = lineTransportType;
@@ -45,13 +43,6 @@ public class LineRecord {
         return lineDepartureTimePlanned2;
     }
 
-    public String getLineType() {
-        return lineType;
-    }
-
-    public String getLineId() {
-        return lineId;
-    }
 
     public String getDiva() {
         return diva;
