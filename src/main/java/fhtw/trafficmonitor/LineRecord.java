@@ -1,5 +1,9 @@
 package fhtw.trafficmonitor;
 
+/**
+ * Class used to create lineRecords when parsing the json block.
+ * The resulted ArrayList containing lineRecords will be used to display the data in the TableView.
+ */
 public class LineRecord {
     private String lineTransportType;   // e.g. ptMetro
     private String lineName;            // e.g. U1, U2, U3, U4, U6

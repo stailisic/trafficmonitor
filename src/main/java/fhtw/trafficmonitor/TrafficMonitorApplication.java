@@ -1,3 +1,9 @@
+/**
+ * @author Hannelore Fayefunmi (ic21b027@technikum-wien.at), Natasa Trajcevska (ic21b124@technikum-wien.at), Anna Nagel (ic21b112@technikum-wien.at)
+ * @project TrafficMonitor (c)2023
+ * @description Retrieving real time data for the subway lines selected by the user via GUI
+ */
+
 package fhtw.trafficmonitor;
 
 import javafx.application.Application;
@@ -6,16 +12,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.json.JSONObject;
 
-import java.io.IOException;
+import java.util.Objects;
 
+/**
+ * Class contains main() to launch the GUI application
+ */
 public class TrafficMonitorApplication extends Application {
-    static Logging trafficMonitorLog = trafficMonitorLog = new Logging();
+
+    static Logging trafficMonitorLog = new Logging();
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("trafficmonitor.fxml")));
         stage.setTitle("TrafficMonitor HauptMenü");
         stage.setScene(new Scene(root));
 
@@ -32,10 +41,10 @@ public class TrafficMonitorApplication extends Application {
 
 
         // modify value to enable/disable debugMode
-        int debugMode = 0; // 0=off, 1=on
+        boolean debugMode = false; // mode settings to be customized: ON=true, OFF=false
 
-        if (debugMode == 1) {
-            /**
+        if (debugMode) {
+            /*
              * demo purpose regarding:
              * 1. send URL request on basis of known 'diva'
              * 2. receive json data
@@ -43,6 +52,8 @@ public class TrafficMonitorApplication extends Application {
              *
              * Note: in class JsonParse you can set debugMode to ON/OFF either to display more information
              */
+
+            System.out.println("Put any testing code in here");
 
             /*
             JsonParse jsonSource1 = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
@@ -66,6 +77,7 @@ public class TrafficMonitorApplication extends Application {
              */
 
             //CreatePublicTransportLine u4 = new CreatePublicTransportLine("u4");
+
 
         } else {
             // launch the GUI

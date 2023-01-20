@@ -12,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to retrieve real time data in json format, parse them and extract the essential data for display
+ */
 public class JsonParse implements Runnable{
     enum DebugState {
         OFF,
@@ -43,20 +46,13 @@ public class JsonParse implements Runnable{
      */
     private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
-    /*
-    public void parseObject(JSONObject json, String key) {
-        // System.out.println(json.has(key));
-        System.out.println(json.get(key));
-    }
-     */
-
     /**
      * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
      *                  * e.g. [{"name":"U1",...,"direction":"H"}] <-- including the square brackets
      *                  * substring -> remove square brackets (at the beginning and end) and therefore
      *                  * add the modified { content } into the ArrayList.
-     * @param json ... e.g.
-     * @param key
+     * @param json ... pass JSONObject to be added to the list
+     * @param key ... key in question
      */
     public void parseObjectLines(JSONObject json, String key) {
         addListLines(json.get(key).toString().substring(1,json.get(key).toString().length() -1));
@@ -73,8 +69,8 @@ public class JsonParse implements Runnable{
     /**
      * parsing jsonInput {data: ...} and retrieve ~value~ of requested 'key'
      *  e.g.: key = lines -> value = [{name: ...}]
-     * @param json
-     * @param key
+     * @param json provided as JSONObject and is the original GET-Request
+     * @param key for the first stage, we look for key 'lines'
      *
      * Source:
      * - How to parse dynamic and nested JSON in java? - Rest assured API automation framework
@@ -242,14 +238,13 @@ public class JsonParse implements Runnable{
         TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
-    /**
+    /*
      * This constructor uses static JSON source for testing/development reasons.
      * Remark: Any updates should be applied to respective constructor above that retrieves JSON source on demand
      * @param diva
      * @param lineName
      * @param transportType
-     */
-    /*
+
     public JsonParse(String diva, String lineName, String transportType) {
         this.diva = diva;
         System.out.println("Demo: " + getDiva() + " " + lineName + " " + transportType);
@@ -1429,12 +1424,6 @@ public class JsonParse implements Runnable{
         }
 
         this.listLines = new ArrayList<>();
-        //this.listLinesLineRecords = FXCollections.observableArrayList();
-
-        //CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine();
-        //for (int k = 0; k < getListLinesLineRecords().size(); k++) {
-        //    createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
-        //}
 
         System.out.println(" *******************************************************************************");
         System.out.println(" ** getKeyStage0 >> Thread.current: "
@@ -1559,7 +1548,6 @@ public class JsonParse implements Runnable{
                             getKeyString(inputJsonObjectListLines, "towards" /*, this.listLines*/),
                             getKeyStringDepartures(inputJsonObjectListLines, "countdown"),
                             getKeyStringDepartures(inputJsonObjectListLines, "timePlanned")
-
                     )
             );
         }
@@ -1597,13 +1585,6 @@ public class JsonParse implements Runnable{
     public ObservableList<LineRecord> getListLinesLineRecords() {
         return listLinesLineRecords;
     }
-
-    /*
-    public void setListLinesLineRecords(ObservableList<LineRecord> listLinesLineRecords) {
-        listLinesLineRecords = listLinesLineRecords;
-    }
-
-     */
 
     /**
      * remove any LineRecords in static ArrayList listLinesLineRecords

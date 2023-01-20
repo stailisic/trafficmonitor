@@ -5,6 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Class to retrieve the Diva number on the basis of the station name
+ */
 public class CsvReader {
 
     private String haltestellenName;

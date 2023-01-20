@@ -6,6 +6,9 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.*;
 
+/**
+ * Class used for creating a logger to track activities in a local session logfile
+ */
 public class Logging {
     private static Logger trafficMonitorLog = Logger.getLogger("TrafficMonitorLog");
 
