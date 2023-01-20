@@ -6,15 +6,30 @@
 
 group project for ODE
 
+## TrafficMonitor (c) 2023
+1. Beim Ausführen des Programm wird ein kleines Fenster "TrafficMonitor Hauptmenü" geöffnet (GUI via fxml).
+   - Auswahl der U-Bahnlinien (U1, U2, U3, U4, U6) via Buttons
+2. Klickt man auf einen U-Bahn-Button wird ein separates Fenster angezeigt (GUI via inline):
+   - Die Haltestellen einer U-Bahn-Linie werden aufgrund einer statischen CSV-Liste dynamisch erstellt
+   - Hier kann man die gewünschte Haltestelle auswählen (RadioButton)
+   - Der Button 'Aktualisieren' holt sich die JsonDaten und verarbeitet sie für die Ausgabe. Hier geschieht das MultiThreading, wenn mehrere Haltestellen ausgewählt sind.
+   - Der Button 'Anzeigen' holt die resultierenden Ergebnisse auf den Schirm.
+   - Der Button 'Anzeige löschen' löscht die Anzeige und jene gespeicherten Daten der betreffenden U-Bahn-Linie vom Speicher.
+
+Note: Buttons werden mit Absicht 'disabled' (ausgegraut, nicht anklickbar) und wieder 'enabled' (wieder anklickbar), um ein optimales UX anzubieten.
+-- Stand 2023-01-20
+
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
 
 ### 2023-01-20
+**PROJEKT FERTIG**
+
 - Logger hinzugefügt
 - Code clean up
-- Code kommentiert
-- Tests
+- JavaDoc, Code kommentiert
+- BlackBox Testing
 
 ### 2023-01-18 + 2023-01-19
 - Threading eingebaut: 
