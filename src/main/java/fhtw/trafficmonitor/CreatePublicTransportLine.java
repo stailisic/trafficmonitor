@@ -19,7 +19,6 @@ import java.util.ArrayList;
  * Class to create the customized 'TrafficWindow UX' window
  */
 public class CreatePublicTransportLine {
-
     private String transportLine; // e.g.: U1, U2, U3, U4, U6
 
     /**
@@ -29,15 +28,17 @@ public class CreatePublicTransportLine {
     private static int haltestelle_layout_x_pos_start = 20;
     private static int haltestelle_layout_x_abstand = 30;
 
+    /**
+     * ToolTip translations for the Buttons
+     */
     private static String btn_refresh_TooltipText_DE = "Echtzeitdaten via GET-Request holen. Json zerlegen und relevanten Key/Values für die Anzeige abspeichern.";
     private static String btn_display_TooltipText_DE = "Resultierende Echtzeitdaten anzeigen lassen.";
     private static String btn_deleteDisplay_TooltipText_DE = "Gespeicherte Echtzeitdaten und Anzeige löschen";
 
-
     /**
      * list of station Names of respective transportLine represented as RadioButtons
      */
-    private ArrayList <RadioButton> transportLineButtonsList = new ArrayList<>();
+    private ArrayList<RadioButton> transportLineButtonsList = new ArrayList<>();
 
     /**
      * list of lineRecords of respective transportLine, used for tableView
@@ -48,6 +49,7 @@ public class CreatePublicTransportLine {
 
     /**
      * Constructor used for instance creation in regard of provided transportLine (e.g. U1)
+     *
      * @param transportLineName (e.g.: u1, u2, u3, u4, u6 - provided as small letters)
      */
     public CreatePublicTransportLine(String transportLineName) {
@@ -60,15 +62,13 @@ public class CreatePublicTransportLine {
         TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt");
     }
 
-
     /**
      * Method to create final TrafficMonitor UX window including functionality of respective buttons
+     *
      * @return custom window representing the respective transportLine UX
      */
-    public Parent buildView () {
+    public Parent buildView() {
         TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Erstellung des Fenster TrafficMonitor " + transportLine.toUpperCase());
-
-     //   this.transportLine = transportLine;
         BorderPane borderPane = createBorderPane();
         AnchorPane anchorPane = createAnchorPane();
         TableView tableView = createTableView();
@@ -101,17 +101,15 @@ public class CreatePublicTransportLine {
          * Starting state of the executable bottom Buttons
          * setDisable(false): Button clickable
          * setDisable(true): Button greyed out (not clickable)
-         * /
+         */
         btn_refresh.setDisable(false);
         btn_display.setDisable(true);
         btn_deleteDisplay.setDisable(true);
 
-
-
-        /**
+        /*
          * Button 'Aktualisieren'
          */
-        btn_refresh.setOnAction(e->{
+        btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
 
@@ -119,62 +117,35 @@ public class CreatePublicTransportLine {
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
 
-            for(int i=0;i<transportLineButtonsList.size();i++) {
-                if(transportLineButtonsList.get(i).isSelected()) {
+            for (int i = 0; i < transportLineButtonsList.size(); i++) {
+                if (transportLineButtonsList.get(i).isSelected()) {
                     selectedButtons.add(transportLineButtonsList.get(i));
                 }
             }
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.");
 
-            if (selectedButtons.size() > 0 ) {
+            if (selectedButtons.size() > 0) {
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
-
                 btn_refresh.setDisable(true);
                 btn_refresh.setText("Aktualisieren >");
                 btn_display.setDisable(false);
                 btn_display.setText("> Anzeigen");
 
-                for(int i=0;i<selectedButtons.size();i++) {
-                    //if(transportLineButtonsList.get(i).isSelected()) {
+                for (int i = 0; i < selectedButtons.size(); i++) {
+                    CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
+                    csvReader.retrieveDiva();
 
-                        CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
-                        csvReader.retrieveDiva();
-
-                        //JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
-                        JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine , "ptMetro",i);
-                        Thread thread = new Thread(jsonParse);
-                        thread.setName("Thread_" + jsonParse.getLineName() + "_" + jsonParse.getDiva());
-
-
-                        thread.start();
+                    JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine, "ptMetro", i);
+                    Thread thread = new Thread(jsonParse);
+                    thread.setName("Thread_" + jsonParse.getLineName() + "_" + jsonParse.getDiva());
+                    thread.start();
 
                     System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
                     TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("thread.current: "
                             + Thread.currentThread().getId() + ", "
                             + Thread.currentThread().getName()
                             + "thread state: " + thread.getState() + " " + thread.isAlive());
-
-
-                        //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
-                        //jsonParse.getKeyStage2();
-
-                    //} else {
-                    //    System.out.println("Button not selected");
-                    //    System.out.println("Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    //    infoLabel.setText("Keine Auswahl getroffen bzw. Linie " + this.transportLine.toUpperCase() + " nicht im Betrieb.");
-                    //}
-
-
                 }
-
-            /*
-            for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
-                list.add(jsonParseMain.getListLinesLineRecords().get(k));
-            }
-
-            tableView.refresh();
-            */
-
             } else {
                 infoLabel.setText("Keine Haltestelle ausgewählt.");
                 infoLabel.setStyle("-fx-background-color: #EE1D23; -fx-text-fill: #FFFFFF");
@@ -187,7 +158,7 @@ public class CreatePublicTransportLine {
          * - retrieve lineRecords from static list
          * - display only of respective transportLine 'UX'
          */
-        btn_display.setOnAction(e->{
+        btn_display.setOnAction(e -> {
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Anzeigen der resultierenden Ergebnisse.");
             btn_refresh.setDisable(false);
             btn_refresh.setText("> Aktualisieren");
@@ -218,7 +189,7 @@ public class CreatePublicTransportLine {
             tableView.refresh();
         });
 
-        btn_deleteDisplay.setOnAction(e->{
+        btn_deleteDisplay.setOnAction(e -> {
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Löschen der Anzeige und der betroffenen Einträge in der Datenbank.");
             btn_refresh.setDisable(false);
             btn_display.setDisable(true);
@@ -236,7 +207,7 @@ public class CreatePublicTransportLine {
             for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
                 if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
                     jsonParseMain.getListLinesLineRecords().remove(k);
-                    k=-1;
+                    k = -1;
                 }
             }
 
@@ -245,8 +216,7 @@ public class CreatePublicTransportLine {
             jsonParseMain.getListLinesLineRecords().forEach(System.out::println);
             System.out.println("---------------------------------------------------------");
 
-
-            for(int i = 0; i < transportLineButtonsList.size();i++) {
+            for (int i = 0; i < transportLineButtonsList.size(); i++) {
                 transportLineButtonsList.get(i).setSelected(false); // Reset state of RadioButton: 'not selected'
             }
 
@@ -254,26 +224,26 @@ public class CreatePublicTransportLine {
 
         });
 
-
-        return  borderPane;
+        return borderPane;
     }
 
     /**
      * Method to create a ButtonBar with specific padding settings.
+     *
      * @return ButtonBar with specific padding settings
      */
     private ButtonBar createButtonBar() {
         ButtonBar buttonBar = new ButtonBar();
-        buttonBar.setPadding(new Insets(10,10,10,0));
+        buttonBar.setPadding(new Insets(10, 10, 10, 0));
         return buttonBar;
     }
 
-
     /**
      * Method to create Button without any specific settings
+     *
      * @return plain Button
      */
-    private Button createButton(){
+    private Button createButton() {
         Button button = new Button();
         return button;
     }
@@ -281,9 +251,10 @@ public class CreatePublicTransportLine {
     /**
      * Method to create the general structure of the TableView, which is
      * used for displaying the lineRecords.
+     *
      * @return custom TableView
      */
-    private TableView createTableView(){
+    private TableView createTableView() {
         TableView tableView = new TableView();
 
         TableColumn transportType = new TableColumn<>("Typ");
@@ -314,13 +285,12 @@ public class CreatePublicTransportLine {
 
         tableView.setItems(list);
 
-        //tableView.setItems(jsonParseMain.getListLinesLineRecords());
-
         return tableView;
     }
 
     /**
      * Method to create an area of type BorderPane with specific settings
+     *
      * @return BorderPane with specific size setting
      */
     private BorderPane createBorderPane() {
@@ -333,6 +303,7 @@ public class CreatePublicTransportLine {
     /**
      * Method to create an area of type AnchorPane with specific settings,
      * in which the station names (each of type RadioButton) are included.
+     *
      * @return AnchorPane with specific setting including the station names represented as RadioButtons
      */
     private AnchorPane createAnchorPane() {
@@ -343,7 +314,7 @@ public class CreatePublicTransportLine {
         /*
          * add station names, represented each as RadioButton, to the AnchorPane area
          */
-        for (int i=0; i < this.transportLineButtonsList.size();i++) {
+        for (int i = 0; i < this.transportLineButtonsList.size(); i++) {
             anchorPane.getChildren().add(this.transportLineButtonsList.get(i));
         }
         return anchorPane;
@@ -352,6 +323,7 @@ public class CreatePublicTransportLine {
     /**
      * Method to create a Label with specific settings
      * - used for the infoLabel as message indicator in general
+     *
      * @return Label with specific setting
      */
     private Label createLabel() {
@@ -359,7 +331,7 @@ public class CreatePublicTransportLine {
         label.setText("");
         label.setLayoutX(30);
         label.setLayoutX(50);
-        label.setPadding(new Insets(10,0,10,0));
+        label.setPadding(new Insets(10, 0, 10, 0));
         return label;
     }
 
@@ -367,9 +339,10 @@ public class CreatePublicTransportLine {
      * Method to create a RadioButton with specific settings
      * - used when processing the list for creating the station names (Haltestellennamen) as type of RadioButton
      * - includes design pattern: size, rotated, custom (x,y)-location of each newly created RadioButton
+     *
      * @param buttonName equals to station name (Haltestellenname)
-     * @param y is the y-value for positioning the RadioButton with (x,y)-coordinates
-     * @param x is the x-value for positioning the RadioButton with (x,y)-coordinates
+     * @param y          is the y-value for positioning the RadioButton with (x,y)-coordinates
+     * @param x          is the x-value for positioning the RadioButton with (x,y)-coordinates
      * @return RadioButton with specific setting
      */
     public RadioButton createButton(String buttonName, int y, int x) {
@@ -386,9 +359,10 @@ public class CreatePublicTransportLine {
     /**
      * Method to create
      * - on the basis of provided transportLine, e.g.: u1, u2, u3, u4, u6 (note: transportLine is provided in small case)
-     *   - the list of station names will be created by retrieving from the given *.csv and
-     *   - stored in the ArrayList of type RadioButton
-     * @param transportLine e.g.: u1, u2, u3, u4, u6 (note: transportLine is provided in small case)
+     * - the list of station names will be created by retrieving from the given *.csv and
+     * - stored in the ArrayList of type RadioButton
+     *
+     * @param transportLine            e.g.: u1, u2, u3, u4, u6 (note: transportLine is provided in small case)
      * @param transportLineButtonsList ArrayList that contains the list of station names (as RadioButtons) of the respective transportLine
      */
     public void add_transportLineButtons(String transportLine, ArrayList<RadioButton> transportLineButtonsList) {
@@ -397,7 +371,7 @@ public class CreatePublicTransportLine {
         int x_abstand = haltestelle_layout_x_abstand;
 
         try {
-            String filepath="";
+            String filepath = "";
             switch (transportLine) {
                 case "U1" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
                 case "U2" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
@@ -409,15 +383,14 @@ public class CreatePublicTransportLine {
 
             String line = "";
 
-            int cntLine=0;
+            int cntLine = 0;
 
             BufferedReader br = new BufferedReader(new FileReader(filepath));
             while ((line = br.readLine()) != null) {
                 if (cntLine == 0) {
                     cntLine++;
                     continue;
-                }
-                else {
+                } else {
                     String[] data = line.split(";");
                     transportLineButtonsList.add(createButton(data[1], y, x));
                     System.out.println("col[0]: " + data[0] + " & col[1]: " + data[1]
@@ -451,6 +424,7 @@ public class CreatePublicTransportLine {
 
     /**
      * Method to return
+     *
      * @return the ObservableList that contains the lineRecords, required for TableView display
      */
     public ObservableList<LineRecord> getList() {
@@ -465,6 +439,7 @@ public class CreatePublicTransportLine {
 
     /**
      * Simple Method to reset the InfoLabel
+     *
      * @param infoLabel passed Label
      */
     public void resetInfoLabel(Label infoLabel) {

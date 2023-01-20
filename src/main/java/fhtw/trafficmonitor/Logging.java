@@ -8,6 +8,9 @@ import java.util.logging.*;
 
 /**
  * Class used for creating a logger to track activities in a local session logfile
+ * Helpful sources:
+ *  - <a href="https://www.geeksforgeeks.org/logging-in-java/">logging-in-java/</a>
+ *  - <a href="https://stackoverflow.com/questions/15758685/how-to-write-logs-in-text-file-when-using-java-util-logging-logger">how-to-write-logs-in-text-file-when-using-java-util-logging-logger</a>
  */
 public class Logging {
     private static Logger trafficMonitorLog = Logger.getLogger("TrafficMonitorLog");

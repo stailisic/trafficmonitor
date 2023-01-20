@@ -1410,7 +1410,6 @@ public class JsonParse implements Runnable{
      * - to retrieve jsonData and store it in String 'jsonInput'
      */
     public void getKeyStage0() {
-
         /*
           Source: https://medium.com/swlh/getting-json-data-from-a-restful-api-using-java-b327aafb3751
            - part regarding HttpURLConnection used from source above and modified for this purpose
