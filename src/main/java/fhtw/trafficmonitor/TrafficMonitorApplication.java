@@ -8,7 +8,11 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 public class TrafficMonitorApplication extends Application {
+    static Logging trafficMonitorLog = trafficMonitorLog = new Logging();
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
@@ -20,9 +24,13 @@ public class TrafficMonitorApplication extends Application {
         stage.setOnHidden(e -> Platform.exit());
 
         stage.show();
+        trafficMonitorLog.logTrafficMonitor("TrafficHauptmenü geöffnet");
     }
 
     public static void main(String[] args) {
+        trafficMonitorLog.logTrafficMonitor("Willkommen! Das Logging beginnt nun für den TrafficMonitor.");
+
+
         // modify value to enable/disable debugMode
         int debugMode = 0; // 0=off, 1=on
 

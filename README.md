@@ -10,6 +10,12 @@ group project for ODE
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
 
+### 2023-01-20
+- Logger hinzugefügt
+- Code clean up
+- Code kommentiert
+- Tests
+
 ### 2023-01-18 + 2023-01-19
 - Threading eingebaut: 
   - Klasse JsonParse mit `implements Runnable` und einiges umgebaut, damit Threading ermöglicht

@@ -59,7 +59,9 @@ public class CreatePublicTransportLine {
 
         add_transportLineButtons(this.transportLine, this.transportLineButtonsList);
 
-        System.out.println("Size of button list " + this.transportLineButtonsList.size());
+        System.out.println("Size of RadioButton list " + this.transportLineButtonsList.size());
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt");
     }
 
 
@@ -68,6 +70,8 @@ public class CreatePublicTransportLine {
      * @return custom window representing the respective transportLine UX
      */
     public Parent buildView () {
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Erstellung des Fenster TrafficMonitor " + transportLine.toUpperCase());
+
      //   this.transportLine = transportLine;
         BorderPane borderPane = createBorderPane();
         AnchorPane anchorPane = createAnchorPane();
@@ -112,8 +116,8 @@ public class CreatePublicTransportLine {
          * Button 'Aktualisieren'
          */
         btn_refresh.setOnAction(e->{
-
-            System.out.println("Aktualisieren geklickt");
+            //System.out.println("Aktualisieren geklickt");
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
 
             resetInfoLabel(infoLabel);
 
@@ -124,8 +128,10 @@ public class CreatePublicTransportLine {
                     selectedButtons.add(transportLineButtonsList.get(i));
                 }
             }
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.");
 
             if (selectedButtons.size() > 0 ) {
+                TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
 
                 btn_refresh.setDisable(true);
                 btn_refresh.setText("Aktualisieren >");
@@ -141,9 +147,16 @@ public class CreatePublicTransportLine {
                         //JsonParse jsonParse = new JsonParse(csvReader.getDiva(), transportLineButtonsList.get(i).getText(), this.transportLine , "ptMetro");
                         JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine , "ptMetro",i);
                         Thread thread = new Thread(jsonParse);
+                        thread.setName("Thread_" + jsonParse.getLineName() + "_" + jsonParse.getDiva());
+
+
                         thread.start();
 
-                        System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
+                    System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
+                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("thread.current: "
+                            + Thread.currentThread().getId() + ", "
+                            + Thread.currentThread().getName()
+                            + "thread state: " + thread.getState() + " " + thread.isAlive());
 
 
                         //jsonParse.getKeyStage1(new JSONObject(jsonParse.getJsonInput()), this.transportLine, "ptMetro");
@@ -169,6 +182,7 @@ public class CreatePublicTransportLine {
             } else {
                 infoLabel.setText("Keine Haltestelle ausgewählt.");
                 infoLabel.setStyle("-fx-background-color: #EE1D23; -fx-text-fill: #FFFFFF");
+                TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Keine Haltestelle ausgewählt.");
             }
 
         });
@@ -178,6 +192,7 @@ public class CreatePublicTransportLine {
          * - display only of respective transportLine 'UX'
          */
         btn_display.setOnAction(e->{
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Anzeigen der resultierenden Ergebnisse.");
             btn_refresh.setDisable(false);
             btn_refresh.setText("> Aktualisieren");
             btn_display.setDisable(true);
@@ -208,6 +223,7 @@ public class CreatePublicTransportLine {
         });
 
         btn_deleteDisplay.setOnAction(e->{
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Löschen der Anzeige und der betroffenen Einträge in der Datenbank.");
             btn_refresh.setDisable(false);
             btn_display.setDisable(true);
 
@@ -422,11 +438,9 @@ public class CreatePublicTransportLine {
                     transportLineButtonsList.add(createButton(data[1], y, x));
                     System.out.println("col[0]: " + data[0] + " & col[1]: " + data[1]
                             + " x: " + x
-                            + " y: " + y
-                            + "\n");
+                            + " y: " + y);
                     x = x + x_abstand;
                 }
-
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -435,12 +449,12 @@ public class CreatePublicTransportLine {
         }
     }
 
-    /**
+    /*
      * Method to remove existing lineRecords of respective transportLine.
      * - used, whenever the Button btn_refresh is executed, so only
      *   newly retrieved and lately added records from the ArrayList will be displayed
      * @param diva
-     */
+
     public void checkListForTableViewRefresh(String diva){
         for (int i = 0; i < list.size();i++) {
             if (list.get(i).getDiva().equals(diva)) {
@@ -449,17 +463,22 @@ public class CreatePublicTransportLine {
         }
     }
 
+     */
+
     public ObservableList<LineRecord> getList() {
         return list;
     }
-
+/*
     public void setList(ObservableList<LineRecord> list) {
         list = list;
     }
 
+ */
+
     public void resetInfoLabel(Label infoLabel) {
         infoLabel.setText(" ");
         infoLabel.setStyle("-fx-background-color: null; -fx-text-fill: #FFFFFF");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("InfoLabel zurückgesetzt.");
     }
 
 }

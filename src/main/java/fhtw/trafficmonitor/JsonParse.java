@@ -19,7 +19,7 @@ public class JsonParse implements Runnable{
     }
 
     //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
-    private static final DebugState debugMode = DebugState.ON;
+    private static final DebugState debugMode = DebugState.OFF;
 
     private String diva;
     private String stationName;
@@ -211,6 +211,7 @@ public class JsonParse implements Runnable{
      */
     @Override
     public void run () {
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow 'run'");
         /*
           Remove any existing LineRecords from ArrayList 'listLinesLineRecords'
           in regard of 'lineName' (=transportLine, e.g. U1,U2,U3,U4,U6)
@@ -220,12 +221,25 @@ public class JsonParse implements Runnable{
         getKeyStage0();
         getKeyStage1(new JSONObject(this.jsonInput), this.lineName, this.transportType);
         getKeyStage2();
+
         System.out.println(" *******************************************************************************");
-        System.out.println(" ** Thread created [" + threadNumber + "] for " + diva
+        System.out.println(" ** Thread.current: "
+                + Thread.currentThread().getId()
+                + " index [" + threadNumber + "] for " + diva
                 + ", " + stationName
                 + ", " +  lineName
                 + ", " +  transportType );
         System.out.println(" *******************************************************************************");
+
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** Thread.current: "
+                        + Thread.currentThread().getId()
+                        + " index " + threadNumber + "] for " + diva
+                        + ", " + stationName
+                        + ", " + lineName
+                        + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
     /**
@@ -1422,6 +1436,24 @@ public class JsonParse implements Runnable{
         //    createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
         //}
 
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage0 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
+        System.out.println(" *******************************************************************************");
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage0 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
+
     }
 
     /**
@@ -1492,6 +1524,21 @@ public class JsonParse implements Runnable{
             }
         }
 
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage1 >> Thread.current: " + Thread.currentThread().getId() + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
+        System.out.println(" *******************************************************************************");
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage1 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
     /**
@@ -1516,7 +1563,23 @@ public class JsonParse implements Runnable{
                     )
             );
         }
+
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage2 >> Thread.current: " + Thread.currentThread().getId() + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
         listLinesLineRecords.forEach(System.out::println);
+        System.out.println(" *******************************************************************************");
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage2 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
     public String getDiva() {
@@ -1525,6 +1588,10 @@ public class JsonParse implements Runnable{
 
     public void setDiva(String diva) {
         this.diva = diva;
+    }
+
+    public String getLineName() {
+        return lineName;
     }
 
     public ObservableList<LineRecord> getListLinesLineRecords() {
@@ -1543,6 +1610,8 @@ public class JsonParse implements Runnable{
      * in regard of given 'lineName'
      */
     public void removeLineRecordsFromList(){
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** Remove LineRecords that will not be used for display. LineRecords of lineName " + this.lineName + " remain.");
+
         for (int k = 0; k < listLinesLineRecords.size(); k++) {
             if (listLinesLineRecords.get(k).getLineName().equals(this.lineName)) {
                 listLinesLineRecords.remove(k);

@@ -96,29 +96,34 @@ public class TrafficMonitorController implements Initializable {
          *  -> run method to create new respective (2nd) window 'TransportMonitor UX'
          */
         btn_u1.setOnAction(e->{
-            String transportLine = "u1";
-            //label_u1.setText("Button " + transportLine.toUpperCase() + " has been pressed.");
-            openTrafficMonitorWindow(transportLine, btn_u1, label_u1);
+            String transportLineName = "u1";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+            //label_u1.setText("Button " + transportLineName.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(transportLineName, btn_u1, label_u1);
         });
 
         btn_u2.setOnAction(e->{
             String transportLineName = "u2";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
             openTrafficMonitorWindow(transportLineName, btn_u2, label_u2);
+
         });
 
         btn_u3.setOnAction(e->{
             String transportLineName = "u3";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
             openTrafficMonitorWindow(transportLineName, btn_u3, label_u3);
-
         });
 
         btn_u4.setOnAction(e->{
             String transportLineName = "u4";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
             openTrafficMonitorWindow(transportLineName, btn_u4, label_u4);
         });
 
         btn_u6.setOnAction(e->{
             String transportLineName = "u6";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
             openTrafficMonitorWindow(transportLineName, btn_u6, label_u6);
         });
     }
@@ -141,15 +146,21 @@ public class TrafficMonitorController implements Initializable {
 
             label_uX.setText("TrafficMonitor window " + transportLineName.toUpperCase() + " is now open!");
 
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("TrafficMonitor Hauptmenü " + transportLineName.toUpperCase() + " ist nun geöffnet!");
             stage.showAndWait();
 
+            // After TrafficMonitor UX window has been closed:
+            // - Button UX will be available again and
+            // - the Label will be reset to empty
             if (!stage.isShowing()) {
                 btn_uX.setDisable(false);
                 label_uX.setText("");
+                TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("TrafficMonitor Hauptmenü " + transportLineName.toUpperCase() + " wurde geschlossen.");
             }
         }
         catch (Exception exception) {
             System.out.println("TrafficMonitor window " + transportLineName.toUpperCase() + " is already open!");
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("TrafficMonitor Hauptmenü " + transportLineName.toUpperCase() + " ist bereits offen!");
         }
     }
 }
