@@ -99,11 +99,11 @@ public class CreatePublicTransportLine {
         borderPane.setBottom(buttonBar);
         anchorPane.getChildren().add(infoLabel);
 
-        /**
+        /*
          * Starting state of the executable bottom Buttons
          * setDisable(false): Button clickable
          * setDisable(true): Button greyed out (not clickable)
-         * */
+         * /
         btn_refresh.setDisable(false);
         btn_display.setDisable(true);
         btn_deleteDisplay.setDisable(true);
@@ -185,7 +185,7 @@ public class CreatePublicTransportLine {
 
         });
 
-        /**
+        /*
          * - retrieve lineRecords from static list
          * - display only of respective transportLine 'UX'
          */
@@ -342,7 +342,7 @@ public class CreatePublicTransportLine {
         anchorPane.setPrefWidth(200);
         anchorPane.setPrefHeight(200);
 
-        /**
+        /*
          * add station names, represented each as RadioButton, to the AnchorPane area
          */
         for (int i=0; i < this.transportLineButtonsList.size();i++) {
@@ -400,25 +400,13 @@ public class CreatePublicTransportLine {
 
         try {
             String filepath="";
-            switch(transportLine) {
-                case "U1":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
-                    break;
-                case "U2":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
-                    break;
-                case "U3":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv";
-                    break;
-                case "U4":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
-                    break;
-                case "U6":
-                    filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv";
-                    break;
-                default:
-                    System.out.println("Sorry no file found");
-                    break;
+            switch (transportLine) {
+                case "U1" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
+                case "U2" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
+                case "U3" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv";
+                case "U4" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
+                case "U6" -> filepath = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv";
+                default -> System.out.println("Sorry no file found");
             }
 
             String line = "";
