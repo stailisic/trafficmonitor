@@ -1,0 +1,933 @@
+{
+	"data": {
+		"monitors": [
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3775813,
+							48.2117466
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "B",
+						"attributes": {
+							"rbl": 42
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "1",
+						"towards": "Siccardsburggasse, Betriebsbahnhof Favoriten",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:27:30.000+0100",
+										"timeReal": "2022-12-20T00:24:37.000+0100",
+										"countdown": 3
+									}
+								}
+							]
+						},
+						"type": "ptTram",
+						"lineId": 101
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3780472,
+							48.2116211
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "C",
+						"attributes": {
+							"rbl": 1000
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "1",
+						"towards": "Wexstraße, Betriebsbhf. Brigittenau",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:30:00.000+0100",
+										"timeReal": "2022-12-20T00:28:45.000+0100",
+										"countdown": 7
+									}
+								}
+							]
+						},
+						"type": "ptTram",
+						"lineId": 101
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3776072,
+							48.2117930
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "A",
+						"attributes": {
+							"rbl": 134
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "2",
+						"towards": "Friedrich-Engels-Platz",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:28:00.000+0100",
+										"timeReal": "2022-12-20T00:29:57.000+0100",
+										"countdown": 8
+									}
+								}
+							]
+						},
+						"type": "ptTram",
+						"lineId": 102
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3780233,
+							48.2115755
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "D",
+						"attributes": {
+							"rbl": 22
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "2",
+						"towards": "Dornbach",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:13:00.000+0100",
+										"timeReal": "2022-12-20T00:30:54.000+0100",
+										"countdown": 9
+									}
+								}
+							]
+						},
+						"type": "ptTram",
+						"lineId": 102
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3775250,
+							48.2118494
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5505
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N25",
+						"towards": "Großfeldsiedlung",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:11:00.000+0100",
+										"timeReal": "2022-12-20T01:11:00.000+0100",
+										"countdown": 49
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 525
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3783375,
+							48.2116644
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5501
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N25",
+						"towards": "Kai, Ring",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:54:00.000+0100",
+										"timeReal": "2022-12-20T00:54:00.000+0100",
+										"countdown": 32
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:24:00.000+0100",
+										"countdown": 62
+									},
+									"vehicle": {
+										"name": "N25",
+										"towards": "Kai, Ring",
+										"direction": "R",
+										"richtungsId": "2",
+										"barrierFree": false,
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptBusNight",
+										"attributes": {},
+										"linienId": 525
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 525
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3775813,
+							48.2117466
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "B",
+						"attributes": {
+							"rbl": 42
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N29",
+						"towards": "Floridsdorf U",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:42:00.000+0100",
+										"timeReal": "2022-12-20T00:42:00.000+0100",
+										"countdown": 20
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:12:00.000+0100",
+										"timeReal": "2022-12-20T01:12:00.000+0100",
+										"countdown": 50
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 529
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3771338,
+							48.2119633
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5507
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N29",
+						"towards": "Wittelsbachstraße",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:25:00.000+0100",
+										"timeReal": "2022-12-20T00:25:00.000+0100",
+										"countdown": 3
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:55:00.000+0100",
+										"timeReal": "2022-12-20T00:55:00.000+0100",
+										"countdown": 33
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:25:00.000+0100",
+										"countdown": 63
+									},
+									"vehicle": {
+										"name": "N29",
+										"towards": "Wittelsbachstraße",
+										"direction": "R",
+										"richtungsId": "2",
+										"barrierFree": false,
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptBusNight",
+										"attributes": {},
+										"linienId": 529
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 529
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3769194,
+							48.2120352
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5508
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N31",
+						"towards": "Stammersdorf",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": false,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:26:00.000+0100",
+										"countdown": 64
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 531
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3783375,
+							48.2116644
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5501
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N38",
+						"towards": "Grinzing",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": false,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:09:00.000+0100",
+										"countdown": 47
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 538
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3781372,
+							48.2117066
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz U",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5502
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N60",
+						"towards": "Maurer Hauptplatz",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": false,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:09:00.000+0100",
+										"countdown": 47
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 560
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3779333,
+							48.2117591
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "F",
+						"attributes": {
+							"rbl": 5503
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "N66",
+						"towards": "Liesing S",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": false,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:54:00.000+0100",
+										"countdown": 32
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T01:24:00.000+0100",
+										"countdown": 62
+									}
+								}
+							]
+						},
+						"type": "ptBusNight",
+						"lineId": 566
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3780930,
+							48.2118811
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "1",
+						"attributes": {
+							"rbl": 4113
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "U1",
+						"towards": "LEOPOLDAU    ",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:21:51.000+0100",
+										"timeReal": "2022-12-20T00:21:51.000+0100",
+										"countdown": 1
+									},
+									"vehicle": {
+										"name": "U1",
+										"towards": "LEOPOLDAU    ",
+										"direction": "H",
+										"richtungsId": "1",
+										"barrierFree": true,
+										"foldingRamp": true,
+										"foldingRampType": "part",
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptMetro",
+										"attributes": {},
+										"linienId": 301
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:33:51.000+0100",
+										"timeReal": "2022-12-20T00:33:51.000+0100",
+										"countdown": 13
+									},
+									"vehicle": {
+										"name": "U1",
+										"towards": "LEOPOLDAU    ",
+										"direction": "H",
+										"richtungsId": "1",
+										"barrierFree": true,
+										"foldingRamp": true,
+										"foldingRampType": "part",
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptMetro",
+										"attributes": {},
+										"linienId": 301
+									}
+								}
+							]
+						},
+						"type": "ptMetro",
+						"lineId": 301
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3780750,
+							48.2119288
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "2",
+						"attributes": {
+							"rbl": 4116
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "U1",
+						"towards": "OBERLAA",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:24:51.000+0100",
+										"timeReal": "2022-12-20T00:24:51.000+0100",
+										"countdown": 4
+									}
+								}
+							]
+						},
+						"type": "ptMetro",
+						"lineId": 301
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3781380,
+							48.2118750
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "1",
+						"attributes": {
+							"rbl": 4427
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "U4",
+						"towards": "HEILIGENSTADT",
+						"direction": "H",
+						"platform": "1",
+						"richtungsId": "1",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:31:51.000+0100",
+										"timeReal": "2022-12-20T00:31:51.000+0100",
+										"countdown": 11
+									},
+									"vehicle": {
+										"name": "U4",
+										"towards": "HEILIGENSTADT",
+										"direction": "H",
+										"richtungsId": "1",
+										"barrierFree": true,
+										"foldingRamp": true,
+										"foldingRampType": "part",
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptMetro",
+										"attributes": {},
+										"linienId": 304
+									}
+								},
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:34:51.000+0100",
+										"timeReal": "2022-12-20T00:34:51.000+0100",
+										"countdown": 14
+									},
+									"vehicle": {
+										"name": "U4",
+										"towards": "HEILIGENSTADT",
+										"direction": "H",
+										"richtungsId": "1",
+										"barrierFree": true,
+										"foldingRamp": true,
+										"foldingRampType": "part",
+										"realtimeSupported": true,
+										"trafficjam": false,
+										"type": "ptMetro",
+										"attributes": {},
+										"linienId": 304
+									}
+								}
+							]
+						},
+						"type": "ptMetro",
+						"lineId": 304
+					}
+				],
+				"attributes": {}
+			},
+			{
+				"locationStop": {
+					"type": "Feature",
+					"geometry": {
+						"type": "Point",
+						"coordinates": [
+							16.3781111,
+							48.2118269
+						]
+					},
+					"properties": {
+						"name": "60201198",
+						"title": "Schwedenplatz",
+						"municipality": "Wien",
+						"municipalityId": 90001,
+						"type": "stop",
+						"coordName": "WGS84",
+						"gate": "2",
+						"attributes": {
+							"rbl": 4410
+						}
+					}
+				},
+				"lines": [
+					{
+						"name": "U4",
+						"towards": "HÜTTELDORF",
+						"direction": "R",
+						"platform": "2",
+						"richtungsId": "2",
+						"barrierFree": true,
+						"realtimeSupported": true,
+						"trafficjam": false,
+						"departures": {
+							"departure": [
+								{
+									"departureTime": {
+										"timePlanned": "2022-12-20T00:21:51.000+0100",
+										"timeReal": "2022-12-20T00:21:51.000+0100",
+										"countdown": 1
+									}
+								}
+							]
+						},
+						"type": "ptMetro",
+						"lineId": 304
+					}
+				],
+				"attributes": {}
+			}
+		]
+	},
+	"message": {
+		"value": "OK",
+		"messageCode": 1,
+		"serverTime": "2022-12-20T00:21:01.000+0100"
+	}
+}

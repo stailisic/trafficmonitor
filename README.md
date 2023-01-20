@@ -6,11 +6,65 @@
 
 group project for ODE
 
+## TrafficMonitor (c) 2023
+1. Beim Ausführen des Programm wird ein kleines Fenster "TrafficMonitor Hauptmenü" geöffnet (GUI via fxml).
+   - Auswahl der U-Bahnlinien (U1, U2, U3, U4, U6) via Buttons
+2. Klickt man auf einen U-Bahn-Button wird ein separates Fenster angezeigt (GUI via inline):
+   - Die Haltestellen einer U-Bahn-Linie werden aufgrund einer statischen CSV-Liste dynamisch erstellt
+   - Hier kann man die gewünschte Haltestelle auswählen (RadioButton)
+   - Der Button 'Aktualisieren' holt sich die JsonDaten und verarbeitet sie für die Ausgabe. Hier geschieht das MultiThreading, wenn mehrere Haltestellen ausgewählt sind.
+   - Der Button 'Anzeigen' holt die resultierenden Ergebnisse auf den Schirm.
+   - Der Button 'Anzeige löschen' löscht die Anzeige und jene gespeicherten Daten der betreffenden U-Bahn-Linie vom Speicher.
+
+Note: Buttons werden mit Absicht 'disabled' (ausgegraut, nicht anklickbar) und wieder 'enabled' (wieder anklickbar), um ein optimales UX anzubieten.
+-- Stand 2023-01-20
+
 ## Stand des Projekts
 Bemerkung: der oberste Eintrag ist das jüngste Ereignis. Die noch in Arbeit stehende Implementierung befindet sich im dev Branch und die untenstehenden Ereignisse beziehen sich somit auf die im dev Branch übertragenen commits. 
 
+
+### 2023-01-20
+**PROJEKT FERTIG**
+
+- Logger hinzugefügt
+- Code clean up
+- JavaDoc, Code kommentiert
+- BlackBox Testing
+
+### 2023-01-18 + 2023-01-19
+- Threading eingebaut: 
+  - Klasse JsonParse mit `implements Runnable` und einiges umgebaut, damit Threading ermöglicht
+  - Klasse CreatePublicTransportLine: neue Buttons für Workflow hinzugefügt, wegen Threading, da keinen Ansatz gefunden, dass nachdem erst alle Thread fertig sind, danach der tableView-Refresh zum Schluss erfolgt.
+    - Szenario 1: Aktualisieren > Anzeigen. 
+    - Szenario 2: Anzeige löschen
+- Bei erneuter Auswahl und somit neuer Einträge > statische Liste `listLinesLineRecords` entsprechend bereinigen, aber nur für die jeweilige Ubahn-Linie
+- Code kommentiert
+
+### 2023-01-16
+- Controls für das Traffic Monitor Ux Fenster hinzugefügt
+- Bugs: 
+  - TableView: 
+    - Auswahl Haltestelle A und B > Aktualisieren > Ergebnisse OK in TableView
+    - Auswahl Haltestelle B > Aktualisieren > vorheriges Ergebnis von A noch immer drinnen
+    - Expected: Alte Ergebnisse von TableView löschen und Ergebnisse der neuen Auswahl abbilden
+  - LabelInfo: zu unterscheiden und Text entsprechend anzeigen lassen
+    - keine Auswahl: "Keine Auswahl getroffen"
+    - Auswahl, aber außerhalb der Betriebszeiten: "Nicht im Betrieb"
+- Issues:
+  - wenn haltestellennamen_uX_linie.csv am Ende zwei leere Zeilen hat, dann öffnet sich das zweite Fenster (Traffic Monitor Ux) nicht. 
+    - Workaround: nur eine leere Zeile am Ende in der csv-Datei. 
+    - Lösungsvorschlag: Fehlerhandling einbauen 
+- ToDo: Threading, Kommentare, Fehlerhandling 
+
+### 2023-01-15
+- Startfenster erstellt: Auswahl der U-Bahnlinien via button
+- Wenn Button der gewünschten U-Bahnlinie angeklickt wird -> disable btn & Öffnen eines neuen Monitor-Fensters mit allen Haltenstellen, etc.
+  - erledigt: button clicked -> disable button & open 2nd window. If 2nd window is closed -> enable button.
+- TrafficMonitor Window Layout fertig (Klasse CreatePublicTransportLine) -- TODO: Controls mit JsonParse, etc. verlinken, damit bei Auswahl und Bestätigen (durch Button Aktualisieren) das resultierende JSON in der TableView angezeigt wird
+
 ### 2023-01-14
 - CsvReader Klasse um Konstruktor erweitert, Methode umbenannt auf retrieveDiva
+- Neue Klasse CreatePublicTransportLine erstellt zur dynamischen Erstellung der RadioButtons für die Haltestellen einer Linie
 
 ### 2023-01-12
 - aus der CSV-Datei "wienerlienien-ogd-haltestellen.csv" lesen und nach einer bestimmen Adresse suchen, welche dann die dazugehörige Diva ausgibt
