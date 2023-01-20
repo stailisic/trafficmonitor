@@ -45,12 +45,10 @@ public class CreatePublicTransportLine {
     private ObservableList<LineRecord> list = FXCollections.observableArrayList();
 
     private JsonParse jsonParseMain = new JsonParse();
-    public CreatePublicTransportLine() {
-    }
 
     /**
      * Constructor used for instance creation in regard of provided transportLine (e.g. U1)
-     * @param transportLineName (e.g.: u1, u2, u3, u4, u6 <-- provided as small letters)
+     * @param transportLineName (e.g.: u1, u2, u3, u4, u6 - provided as small letters)
      */
     public CreatePublicTransportLine(String transportLineName) {
         this.transportLine = transportLineName.toUpperCase(); // !!! for further processing, upperCase is required
@@ -451,6 +449,10 @@ public class CreatePublicTransportLine {
 
      */
 
+    /**
+     * Method to return
+     * @return the ObservableList that contains the lineRecords, required for TableView display
+     */
     public ObservableList<LineRecord> getList() {
         return list;
     }
@@ -461,6 +463,10 @@ public class CreatePublicTransportLine {
 
  */
 
+    /**
+     * Simple Method to reset the InfoLabel
+     * @param infoLabel passed Label
+     */
     public void resetInfoLabel(Label infoLabel) {
         infoLabel.setText(" ");
         infoLabel.setStyle("-fx-background-color: null; -fx-text-fill: #FFFFFF");

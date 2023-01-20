@@ -48,7 +48,7 @@ public class JsonParse implements Runnable{
 
     /**
      * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
-     *                  * e.g. [{"name":"U1",...,"direction":"H"}] <-- including the square brackets
+     *                  * e.g. [{"name":"U1",...,"direction":"H"}] -- including the square brackets
      *                  * substring -> remove square brackets (at the beginning and end) and therefore
      *                  * add the modified { content } into the ArrayList.
      * @param json ... pass JSONObject to be added to the list
@@ -114,6 +114,13 @@ public class JsonParse implements Runnable{
         }
     }
 
+    /**
+     * Method to retrieve value on the basis of given JSONObject and key
+     * @param json JSONObject passed to retrieve the necessary key
+     * @param key either 'type' or 'name'
+     * @return the value to of the related key as  String
+     */
+
     public String getKeyString(JSONObject json, String key /*, List<String> listLines*/) {
         /*
           Check if particular key exists -> store as boolean value
@@ -157,6 +164,12 @@ public class JsonParse implements Runnable{
         return json.toString();
     }
 
+    /**
+     * Method to retrieve either departure countdown or departure time
+     * @param json JSONObject passed to retrieve the necessary key
+     * @param key either 'countdown' or 'timePlanned'
+     * @return the value to of the related key as String
+     */
     public String getKeyStringDepartures(JSONObject json, String key) {
         String result = "";
         JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures"/*, this.listLines*/));
@@ -182,13 +195,19 @@ public class JsonParse implements Runnable{
         return result;
     }
 
+    /**
+     * Constructor used for the only purpose to access static ArrayList 'listLinesLineRecords'
+     */
     public JsonParse() {
     }
 
     /**
      * Constructor
-     * - when passing the list of
-     * @param diva  provided if radioButton
+     * @param diva ID of respective station name
+     * @param stationName e.g. Schwedenplatz, Vorgartenstraße (RadioButtons)
+     * @param lineName e.g. U1, U2, U3, U4, U6
+     * @param transportType e.g. ptMetro
+     * @param threadNumber index number passed on from the for loop
      */
     public JsonParse(String diva, String stationName, String lineName, String transportType, int threadNumber) {
         this.diva = diva;
@@ -1570,18 +1589,34 @@ public class JsonParse implements Runnable{
         TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
+    /**
+     * Method to return String of
+     * @return the diva number, which is the ID of the respective station in question
+     */
     public String getDiva() {
         return diva;
     }
 
+    /**
+     * Method to set
+     * @param diva the value for the respective diva attribute
+     */
     public void setDiva(String diva) {
         this.diva = diva;
     }
 
+    /**
+     * Method to return String of
+     * @return the respective name of transportation, e.g. U4
+     */
     public String getLineName() {
         return lineName;
     }
 
+    /**
+     * Method to return
+     * @return the ObservableList that contains the lineRecords
+     */
     public ObservableList<LineRecord> getListLinesLineRecords() {
         return listLinesLineRecords;
     }

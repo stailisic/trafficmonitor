@@ -14,6 +14,10 @@ public class CsvReader {
     private String diva;
     private final String filepath = "src/main/resources/fhtw/trafficmonitor/wienerlinien-ogd-haltestellen.csv";
 
+    /**
+     * Constructor
+     * @param haltestellenName name of the station in question
+     */
     public CsvReader(String haltestellenName) {
         this.haltestellenName = haltestellenName;
     }
@@ -22,7 +26,7 @@ public class CsvReader {
      * The method is used to retrieve from the csv on the basis of the station name
      * the corresponding Diva number, which is required as passed parameter for the GET-Request
      * used in the class JsonParse, in order to get the real time information as json.
-     *   CSV source: https://www.wienerlinien.at/ogd_realtime/doku/ogd/wienerlinien-ogd-haltestellen.csv
+     *   CSV source: <a href="https://www.wienerlinien.at/ogd_realtime/doku/ogd/wienerlinien-ogd-haltestellen.csv">wienerlinien-ogd-haltestellen.csv</a>
      *
      */
     public void retrieveDiva () {
@@ -44,10 +48,19 @@ public class CsvReader {
         }
     }
 
+
+    /**
+     * Method to return String of
+     * @return the respective name of the station in question, e.g. Schwedenplatz
+     */
     public String getHaltestellenName() {
         return haltestellenName;
     }
 
+    /**
+     * Method to return String of
+     * @return the diva number, which is the ID of the respective station in question
+     */
     public String getDiva() {
         return diva;
     }

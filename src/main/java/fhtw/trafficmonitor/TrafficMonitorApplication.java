@@ -36,6 +36,10 @@ public class TrafficMonitorApplication extends Application {
         trafficMonitorLog.logTrafficMonitor("TrafficHauptmenü geöffnet");
     }
 
+    /**
+     * Main method, starting point
+     * @param args arguments to be passed
+     */
     public static void main(String[] args) {
         trafficMonitorLog.logTrafficMonitor("Willkommen! Das Logging beginnt nun für den TrafficMonitor.");
 

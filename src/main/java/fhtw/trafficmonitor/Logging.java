@@ -33,8 +33,8 @@ public class Logging {
      * Method to provide logging.
      * Once the application has startet a logger will be created and all
      * activities by placing this method will be recorded and stored in a session file locally
-     * in the path from source root started: src/main/resources/fhtw/trafficmonitor/<*.log>
-     *     - naming of file: <yyyyMMdd_HHmmss>_session_TrafficMonitorLog.log
+     * in the path from source root started: src/main/resources/fhtw/trafficmonitor/*.log
+     *     - naming of file: 'yyyyMMdd_HHmmss'_session_TrafficMonitorLog.log
      *       - e.g. 20230120_103501_session_TrafficMonitorLog.log
      * @param logMessage custom message to be logged
      */

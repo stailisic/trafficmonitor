@@ -1,3 +1,7 @@
+/**
+ * That's the module descriptor and contains
+ * any data needed to build and use our new module.
+ */
 module fhtw.trafficmonitor {
     requires javafx.controls;
     requires javafx.fxml;
