@@ -1,8 +1,28 @@
-# Titel der Applikation
 
-- Hannelore Fayefunmi (ic21b027@technikum-wien.at)
+Projektmeilensteine NEU
+
+Must haves: 
+
+1. Buttons zusammenführen zu einer vereinten Get/Refresh Funktion
+2. Automatisches Refresh jede 5 Minuten
+3. Networking + Zugriffsrechte: Exceptionhandling bei Serverfehlern, zu schneller Eingabe, Serverüberladung, 
+Serversperre, Auswahl mehrere U-Bahn Linien
+4. I/O: Suche durch Eingabe, automatische Auswahl der Stationen
+
+
+Nice to have:
+5. Executable .exe file
+
+Overkill:
+6. Mobile Version
+
+
+
+
+
+
+
 - Anna Nagel (ic21b112@technikum-wien.at)
-- Natasa Trajcevska (ic21b124@technikum-wien.at)
 
 group project for ODE
 
