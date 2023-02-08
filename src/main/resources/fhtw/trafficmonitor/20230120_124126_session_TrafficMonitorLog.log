@@ -1,0 +1,92 @@
+Jän. 20, 2023 12:41:26 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Willkommen! Das Logging beginnt nun für den TrafficMonitor.
+Jän. 20, 2023 12:41:26 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficHauptmenü geöffnet
+Jän. 20, 2023 12:41:29 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Button U1 wurde angeklickt.
+Jän. 20, 2023 12:41:29 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt
+Jän. 20, 2023 12:41:29 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Erstellung des Fenster TrafficMonitor U1
+Jän. 20, 2023 12:41:29 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U1 ist nun geöffnet!
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U1 remain.
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 27, JavaFX Application Threadthread state: RUNNABLE true
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 27, JavaFX Application Threadthread state: RUNNABLE true
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+Jän. 20, 2023 12:41:31 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U1 remain.
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 34 index 1] for 60201433, Vorgartenstraße, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 34 index 1] for 60201433, Vorgartenstraße, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 34 index 1] for 60201433, Vorgartenstraße, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 34 index 1] for 60201433, Vorgartenstraße, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 33 index 0] for 60201040, Praterstern, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 33 index 0] for 60201040, Praterstern, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 33 index 0] for 60201040, Praterstern, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 33 index 0] for 60201040, Praterstern, U1, ptMetro
+Jän. 20, 2023 12:41:32 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+Jän. 20, 2023 12:41:33 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Anzeigen der resultierenden Ergebnisse.
+Jän. 20, 2023 12:41:36 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U1 wurde geschlossen.
