@@ -1,30 +1,54 @@
+/**
+ * @author Hannelore Fayefunmi (ic21b027@technikum-wien.at), Natasa Trajcevska (ic21b124@technikum-wien.at), Anna Nagel (ic21b112@technikum-wien.at)
+ * @project TrafficMonitor (c)2023
+ * @description Retrieving real time data for the subway lines selected by the user via GUI
+ */
+
 package fhtw.trafficmonitor;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.json.JSONObject;
 
+import java.util.Objects;
+
+/**
+ * Class contains main() to launch the GUI application
+ */
 public class TrafficMonitorApplication extends Application {
+
+    static Logging trafficMonitorLog = new Logging();
+
     @Override
     public void start(Stage stage) throws Exception {
-
-        //Parent root = FXMLLoader.load(getClass().getResource("demo.fxml"));
-        Parent root = FXMLLoader.load(getClass().getResource("trafficmonitor.fxml"));
-        //stage.setTitle("Demonstration TableView with defined Columns");
+        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("trafficmonitor.fxml")));
+        stage.setTitle("TrafficMonitor HauptMenü");
         stage.setScene(new Scene(root));
-        stage.show();
 
+        // 2023-01-19: line added. Unfortunately this throws an IllegalArgumentException,
+        // but it's used to close all remaining windows besides main window
+        stage.setOnHidden(e -> Platform.exit());
+
+        stage.show();
+        trafficMonitorLog.logTrafficMonitor("TrafficHauptmenü geöffnet");
     }
 
+    /**
+     * Main method, starting point
+     * @param args arguments to be passed
+     */
     public static void main(String[] args) {
-        // modify value to enable/disable debugMode
-        int debugMode = 0; // 0=off, 1=on
+        trafficMonitorLog.logTrafficMonitor("Willkommen! Das Logging beginnt nun für den TrafficMonitor.");
 
-        if (debugMode == 1) {
-            /**
+
+        // modify value to enable/disable debugMode
+        boolean debugMode = false; // mode settings to be customized: ON=true, OFF=false
+
+        if (debugMode) {
+            /*
              * demo purpose regarding:
              * 1. send URL request on basis of known 'diva'
              * 2. receive json data
@@ -33,6 +57,8 @@ public class TrafficMonitorApplication extends Application {
              * Note: in class JsonParse you can set debugMode to ON/OFF either to display more information
              */
 
+            System.out.println("Put any testing code in here");
+
             /*
             JsonParse jsonSource1 = new JsonParse("60201198", "Schwedenplatz", "U1", "ptMetro");
             System.out.println(jsonSource1.getUrl_source());
@@ -40,7 +66,6 @@ public class TrafficMonitorApplication extends Application {
             jsonSource1.getKeyStage1(new JSONObject(jsonSource1.getJsonInput()), "U1", "ptMetro");
 
              */
-
 
             //System.out.println("Retrieve only selected transportType");
             //jsonSource1.getListLines().forEach(System.out::println);

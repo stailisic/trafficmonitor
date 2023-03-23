@@ -2,8 +2,6 @@ package fhtw.trafficmonitor;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,6 +12,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to retrieve real time data in json format, parse them and extract the essential data for display
+ */
 public class JsonParse implements Runnable{
     enum DebugState {
         OFF,
@@ -21,11 +22,11 @@ public class JsonParse implements Runnable{
     }
 
     //private static DebugState debugMode = DebugState.OFF;   // 0=off, 1=on
-    private static DebugState debugMode = DebugState.ON;
+    private static final DebugState debugMode = DebugState.OFF;
 
     private String diva;
     private String stationName;
-    private String lineName;
+    private String lineName; // e.g. U1, U2, U3, U4, U6
     private String transportType;
     private String url_source = "https://www.wienerlinien.at/ogd_realtime/monitor?stopid=0&diva=";
     private String jsonInput = "";
@@ -34,21 +35,24 @@ public class JsonParse implements Runnable{
     // pro Haltestelle
     private List<String> listLines = new ArrayList<>();
 
-    // pro Haltestelle
-    private ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
-
-    public void parseObject(JSONObject json, String key) {
-        // System.out.println(json.has(key));
-        System.out.println(json.get(key));
-    }
+    /**
+     * Approach:
+     * - collect all created LineRecords into one static list
+     *   - e.g. if U1- and U4-TransportMonitor window is open and
+     *     both have several stations selected, then all records
+     *     are gathered in one list
+     * - for displaying the respective lineRecords for each 'TransportMonitor window UX'
+     *   will be done by filtering the transportLine 'UX'
+     */
+    private static ObservableList<LineRecord> listLinesLineRecords = FXCollections.observableArrayList();
 
     /**
      * key "lines" is of type JSONArray, but provides in general only one index [0] JSONObject,
-     *                  * e.g. [{"name":"U1",...,"direction":"H"}] <-- including the square brackets
+     *                  * e.g. [{"name":"U1",...,"direction":"H"}] -- including the square brackets
      *                  * substring -> remove square brackets (at the beginning and end) and therefore
      *                  * add the modified { content } into the ArrayList.
-     * @param json ... e.g.
-     * @param key
+     * @param json ... pass JSONObject to be added to the list
+     * @param key ... key in question
      */
     public void parseObjectLines(JSONObject json, String key) {
         addListLines(json.get(key).toString().substring(1,json.get(key).toString().length() -1));
@@ -65,17 +69,18 @@ public class JsonParse implements Runnable{
     /**
      * parsing jsonInput {data: ...} and retrieve ~value~ of requested 'key'
      *  e.g.: key = lines -> value = [{name: ...}]
-     * @param json
-     * @param key
-     * @param listLines
-     *
+     * @param json provided as JSONObject and is the original GET-Request
+     * @param key for the first stage, we look for key 'lines'
      * Source:
      * - How to parse dynamic and nested JSON in java? - Rest assured API automation framework
-     *   - https://www.youtube.com/watch?v=ZjZqLUGCWxo
-     */
-    public void getKey(JSONObject json, String key /*, Enum stage*/ , List<String> listLines) {
+     *   - h<a href="ttps://www.youtube.com/watch?v=ZjZqLUGCWxo
+    ">...</a>     */
+    public void getKey(JSONObject json, String key /* , List<String> listLines*/) {
         //Check if particular key exists -> store as boolean value
         boolean exists = json.has(key);
+
+        //System.out.println("BOOL HERE:"+exists);  //DEBUG
+
         Iterator<?> keys;  // Iterator use generic concept
         String nextKeys;
 
@@ -87,8 +92,7 @@ public class JsonParse implements Runnable{
                     //Check if the next key is either an Object or Array
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
 
-
-                            getKey(json.getJSONObject(nextKeys), key, /*stage,*/ listLines);
+                        getKey(json.getJSONObject(nextKeys), key /*, listLines*/);
 
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
@@ -97,9 +101,7 @@ public class JsonParse implements Runnable{
                             String jsonArrayString = jsonArray.get(i).toString();
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
-
-                                getKey(innerJson, key, /*stage,*/ listLines);
-
+                            getKey(innerJson, key /*, listLines*/);
                         }
                     }
                 } catch (Exception e) {
@@ -107,23 +109,20 @@ public class JsonParse implements Runnable{
                 }
             }
         } else { // exists part
-            /* if (JsonParse.Stage.STAGE_LINES.equals(stage)) { */
                 parseObjectLines(json, key);
-            /*
-            }
-            else if (stage.equals(JsonParse.Stage.STAGE_LINES_INNER)) {
-                parseObject(json, key);
-            }
-            parseObject(json, key);
-
-             */
         }
     }
 
-    public String getKeyString(JSONObject json, String key, List<String> listLines) {
+    /**
+     * Method to retrieve value on the basis of given JSONObject and key
+     * @param json JSONObject passed to retrieve the necessary key
+     * @param key either 'type' or 'name'
+     * @return the value to of the related key as  String
+     */
 
-        /**
-         * Check if particular key exists -> store as boolean value
+    public String getKeyString(JSONObject json, String key /*, List<String> listLines*/) {
+        /*
+          Check if particular key exists -> store as boolean value
          */
         boolean exists = json.has(key);
         Iterator<?> keys;  // Iterator use generic concept
@@ -134,11 +133,12 @@ public class JsonParse implements Runnable{
             while (keys.hasNext()) {
                 nextKeys = (String) keys.next();
                 try {
-                    /**
-                     * Check if the next key is either an Object or Array
+                    /*
+                      Check if the next key is either an Object or Array
                      */
                     if (json.get(nextKeys) instanceof JSONObject) {              // if nextKey is an JsonObject
-                            getKeyString(json.getJSONObject(nextKeys), key, listLines);
+
+                        getKeyString(json.getJSONObject(nextKeys), key /*, listLines*/);
 
 
                     } else if (json.get(nextKeys) instanceof JSONArray) {       // if nextKey is an JsonArray
@@ -148,11 +148,9 @@ public class JsonParse implements Runnable{
                             String jsonArrayString = jsonArray.get(i).toString();
                             JSONObject innerJson = new JSONObject(jsonArrayString);
 
-
-                                getKeyString(innerJson, key, listLines);
+                            getKeyString(innerJson, key /*, listLines*/);
 
                         }
-
                     }
                 } catch (Exception e) {
                     System.out.println("Validation next key - ERROR.");
@@ -164,12 +162,18 @@ public class JsonParse implements Runnable{
         return json.toString();
     }
 
+    /**
+     * Method to retrieve either departure countdown or departure time
+     * @param json JSONObject passed to retrieve the necessary key
+     * @param key either 'countdown' or 'timePlanned'
+     * @return the value to of the related key as String
+     */
     public String getKeyStringDepartures(JSONObject json, String key) {
-        String result = "";
-        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures", this.listLines));
+        StringBuilder result = new StringBuilder();
+        JSONObject jsonObjectDepartures = new JSONObject(getKeyString(json, "departures"/*, this.listLines*/));
 
         if (debugMode.equals(DebugState.ON)) {
-            System.out.println("DEBUG " + jsonObjectDepartures.toString());
+            System.out.println("DEBUG " + jsonObjectDepartures);
             System.out.println("DEBUG " + jsonObjectDepartures.get("departure").toString());
         }
 
@@ -184,17 +188,24 @@ public class JsonParse implements Runnable{
                 System.out.println("DEBUG " + innerJsonTimePlanned.get(key).toString());
             }
 
-            result += innerJsonTimePlanned.get(key).toString() + "\n";
+            result.append(innerJsonTimePlanned.get(key).toString()).append("\n");
         }
-        return result;
+        return result.toString();
     }
 
+    /**
+     * Constructor used for the only purpose to access static ArrayList 'listLinesLineRecords'
+     */
     public JsonParse() {
     }
 
     /**
      * Constructor
-     * @param diva  provided if radioButton
+     * @param diva ID of respective station name
+     * @param stationName e.g. Schwedenplatz, Vorgartenstraße (RadioButtons)
+     * @param lineName e.g. U1, U2, U3, U4, U6
+     * @param transportType e.g. ptMetro
+     * @param threadNumber index number passed on from the for loop
      */
     public JsonParse(String diva, String stationName, String lineName, String transportType, int threadNumber) {
         this.diva = diva;
@@ -203,119 +214,54 @@ public class JsonParse implements Runnable{
         this.transportType = transportType;
         this.url_source = url_source + diva;
         this.threadNumber = threadNumber;
-/*
-        try {
-            URL url = new URL(url_source);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            // Receiving the response code
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner scanner = new Scanner(url.openStream());
-
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    this.jsonInput += scanner.nextLine();
-                }
-
-                //Close the scanner
-                scanner.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.listLines = new ArrayList<>();
-        this.listLinesLineRecords = FXCollections.observableArrayList();
-
- */
-
-
     }
 
-    public void getKeyStage0() {
-
-        try {
-            URL url = new URL(url_source);
-
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setRequestMethod("GET");
-            conn.connect();
-
-            // Receiving the response code
-            int responseCode = conn.getResponseCode();
-
-            if (responseCode != 200) {
-                throw new RuntimeException("HttpResponseCode: " + responseCode);
-            } else {
-                Scanner scanner = new Scanner(url.openStream());
-
-                //Write all the JSON data into a string using a scanner
-                while (scanner.hasNext()) {
-                    this.jsonInput += scanner.nextLine();
-                }
-
-                //Close the scanner
-                scanner.close();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        this.listLines = new ArrayList<>();
-        //this.listLinesLineRecords = FXCollections.observableArrayList();
-
-        CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine();
-
-        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
-            createPublicTransportLine.getList().add(getListLinesLineRecords().get(k));
-        }
-
-
-    }
-
+    /**
+     * Threading procedure
+     * 1. getKeyStage0: GET-Request > save json data into String 'jsonInput'
+     * 2. getKeyStage1: parse json data and retrieve necessary key/values -> save in ArrayList 'listLines'
+     * 3. getKeyStage2: pass each entry of ArrayList 'listLines' as new LineRecord into static ArrayList 'listLinesLineRecords'
+     */
     @Override
     public void run () {
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow 'run'");
+        /*
+          Remove any existing LineRecords from ArrayList 'listLinesLineRecords'
+          in regard of 'lineName' (=transportLine, e.g. U1,U2,U3,U4,U6)
+         */
+        removeLineRecordsFromList();
 
         getKeyStage0();
         getKeyStage1(new JSONObject(this.jsonInput), this.lineName, this.transportType);
         getKeyStage2();
+
         System.out.println(" *******************************************************************************");
-        System.out.println(" ** Thread created [" + threadNumber + "] for " + diva
+        System.out.println(" ** Thread.current: "
+                + Thread.currentThread().getId()
+                + " index [" + threadNumber + "] for " + diva
                 + ", " + stationName
                 + ", " +  lineName
                 + ", " +  transportType );
         System.out.println(" *******************************************************************************");
 
 
-        /*
-        for (int k = 0; k < getListLinesLineRecords().size(); k++) {
-            //list.add(jsonParse.getListLinesLineRecords().get(k));
-            System.out.println(k + " " + getListLinesLineRecords().get(k).getLineName()
-                    + " " + getListLinesLineRecords().get(k).getLineStationName()
-                    + " to " + getListLinesLineRecords().get(k).getLineTowards());
-        }
-
-         */
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** Thread.current: "
+                        + Thread.currentThread().getId()
+                        + " index " + threadNumber + "] for " + diva
+                        + ", " + stationName
+                        + ", " + lineName
+                        + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
-
-    /**
+    /*
      * This constructor uses static JSON source for testing/development reasons.
      * Remark: Any updates should be applied to respective constructor above that retrieves JSON source on demand
      * @param diva
      * @param lineName
      * @param transportType
-     */
-    /*
+
     public JsonParse(String diva, String lineName, String transportType) {
         this.diva = diva;
         System.out.println("Demo: " + getDiva() + " " + lineName + " " + transportType);
@@ -1458,6 +1404,64 @@ public class JsonParse implements Runnable{
      */
 
     /**
+     * Method used for instance:
+     * - to retrieve jsonData and store it in String 'jsonInput'
+     */
+    public void getKeyStage0() {
+        /*
+          Source: https://medium.com/swlh/getting-json-data-from-a-restful-api-using-java-b327aafb3751
+           - part regarding HttpURLConnection used from source above and modified for this purpose
+         */
+        try {
+            URL url = new URL(url_source);
+
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            // Receiving the response code
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+                Scanner scanner = new Scanner(url.openStream());
+
+                // store retrieved JSON data into string using a scanner line by line
+                while (scanner.hasNext()) {
+                    this.jsonInput += scanner.nextLine();
+                }
+                //Close the scanner
+                scanner.close();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        this.listLines = new ArrayList<>();
+
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage0 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
+        System.out.println(" *******************************************************************************");
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage0 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
+
+    }
+
+    /**
      * Parse jsonInput of the related Haltepunkt (diva) to stage 1:
      *  1. retrieve from all 'monitors index' (A)
      *  2. the inner lines JsonArray (B)
@@ -1490,7 +1494,7 @@ public class JsonParse implements Runnable{
      * @param transportType   ... attribute provided by(a)
      */
     public void getKeyStage1(JSONObject inputJsonObject, String lineName, String transportType) {
-        getKey(inputJsonObject, "lines", this.listLines);
+        getKey(inputJsonObject, "lines"/*, this.listLines*/);
 
         // debug information
         if (debugMode.equals(DebugState.ON)) {
@@ -1499,6 +1503,9 @@ public class JsonParse implements Runnable{
             System.out.println("----- getKeyStage1 | INNER END "); // debug
         }
 
+        /*
+           Remove any entries that do not match ptMetro
+         */
         for (int i=0; i < this.listLines.size(); i++) {
             if (this.listLines.get(i).contains("\"name\":\"" + lineName + "\"")
                     && this.listLines.get(i).contains("\"type\":\"" + transportType + "\"")){
@@ -1509,7 +1516,7 @@ public class JsonParse implements Runnable{
                             + "\"name\":\"" + lineName + "\"" + "\"type\":\"" + transportType + "\"" + this.listLines.get(i)); // debug
                 }
 
-                continue;
+                //continue;
             } else {
                 // debug information: display all entries that will be removed from listLines
                 if (debugMode.equals(DebugState.ON)) {
@@ -1522,11 +1529,26 @@ public class JsonParse implements Runnable{
             }
         }
 
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage1 >> Thread.current: " + Thread.currentThread().getId() + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
+        System.out.println(" *******************************************************************************");
+
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage1 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
     /**
      * From ArrayList retrieve necessary information on basis of provided attributes
-     * and save them in our observableArrayList which is required for GUI
+     * and save them in our general static observableArrayList which is required for GUI
      */
     public void getKeyStage2() {
         for (int i=0; i < this.listLines.size(); i++) {
@@ -1535,76 +1557,80 @@ public class JsonParse implements Runnable{
 
             listLinesLineRecords.add(
                     new LineRecord(
-                            getKeyString(inputJsonObjectListLines, "type", this.listLines),
+                            getKeyString(inputJsonObjectListLines, "type" /*, this.listLines*/),
                             this.diva,
-                            getKeyString(inputJsonObjectListLines, "name",  this.listLines),
+                            getKeyString(inputJsonObjectListLines, "name" /*, this.listLines*/),
                             this.stationName,
-                            getKeyString(inputJsonObjectListLines, "towards",  this.listLines),
+                            getKeyString(inputJsonObjectListLines, "towards" /*, this.listLines*/),
                             getKeyStringDepartures(inputJsonObjectListLines, "countdown"),
                             getKeyStringDepartures(inputJsonObjectListLines, "timePlanned")
-
                     )
             );
-
-            //System.out.println(getKeyString(inputJsonObjectListLines, "type", this.listLines));
-            //System.out.println(getKeyString(inputJsonObjectListLines, "name", this.listLines));
-            //System.out.println(getKeyString(inputJsonObjectListLines, "towards", this.listLines));
-
-
-
         }
 
+        System.out.println(" *******************************************************************************");
+        System.out.println(" ** getKeyStage2 >> Thread.current: " + Thread.currentThread().getId() + " index [" + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " +  lineName
+                + ", " +  transportType );
         listLinesLineRecords.forEach(System.out::println);
+        System.out.println(" *******************************************************************************");
 
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************\n");
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** getKeyStage2 >> Thread.current: "
+                + Thread.currentThread().getId()
+                + " index " + threadNumber + "] for " + diva
+                + ", " + stationName
+                + ", " + lineName
+                + ", " +  transportType);
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" *******************************************************************************");
     }
 
+    /**
+     * Method to return String of
+     * @return the diva number, which is the ID of the respective station in question
+     */
     public String getDiva() {
         return diva;
     }
 
+    /**
+     * Method to set
+     * @param diva the value for the respective diva attribute
+     */
     public void setDiva(String diva) {
         this.diva = diva;
     }
 
-    public String getUrl_source() {
-        return url_source;
-    }
-
-    public void setUrl_source(String url_source) {
-        this.url_source = url_source;
-    }
-
-    public String getJsonInput() {
-        return jsonInput;
-    }
-
-    public void setJsonInput(String jsonInput) {
-        this.jsonInput = jsonInput;
-    }
-
-    public List<String> getListLines() {
-        return listLines;
-    }
-
-    public void setListLines(List<String> listLines) {
-        this.listLines = listLines;
-    }
-
-    public ObservableList<LineRecord> getListLinesLineRecords() {
-        return listLinesLineRecords;
-    }
-
-    public void setListLinesLineRecords(ObservableList<LineRecord> listLinesLineRecords) {
-        this.listLinesLineRecords = listLinesLineRecords;
-    }
-
+    /**
+     * Method to return String of
+     * @return the respective name of transportation, e.g. U4
+     */
     public String getLineName() {
         return lineName;
     }
 
-    public String getTransportType() {
-        return transportType;
+    /**
+     * Method to return
+     * @return the ObservableList that contains the lineRecords
+     */
+    public ObservableList<LineRecord> getListLinesLineRecords() {
+        return listLinesLineRecords;
     }
 
+    /**
+     * remove any LineRecords in static ArrayList listLinesLineRecords
+     * in regard of given 'lineName'
+     */
+    public void removeLineRecordsFromList(){
+        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor(" ** Remove LineRecords that will not be used for display. LineRecords of lineName " + this.lineName + " remain.");
+
+        for (int k = 0; k < listLinesLineRecords.size(); k++) {
+            if (listLinesLineRecords.get(k).getLineName().equals(this.lineName)) {
+                listLinesLineRecords.remove(k);
+                k=-1;
+            }
+        }
+    }
 
 }
