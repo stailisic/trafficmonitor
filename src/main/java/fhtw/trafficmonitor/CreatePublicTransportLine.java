@@ -90,7 +90,7 @@ public class CreatePublicTransportLine {
 
         buttonBar.getButtons().add(btn_refresh);
         buttonBar.getButtons().add(btn_display);
-        //buttonBar.getButtons().add(btn_deleteDisplay);
+        buttonBar.getButtons().add(btn_deleteDisplay);
 
         borderPane.setTop(anchorPane);
         borderPane.setCenter(tableView);
@@ -164,8 +164,8 @@ public class CreatePublicTransportLine {
             btn_refresh.setText("> Aktualisieren");
             btn_display.setDisable(true);
             btn_display.setText("< Anzeigen >");
-            //btn_deleteDisplay.setDisable(false);
-            //btn_deleteDisplay.setText("> Anzeige löschen");
+            btn_deleteDisplay.setDisable(false);
+            btn_deleteDisplay.setText("> Anzeige löschen");
 
             tableView.getItems().removeAll();
             list.clear();
@@ -178,6 +178,7 @@ public class CreatePublicTransportLine {
             for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
                 if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
                     list.add(jsonParseMain.getListLinesLineRecords().get(k));
+                    System.out.println("NASTOY TEST 2");
                 }
             }
 

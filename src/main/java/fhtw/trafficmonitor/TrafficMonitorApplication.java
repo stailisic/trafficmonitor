@@ -11,6 +11,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -25,6 +26,9 @@ public class TrafficMonitorApplication extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("trafficmonitor.fxml")));
+        Image iconmine = new Image("C:\\Users\\nagel\\Desktop\\ODE\\prj3\\src\\main\\resources\\fhtw\\trafficmonitor\\wlicon.png");
+
+        stage.getIcons().add(iconmine);
         stage.setTitle("TrafficMonitor HauptMenü");
         stage.setScene(new Scene(root));
 
