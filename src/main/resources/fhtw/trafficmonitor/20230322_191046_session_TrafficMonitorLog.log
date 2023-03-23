@@ -1,0 +1,174 @@
+мар. 22, 2023 7:10:46 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Willkommen! Das Logging beginnt nun für den TrafficMonitor.
+мар. 22, 2023 7:10:47 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficHauptmenü geöffnet
+мар. 22, 2023 7:10:49 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Button U3 wurde angeklickt.
+мар. 22, 2023 7:10:49 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt
+мар. 22, 2023 7:10:50 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Erstellung des Fenster TrafficMonitor U3
+мар. 22, 2023 7:10:50 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U3 ist nun geöffnet!
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U3 remain.
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 22, 2023 7:10:54 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U3 remain.
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 53 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 52 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 52 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 53 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 52 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 53 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 52 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 53 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:10:55 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:01 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Anzeigen der resultierenden Ergebnisse.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U3 remain.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U3 remain.
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 61 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 61 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 62 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 61 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 61 index 0] for 60200245, Stubentor, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 62 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 62 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 62 index 1] for 60200743, Mitte-Landstraße, U3, ptMetro
+мар. 22, 2023 7:11:03 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 22, 2023 7:11:05 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Anzeigen der resultierenden Ergebnisse.
+мар. 22, 2023 7:11:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Löschen der Anzeige und der betroffenen Einträge in der Datenbank.
+мар. 22, 2023 7:11:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 22, 2023 7:11:11 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U3 wurde geschlossen.

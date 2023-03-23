@@ -1,0 +1,54 @@
+мар. 23, 2023 8:16:01 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Willkommen! Das Logging beginnt nun für den TrafficMonitor.
+мар. 23, 2023 8:16:02 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficHauptmenü geöffnet
+мар. 23, 2023 8:16:04 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Button U1 wurde angeklickt.
+мар. 23, 2023 8:16:04 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt
+мар. 23, 2023 8:16:04 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Erstellung des Fenster TrafficMonitor U1
+мар. 23, 2023 8:16:04 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U1 ist nun geöffnet!
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U1 remain.
+мар. 23, 2023 8:16:06 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 52 index 0] for 60200234, Donauinsel, U1, ptMetro
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 52 index 0] for 60200234, Donauinsel, U1, ptMetro
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 52 index 0] for 60200234, Donauinsel, U1, ptMetro
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 52 index 0] for 60200234, Donauinsel, U1, ptMetro
+мар. 23, 2023 8:16:07 PM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
