@@ -15,6 +15,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
 /**
  * Class to create the customized 'TrafficWindow UX' window
  */
@@ -76,8 +77,9 @@ public class CreatePublicTransportLine {
         ButtonBar buttonBar = createButtonBar();
 
         Button btn_refresh = createButton();
-        btn_refresh.setText("> Aktualisieren");
+        btn_refresh.setText("> Get Info");
         btn_refresh.setTooltip(new Tooltip(btn_refresh_TooltipText_DE));
+
 
         Button btn_display = createButton();
         btn_display.setText("Anzeigen");
@@ -89,8 +91,8 @@ public class CreatePublicTransportLine {
         btn_deleteDisplay.setTooltip(new Tooltip(btn_deleteDisplay_TooltipText_DE));
 
         buttonBar.getButtons().add(btn_refresh);
-        buttonBar.getButtons().add(btn_display);
-        buttonBar.getButtons().add(btn_deleteDisplay);
+        //buttonBar.getButtons().add(btn_display);
+       //buttonBar.getButtons().add(btn_deleteDisplay);
 
         borderPane.setTop(anchorPane);
         borderPane.setCenter(tableView);
@@ -102,20 +104,25 @@ public class CreatePublicTransportLine {
          * setDisable(false): Button clickable
          * setDisable(true): Button greyed out (not clickable)
          */
-        btn_refresh.setDisable(false);
-        btn_display.setDisable(true);
-        btn_deleteDisplay.setDisable(true);
+        //btn_refresh.setDisable(false);
+        //btn_display.setDisable(true);
+        //btn_deleteDisplay.setDisable(true);
 
         /*
          * Button 'Aktualisieren'
          */
+
+
         btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
+
+
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
 
             resetInfoLabel(infoLabel);
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
+
 
             for (int i = 0; i < transportLineButtonsList.size(); i++) {
                 if (transportLineButtonsList.get(i).isSelected()) {
@@ -126,10 +133,10 @@ public class CreatePublicTransportLine {
 
             if (selectedButtons.size() > 0) {
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
-                btn_refresh.setDisable(true);
-                btn_refresh.setText("Aktualisieren >");
-                btn_display.setDisable(false);
-                btn_display.setText("> Anzeigen");
+                //btn_refresh.setDisable(true);
+                btn_refresh.setText("Refresh >");
+                //btn_display.setDisable(false);
+                //btn_display.setText("> Anzeigen");
 
                 for (int i = 0; i < selectedButtons.size(); i++) {
                     CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
@@ -145,12 +152,45 @@ public class CreatePublicTransportLine {
                             + Thread.currentThread().getId() + ", "
                             + Thread.currentThread().getName()
                             + "thread state: " + thread.getState() + " " + thread.isAlive());
+
+
                 }
+
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+
+                tableView.getItems().removeAll();
+                list.clear();
+
+                System.out.println("---------------------------------------------------------");
+                System.out.println("(1) Entries of list: ");
+                list.forEach(System.out::println);
+                System.out.println("---------------------------------------------------------");
+
+                for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                    if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
+                        list.add(jsonParseMain.getListLinesLineRecords().get(k));
+                    }
+                }
+
+                System.out.println("---------------------------------------------------------");
+                System.out.println("(2) Entries of list: ");
+                list.forEach(System.out::println);
+                System.out.println("---------------------------------------------------------");
+
+                tableView.refresh();
+
+
             } else {
                 infoLabel.setText("Keine Haltestelle ausgewählt.");
                 infoLabel.setStyle("-fx-background-color: #EE1D23; -fx-text-fill: #FFFFFF");
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Keine Haltestelle ausgewählt.");
             }
+
 
         });
 
@@ -178,7 +218,6 @@ public class CreatePublicTransportLine {
             for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
                 if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
                     list.add(jsonParseMain.getListLinesLineRecords().get(k));
-                    System.out.println("NASTOY TEST 2");
                 }
             }
 
@@ -227,6 +266,8 @@ public class CreatePublicTransportLine {
 
         return borderPane;
     }
+
+
 
     /**
      * Method to create a ButtonBar with specific padding settings.

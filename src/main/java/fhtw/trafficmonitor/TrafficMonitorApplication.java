@@ -89,7 +89,9 @@ public class TrafficMonitorApplication extends Application {
 
         } else {
             // launch the GUI
+
             launch(args);
+
         }
     }
 }
