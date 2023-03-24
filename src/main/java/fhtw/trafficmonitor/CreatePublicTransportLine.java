@@ -320,8 +320,6 @@ public class CreatePublicTransportLine {
         departureTimePlanned1.setPrefWidth(200);
         departureTimePlanned1.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned1"));
 
-        //myColumn.setCellValueFactory(new PropertyValueFactory<>("myDataProperty"));
-
         departureTimePlanned1.setCellFactory(column -> new TableCell<LineRecord, String>() {
 
 
@@ -330,15 +328,12 @@ public class CreatePublicTransportLine {
                 super.updateItem(item, empty);
                 setText(item);
 
-                setTextFill(item != null && item.contains("2") ? Color.RED : Color.BLACK);
+                setTextFill(item != null && item.contains("0") ? Color.RED : Color.BLACK);
 
 
 
             }
         });
-
-
-
 
 
         /*
