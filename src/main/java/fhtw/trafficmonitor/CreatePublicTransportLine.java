@@ -16,6 +16,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -159,7 +160,7 @@ public class CreatePublicTransportLine {
                 }
 
                 try {
-                    Thread.sleep(2500);
+                    Thread.sleep(2000);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -314,6 +315,7 @@ public class CreatePublicTransportLine {
         towards.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineTowards"));
 
 
+
         TableColumn departureTimePlanned1 = new TableColumn<>("Abfahrt Countdown in Minuten");
         departureTimePlanned1.setPrefWidth(200);
         departureTimePlanned1.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned1"));
@@ -321,15 +323,22 @@ public class CreatePublicTransportLine {
         //myColumn.setCellValueFactory(new PropertyValueFactory<>("myDataProperty"));
 
         departureTimePlanned1.setCellFactory(column -> new TableCell<LineRecord, String>() {
+
+
             @Override
             protected void updateItem(String item, boolean empty) {
                 super.updateItem(item, empty);
                 setText(item);
-                //int x = Integer.parseInt(item);
-                System.out.println("TUT"+item);
-                setTextFill(item != null && item.contains("0") ? Color.RED : Color.BLACK);
+
+                setTextFill(item != null && item.contains("2") ? Color.RED : Color.BLACK);
+
+
+
             }
         });
+
+
+
 
 
         /*
