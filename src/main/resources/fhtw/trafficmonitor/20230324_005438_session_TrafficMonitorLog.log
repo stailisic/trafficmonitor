@@ -1,0 +1,12 @@
+мар. 24, 2023 12:54:38 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Willkommen! Das Logging beginnt nun für den TrafficMonitor.
+мар. 24, 2023 12:54:38 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficHauptmenü geöffnet
+мар. 24, 2023 12:54:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Button U1 wurde angeklickt.
+мар. 24, 2023 12:54:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt
+мар. 24, 2023 12:54:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Erstellung des Fenster TrafficMonitor U1
+мар. 24, 2023 12:54:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U1 ist nun geöffnet!
