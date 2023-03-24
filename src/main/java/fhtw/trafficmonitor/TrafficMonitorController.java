@@ -9,11 +9,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static javafx.scene.layout.BorderWidths.*;
 
 /**
  * Class used for creating the UI of the first window,
@@ -143,6 +146,7 @@ public class TrafficMonitorController implements Initializable {
             stage.setScene(scene);
 
             btn_uX.setDisable(true);
+            //btn_uX.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
             label_uX.setText("TrafficMonitor window " + transportLineName.toUpperCase() + " is now open!");
 

@@ -1,5 +1,6 @@
 package fhtw.trafficmonitor;
 
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -8,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -157,7 +159,7 @@ public class CreatePublicTransportLine {
                 }
 
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(2500);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -310,9 +312,34 @@ public class CreatePublicTransportLine {
         TableColumn towards = new TableColumn("Richtung");
         towards.setPrefWidth(200);
         towards.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineTowards"));
+
+
         TableColumn departureTimePlanned1 = new TableColumn<>("Abfahrt Countdown in Minuten");
         departureTimePlanned1.setPrefWidth(200);
         departureTimePlanned1.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned1"));
+
+        //myColumn.setCellValueFactory(new PropertyValueFactory<>("myDataProperty"));
+
+        departureTimePlanned1.setCellFactory(column -> new TableCell<LineRecord, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                setText(item);
+                //int x = Integer.parseInt(item);
+                System.out.println("TUT"+item);
+                setTextFill(item != null && item.contains("0") ? Color.RED : Color.BLACK);
+            }
+        });
+
+
+        /*
+        if (departureTimePlanned1.equals(1)) {
+            departureTimePlanned1.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        } else
+            departureTimePlanned1.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+
+         */
+
         TableColumn departureTimePlanned2 = new TableColumn<>("Abfahrtszeiten");
         departureTimePlanned2.setPrefWidth(200);
         departureTimePlanned2.setCellValueFactory(new PropertyValueFactory<LineRecord, String>("lineDepartureTimePlanned2"));
@@ -325,6 +352,9 @@ public class CreatePublicTransportLine {
         tableView.getColumns().add(departureTimePlanned2);
 
         tableView.setItems(list);
+
+
+
 
         return tableView;
     }
