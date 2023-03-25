@@ -7,8 +7,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -56,6 +59,20 @@ public class TrafficMonitorController implements Initializable {
 
     @FXML
     private TextArea textArea_description;
+
+
+    @FXML
+    private TextField stationIn;
+
+
+    @FXML
+    void takeUserInput(MouseEvent event) {
+
+
+        String userInput = stationIn.getText();
+        System.out.println("--USER INPUT : "+userInput+"--");
+
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -143,6 +160,10 @@ public class TrafficMonitorController implements Initializable {
             CreatePublicTransportLine createPublicTransportLine = new CreatePublicTransportLine(transportLineName);
             Scene scene = new Scene(createPublicTransportLine.buildView(), 1024, 800);
             stage.setTitle("TrafficMonitor " + transportLineName.toUpperCase());
+            Image iconmine = new Image("C:\\Users\\nagel\\Desktop\\ODE\\prj3\\src\\main\\resources\\fhtw\\trafficmonitor\\wlicon.png");
+
+            stage.getIcons().add(iconmine);
+
             stage.setScene(scene);
 
             btn_uX.setDisable(true);

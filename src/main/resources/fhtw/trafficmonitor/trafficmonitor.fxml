@@ -40,7 +40,8 @@
                   <Label fx:id="label_u3" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <Label fx:id="label_u4" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Label fx:id="label_u6" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextField fx:id="stationIn" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onMouseClicked="#takeUserInput" text="Suchen" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                </children>
             </GridPane>
          </center>

@@ -1,12 +1,13 @@
 package fhtw.trafficmonitor;
 
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
@@ -20,6 +21,8 @@ import java.util.Arrays;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import static javafx.geometry.Pos.BOTTOM_CENTER;
 
 
 /**
@@ -82,9 +85,13 @@ public class CreatePublicTransportLine {
         Label infoLabel = createLabel();
         ButtonBar buttonBar = createButtonBar();
 
+
         Button btn_refresh = createButton();
-        btn_refresh.setText("> Get Info");
+        btn_refresh.setText("GET INFO");
         btn_refresh.setTooltip(new Tooltip(btn_refresh_TooltipText_DE));
+        btn_refresh.setStyle("-fx-background-color: blue; -fx-text-fill: white;-fx-font-weight: bold;");
+        ButtonBar.ButtonData buttonData = ButtonBar.ButtonData.LEFT;
+        ButtonBar.setButtonData(btn_refresh, buttonData);
 
 
         Button btn_display = createButton();
@@ -119,6 +126,7 @@ public class CreatePublicTransportLine {
          */
 
 
+
         btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
 
@@ -128,6 +136,9 @@ public class CreatePublicTransportLine {
             resetInfoLabel(infoLabel);
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
+
+            list.clear();
+
 
 
             for (int i = 0; i < transportLineButtonsList.size(); i++) {
@@ -140,14 +151,16 @@ public class CreatePublicTransportLine {
             if (selectedButtons.size() > 0) {
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
                 //btn_refresh.setDisable(true);
-                btn_refresh.setText("Refresh >");
+                btn_refresh.setText("REFRESH");
                 //btn_display.setDisable(false);
                 //btn_display.setText("> Anzeigen");
 
+
                 ScheduledExecutorService executor = Executors.newScheduledThreadPool(selectedButtons.size());
 
-
                 Runnable task = () -> {
+
+
 
                     for (int i = 0; i < selectedButtons.size(); i++) {
                         CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
@@ -163,7 +176,6 @@ public class CreatePublicTransportLine {
                                 + Thread.currentThread().getId() + ", "
                                 + Thread.currentThread().getName()
                                 + "thread state: " + thread.getState() + " " + thread.isAlive());
-
 
                     }
 
