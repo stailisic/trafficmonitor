@@ -205,7 +205,10 @@ public class CreatePublicTransportLine {
                     list.forEach(System.out::println);
                     System.out.println("---------------------------------------------------------");
 
+                    tableView.getItems().removeAll();
                     tableView.refresh();
+
+
 
 
                     System.out.println("Executing the task every 2 minutes with thread " + Thread.currentThread().getName());
