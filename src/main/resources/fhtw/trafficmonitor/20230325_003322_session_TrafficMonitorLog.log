@@ -1,0 +1,198 @@
+мар. 25, 2023 12:33:22 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Willkommen! Das Logging beginnt nun für den TrafficMonitor.
+мар. 25, 2023 12:33:23 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficHauptmenü geöffnet
+мар. 25, 2023 12:33:24 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Button U2 wurde angeklickt.
+мар. 25, 2023 12:33:24 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Haltestellen aus csv in ArrayList<RadioButton> 'transportLineButtonsList' hinzugefügt
+мар. 25, 2023 12:33:24 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Erstellung des Fenster TrafficMonitor U2
+мар. 25, 2023 12:33:24 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: TrafficMonitor Hauptmenü U2 ist nun geöffnet!
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U2 remain.
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 25, 2023 12:33:28 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U2 remain.
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 53 index 1] for 60200910, Aspern Nord, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 52 index 0] for 60200487, Hausfeldstraße, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 53 index 1] for 60200910, Aspern Nord, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 52 index 0] for 60200487, Hausfeldstraße, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 53 index 1] for 60200910, Aspern Nord, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 52 index 0] for 60200487, Hausfeldstraße, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 53 index 1] for 60200910, Aspern Nord, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 52 index 0] for 60200487, Hausfeldstraße, U2, ptMetro
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:29 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Aktualisieren geklickt
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: InfoLabel zurückgesetzt.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow beginnt mit Multithreading.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U2 remain.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U2 remain.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: thread.current: 34, JavaFX Application Threadthread state: RUNNABLE true
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION: Workflow 'run'
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Remove LineRecords that will not be used for display. LineRecords of lineName U2 remain.
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 61 index 0] for 60200473, Hardeggasse, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 61 index 0] for 60200473, Hardeggasse, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 61 index 0] for 60200473, Hardeggasse, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 61 index 0] for 60200473, Hardeggasse, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 64 index 1] for 60201278, Donauspital, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 64 index 1] for 60201278, Donauspital, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 64 index 1] for 60201278, Donauspital, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 64 index 1] for 60201278, Donauspital, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage0 >> Thread.current: 65 index 2] for 60200942, Seestadt, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage1 >> Thread.current: 65 index 2] for 60200942, Seestadt, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** getKeyStage2 >> Thread.current: 65 index 2] for 60200942, Seestadt, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************
+
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  ** Thread.current: 65 index 2] for 60200942, Seestadt, U2, ptMetro
+мар. 25, 2023 12:33:40 AM fhtw.trafficmonitor.Logging logTrafficMonitor
+INFORMATION:  *******************************************************************************

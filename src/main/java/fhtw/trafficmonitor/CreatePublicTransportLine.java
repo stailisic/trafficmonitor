@@ -17,6 +17,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -141,51 +144,64 @@ public class CreatePublicTransportLine {
                 //btn_display.setDisable(false);
                 //btn_display.setText("> Anzeigen");
 
-                for (int i = 0; i < selectedButtons.size(); i++) {
-                    CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
-                    csvReader.retrieveDiva();
-
-                    JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine, "ptMetro", i);
-                    Thread thread = new Thread(jsonParse);
-                    thread.setName("Thread_" + jsonParse.getLineName() + "_" + jsonParse.getDiva());
-                    thread.start();
-
-                    System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
-                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("thread.current: "
-                            + Thread.currentThread().getId() + ", "
-                            + Thread.currentThread().getName()
-                            + "thread state: " + thread.getState() + " " + thread.isAlive());
+                ScheduledExecutorService executor = Executors.newScheduledThreadPool(selectedButtons.size());
 
 
-                }
+                Runnable task = () -> {
 
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    throw new RuntimeException(ex);
-                }
+                    for (int i = 0; i < selectedButtons.size(); i++) {
+                        CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
+                        csvReader.retrieveDiva();
+
+                        JsonParse jsonParse = new JsonParse(csvReader.getDiva(), selectedButtons.get(i).getText(), this.transportLine, "ptMetro", i);
+                        Thread thread = new Thread(jsonParse);
+                        thread.setName("Thread_" + jsonParse.getLineName() + "_" + jsonParse.getDiva());
+                        thread.start();
+
+                        System.out.println("thread state: " + thread.getState() + " " + thread.isAlive());
+                        TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("thread.current: "
+                                + Thread.currentThread().getId() + ", "
+                                + Thread.currentThread().getName()
+                                + "thread state: " + thread.getState() + " " + thread.isAlive());
 
 
-                tableView.getItems().removeAll();
-                list.clear();
-
-                System.out.println("---------------------------------------------------------");
-                System.out.println("(1) Entries of list: ");
-                list.forEach(System.out::println);
-                System.out.println("---------------------------------------------------------");
-
-                for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
-                    if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
-                        list.add(jsonParseMain.getListLinesLineRecords().get(k));
                     }
-                }
 
-                System.out.println("---------------------------------------------------------");
-                System.out.println("(2) Entries of list: ");
-                list.forEach(System.out::println);
-                System.out.println("---------------------------------------------------------");
+                    try {
+                        Thread.sleep(2000);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
 
-                tableView.refresh();
+
+                    tableView.getItems().removeAll();
+                    list.clear();
+
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println("(1) Entries of list: ");
+                    list.forEach(System.out::println);
+                    System.out.println("---------------------------------------------------------");
+
+                    for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                        if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
+                            list.add(jsonParseMain.getListLinesLineRecords().get(k));
+                        }
+                    }
+
+                    System.out.println("---------------------------------------------------------");
+                    System.out.println("(2) Entries of list: ");
+                    list.forEach(System.out::println);
+                    System.out.println("---------------------------------------------------------");
+
+                    tableView.refresh();
+
+
+                    // Your code to be executed every 2 minutes goes here
+                    System.out.println("Executing the task every 2 minutes with thread " + Thread.currentThread().getName());
+                };
+
+                // Schedule the task to be executed every 2 minutes
+                executor.scheduleAtFixedRate(task, 0, 2, TimeUnit.MINUTES);
 
 
             } else {
