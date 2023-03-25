@@ -196,11 +196,9 @@ public class CreatePublicTransportLine {
                     tableView.refresh();
 
 
-                    // Your code to be executed every 2 minutes goes here
                     System.out.println("Executing the task every 2 minutes with thread " + Thread.currentThread().getName());
                 };
 
-                // Schedule the task to be executed every 2 minutes
                 executor.scheduleAtFixedRate(task, 0, 2, TimeUnit.MINUTES);
 
 
