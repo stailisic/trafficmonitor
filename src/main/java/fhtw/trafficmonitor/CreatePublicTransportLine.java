@@ -1,7 +1,11 @@
 package fhtw.trafficmonitor;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -11,6 +15,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -140,6 +145,26 @@ public class CreatePublicTransportLine {
 
 
             timerlabel.setText("15");
+            Timeline timeline = new Timeline();
+            timeline.setCycleCount(15);
+            timeline.getKeyFrames().add(new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                int count = 15;
+                @Override
+                public void handle(ActionEvent event) {
+                    count--;
+                    timerlabel.setText(Integer.toString(count));
+                }
+            }));
+            timeline.setOnFinished(new EventHandler<ActionEvent>() {
+                @Override
+                public void handle(ActionEvent event) {
+                    timerlabel.setText("15");
+                    btn_refresh.setDisable(false);
+                }
+            });
+            btn_refresh.setDisable(true);
+            timeline.play();
+
 
 
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
