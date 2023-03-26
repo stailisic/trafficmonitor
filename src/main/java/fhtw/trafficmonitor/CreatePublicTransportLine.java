@@ -163,6 +163,7 @@ public class CreatePublicTransportLine {
                                 k = -1;
                             }
                         }
+                        tableView.refresh();
                     }
 
                     list.clear();
