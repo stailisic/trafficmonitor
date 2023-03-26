@@ -3,11 +3,13 @@ package fhtw.trafficmonitor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 
 import java.io.BufferedReader;
@@ -80,7 +82,15 @@ public class CreatePublicTransportLine {
         AnchorPane anchorPane = createAnchorPane();
         TableView tableView = createTableView();
         Label infoLabel = createLabel();
+
         ButtonBar buttonBar = createButtonBar();
+
+        Label timerlabel = new Label();
+        timerlabel.setLayoutX(900);
+        timerlabel.setLayoutY(20);
+        timerlabel.setStyle("-fx-text-fill: blue;-fx-font-weight: bold;");
+
+
 
 
         Button btn_refresh = createButton();
@@ -108,6 +118,7 @@ public class CreatePublicTransportLine {
         borderPane.setCenter(tableView);
         borderPane.setBottom(buttonBar);
         anchorPane.getChildren().add(infoLabel);
+        anchorPane.getChildren().add(timerlabel);
 
         /*
          * Starting state of the executable bottom Buttons
@@ -126,11 +137,15 @@ public class CreatePublicTransportLine {
         btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
 
+
+
+            timerlabel.setText("15");
+
+
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
 
             resetInfoLabel(infoLabel);
 
-            //jsonParseMain.removeLineRecordsFromList();
 
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
@@ -145,7 +160,7 @@ public class CreatePublicTransportLine {
 
             if (selectedButtons.size() > 0) {
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
-                //btn_refresh.setDisable(true);
+
                 btn_refresh.setText("REFRESH");
                 //btn_display.setDisable(false);
                 //btn_display.setText("> Anzeigen");
@@ -448,6 +463,8 @@ public class CreatePublicTransportLine {
         label.setPadding(new Insets(10, 0, 10, 0));
         return label;
     }
+
+
 
     /**
      * Method to create a RadioButton with specific settings
