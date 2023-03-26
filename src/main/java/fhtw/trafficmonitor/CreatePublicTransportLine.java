@@ -170,16 +170,23 @@ public class CreatePublicTransportLine {
 
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
 
+            System.out.println("KNOP0 "+selectedButtons.size());
+
 
             for (int i = 0; i < transportLineButtonsList.size(); i++) {
                 if (transportLineButtonsList.get(i).isSelected()) {
                     selectedButtons.add(transportLineButtonsList.get(i));
                 }
             }
+
+            System.out.println("KNOP01 "+selectedButtons.size());
+
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Selektierte RadioButtons (Haltestellen) in neue ArrayList gespeichert.");
 
             if (selectedButtons.size() > 0) {
                 TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Workflow beginnt mit Multithreading.");
+
+                System.out.println("KNOP "+selectedButtons.size());
 
                 btn_refresh.setText("REFRESH");
                 //btn_display.setDisable(false);
@@ -190,6 +197,7 @@ public class CreatePublicTransportLine {
                 Runnable task = () -> {
 
 
+                    selectedButtons.clear();
                     if(jsonParseMain.getListLinesLineRecords().size()>0){
 
                         for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
@@ -199,9 +207,22 @@ public class CreatePublicTransportLine {
                             }
                         }
                         tableView.getItems().removeAll();
+
                     }
 
                     list.clear();
+                    System.out.println("KNOP2 "+selectedButtons.size());
+
+
+
+                    for (int i = 0; i < transportLineButtonsList.size(); i++) {
+                        if (transportLineButtonsList.get(i).isSelected()) {
+                            selectedButtons.add(transportLineButtonsList.get(i));
+                        }
+                    }
+
+                    System.out.println("KNOP3 "+selectedButtons.size());
+
 
                     for (int i = 0; i < selectedButtons.size(); i++) {
                         CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
@@ -247,9 +268,7 @@ public class CreatePublicTransportLine {
                     System.out.println("---------------------------------------------------------");
 
 
-
                     tableView.refresh();
-
 
 
                     System.out.println("Executing the task every 2 minutes with thread " + Thread.currentThread().getName());
