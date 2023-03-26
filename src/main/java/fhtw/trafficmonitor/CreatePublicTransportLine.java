@@ -153,12 +153,9 @@ public class CreatePublicTransportLine {
                     timerlabel.setText(Integer.toString(count));
                 }
             }));
-            timeline.setOnFinished(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-                    timerlabel.setText("15");
-                    btn_refresh.setDisable(false);
-                }
+            timeline.setOnFinished(event -> {
+                timerlabel.setText("15");
+                btn_refresh.setDisable(false);
             });
             btn_refresh.setDisable(true);
             timeline.play();
