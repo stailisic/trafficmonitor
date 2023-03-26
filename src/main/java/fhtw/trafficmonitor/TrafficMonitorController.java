@@ -65,15 +65,6 @@ public class TrafficMonitorController implements Initializable {
     private TextField stationIn;
 
 
-    @FXML
-    void takeUserInput(MouseEvent event) {
-
-
-        String userInput = stationIn.getText();
-        System.out.println("--USER INPUT : "+userInput+"--");
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String textArea_description_DE = "Bedienungsanleitung:\n" +
@@ -146,6 +137,28 @@ public class TrafficMonitorController implements Initializable {
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
             openTrafficMonitorWindow(transportLineName, btn_u6, label_u6);
         });
+    }
+
+
+    @FXML
+    void takeUserInput(MouseEvent event) {
+
+        String userInput = stationIn.getText();
+        System.out.println("--USER INPUT : "+userInput+"--");
+
+        //for loop in csv
+        if(userInput.equals("hi")){
+
+            System.out.println("TEST");
+
+            String transportLineName = "u1";
+            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+            //label_u1.setText("Button " + transportLineName.toUpperCase() + " has been pressed.");
+            openTrafficMonitorWindow(transportLineName, btn_u1, label_u1);
+
+
+        }
+
     }
 
     /**
