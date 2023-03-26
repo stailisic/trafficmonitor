@@ -123,19 +123,17 @@ public class CreatePublicTransportLine {
          */
 
 
-
         btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
-
 
             TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Aktualisieren geklickt");
 
             resetInfoLabel(infoLabel);
 
+            //jsonParseMain.removeLineRecordsFromList();
+
+
             ArrayList<RadioButton> selectedButtons = new ArrayList<>();
-
-            list.clear();
-
 
 
             for (int i = 0; i < transportLineButtonsList.size(); i++) {
@@ -152,12 +150,22 @@ public class CreatePublicTransportLine {
                 //btn_display.setDisable(false);
                 //btn_display.setText("> Anzeigen");
 
-
                 ScheduledExecutorService executor = Executors.newScheduledThreadPool(selectedButtons.size());
 
                 Runnable task = () -> {
 
 
+                    if(jsonParseMain.getListLinesLineRecords().size()>0){
+
+                        for (int k = 0; k < jsonParseMain.getListLinesLineRecords().size(); k++) {
+                            if (jsonParseMain.getListLinesLineRecords().get(k).getLineName().equals(this.transportLine)) {
+                                jsonParseMain.getListLinesLineRecords().remove(k);
+                                k = -1;
+                            }
+                        }
+                    }
+
+                    list.clear();
 
                     for (int i = 0; i < selectedButtons.size(); i++) {
                         CsvReader csvReader = new CsvReader(selectedButtons.get(i).getText());
@@ -202,9 +210,13 @@ public class CreatePublicTransportLine {
                     list.forEach(System.out::println);
                     System.out.println("---------------------------------------------------------");
 
-                    tableView.getItems().removeAll();
-                    tableView.refresh();
 
+                    try {
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    tableView.refresh();
 
 
 
