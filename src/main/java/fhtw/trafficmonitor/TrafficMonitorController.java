@@ -16,6 +16,10 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -146,7 +150,38 @@ public class TrafficMonitorController implements Initializable {
         String userInput = stationIn.getText();
         System.out.println("--USER INPUT : "+userInput+"--");
 
-        //for loop in csv
+        String path1 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
+        String path2 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
+        String path3 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv";
+        String path4 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
+        String path6 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv";
+
+        File[] files = { new File(path1), new File(path2), new File(path3), new File(path4), new File(path6),};
+
+
+        //String searchText = "Schönbrunn";
+        System.out.println("Files found: "+ files.length);
+
+
+        for (File file : files) {
+
+            String filePath = file.getPath();
+            System.out.println(filePath);
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.contains(userInput)) {
+                        System.out.println("Found \"" + userInput + "\" in file: " + file.getName());
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading file: " + file.getName());
+                e.printStackTrace();
+            }
+        }
+
+
         if(userInput.equals("hi")){
 
             System.out.println("TEST");
