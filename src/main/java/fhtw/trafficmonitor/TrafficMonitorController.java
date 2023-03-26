@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static javafx.scene.layout.BorderWidths.*;
@@ -150,28 +151,76 @@ public class TrafficMonitorController implements Initializable {
         String userInput = stationIn.getText();
         System.out.println("--USER INPUT : "+userInput+"--");
 
-        String path1 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u1_linie.csv";
-        String path2 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u2_linie.csv";
-        String path3 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u3_linie.csv";
-        String path4 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u4_linie.csv";
-        String path6 = "src/main/resources/fhtw/trafficmonitor/haltestellennamen_u6_linie.csv";
+        final String path1 = "src\\main\\resources\\fhtw\\trafficmonitor\\haltestellennamen_u1_linie.csv";
+        final String path2 = "src\\main\\resources\\fhtw\\trafficmonitor\\haltestellennamen_u2_linie.csv";
+        final String path3 = "src\\main\\resources\\fhtw\\trafficmonitor\\haltestellennamen_u3_linie.csv";
+        final String path4 = "src\\main\\resources\\fhtw\\trafficmonitor\\haltestellennamen_u4_linie.csv";
+        final String path6 = "src\\main\\resources\\fhtw\\trafficmonitor\\haltestellennamen_u6_linie.csv";
 
-        File[] files = { new File(path1), new File(path2), new File(path3), new File(path4), new File(path6),};
+        System.out.println("PATH1 "+path1);
+
+        File[] files = { new File(path1), new File(path2), new File(path3), new File(path4), new File(path6)};
+
+
+        ArrayList<String> stringList = new ArrayList<String>();
 
 
         //String searchText = "Schönbrunn";
-        System.out.println("Files found: "+ files.length);
-
+        //System.out.println("Files found: "+ files.length);
 
         for (File file : files) {
 
             String filePath = file.getPath();
-            System.out.println(filePath);
+            //System.out.println(filePath);
+
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (line.contains(userInput)) {
-                        System.out.println("Found \"" + userInput + "\" in file: " + file.getName());
+                        System.out.println("--- Found " + userInput + " in file: " + file.getName()+" ---");
+                        System.out.println("--- Found path to " + userInput + " in file: " + filePath+" ---");
+                        stringList.add(filePath);
+
+
+                        if(stringList.size()>1){
+
+                            System.out.println("More than two");
+
+                        }
+                        else{
+
+
+                            int dayNumber;
+
+                            switch (filePath) {
+                                case path1:
+                                {
+
+                                    dayNumber = 1;
+                                    System.out.printf("\n__ %d__\n", dayNumber);
+                                    break;}
+
+                                case path2:
+                                    dayNumber = 2;
+                                    break;
+                                case path3:
+                                    dayNumber = 3;
+                                    break;
+                                case path4:
+                                    dayNumber = 4;
+                                    break;
+                                case path6:
+                                    dayNumber = 5;
+                                    break;
+
+                                default:
+                                    throw new IllegalStateException("Unexpected value: " + filePath);
+                            }
+
+
+                        }
+
+
                         break;
                     }
                 }
@@ -180,7 +229,6 @@ public class TrafficMonitorController implements Initializable {
                 e.printStackTrace();
             }
         }
-
 
         if(userInput.equals("hi")){
 
