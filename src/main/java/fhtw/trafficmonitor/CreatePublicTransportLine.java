@@ -142,8 +142,6 @@ public class CreatePublicTransportLine {
         btn_refresh.setOnAction(e -> {
             //System.out.println("Aktualisieren geklickt");
 
-
-
             timerlabel.setText("15");
             Timeline timeline = new Timeline();
             timeline.setCycleCount(15);
@@ -203,7 +201,7 @@ public class CreatePublicTransportLine {
                                 k = -1;
                             }
                         }
-                        tableView.refresh();
+                        tableView.getItems().removeAll();
                     }
 
                     list.clear();
@@ -252,11 +250,7 @@ public class CreatePublicTransportLine {
                     System.out.println("---------------------------------------------------------");
 
 
-                    try {
-                        Thread.sleep(500);
-                    } catch (InterruptedException ex) {
-                        throw new RuntimeException(ex);
-                    }
+
                     tableView.refresh();
 
 
