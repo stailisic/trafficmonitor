@@ -162,8 +162,9 @@ public class TrafficMonitorController implements Initializable {
         File[] files = { new File(path1), new File(path2), new File(path3), new File(path4), new File(path6)};
 
 
-        ArrayList<String> stringList = new ArrayList<String>();
+        ArrayList<String> stringList = new ArrayList<>();
 
+        int loopflag=0;
 
         //String searchText = "Schönbrunn";
         //System.out.println("Files found: "+ files.length);
@@ -172,53 +173,92 @@ public class TrafficMonitorController implements Initializable {
 
             String filePath = file.getPath();
             //System.out.println(filePath);
+            loopflag +=1;
+
 
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
+
                     if (line.contains(userInput)) {
                         System.out.println("--- Found " + userInput + " in file: " + file.getName()+" ---");
                         System.out.println("--- Found path to " + userInput + " in file: " + filePath+" ---");
                         stringList.add(filePath);
 
 
-                        if(stringList.size()>1){
+
+                        System.out.println("Size of arr " + stringList.size());
+                        System.out.println(stringList);
+                        System.out.printf("\nLOOP: %d\n", loopflag);
+
+                        if(stringList.size()>1 && loopflag==stringList.size()){
 
                             System.out.println("More than two");
 
                         }
-                        else{
-
-
-                            int dayNumber;
-
+                        else if (stringList.size()==1 && loopflag >1){
                             switch (filePath) {
                                 case path1:
                                 {
 
-                                    dayNumber = 1;
-                                    System.out.printf("\n__ %d__\n", dayNumber);
-                                    break;}
+                                    String transportLineName = "u1";
+                                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+                                    //label_u1.setText("Button " + transportLineName.toUpperCase() + " has been pressed.");
+                                    openTrafficMonitorWindow(transportLineName, btn_u1, label_u1);
+
+                                    break;
+
+
+                                }
 
                                 case path2:
-                                    dayNumber = 2;
+                                {
+                                    String transportLineName = "u2";
+                                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+                                    openTrafficMonitorWindow(transportLineName, btn_u2, label_u2);
                                     break;
+
+                                }
+
+
                                 case path3:
-                                    dayNumber = 3;
+
+                                {
+                                    String transportLineName = "u3";
+                                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+                                    openTrafficMonitorWindow(transportLineName, btn_u3, label_u3);
                                     break;
+
+
+                                }
+
                                 case path4:
-                                    dayNumber = 4;
+                                {
+                                    String transportLineName = "u4";
+                                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+                                    openTrafficMonitorWindow(transportLineName, btn_u4, label_u4);
                                     break;
+
+
+                                }
+
+
                                 case path6:
-                                    dayNumber = 5;
+
+                                {
+                                    String transportLineName = "u6";
+                                    TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
+                                    openTrafficMonitorWindow(transportLineName, btn_u6, label_u6);
                                     break;
+
+                                }
+
 
                                 default:
                                     throw new IllegalStateException("Unexpected value: " + filePath);
                             }
-
-
                         }
+
 
 
                         break;
@@ -230,17 +270,6 @@ public class TrafficMonitorController implements Initializable {
             }
         }
 
-        if(userInput.equals("hi")){
-
-            System.out.println("TEST");
-
-            String transportLineName = "u1";
-            TrafficMonitorApplication.trafficMonitorLog.logTrafficMonitor("Button " + transportLineName.toUpperCase() + " wurde angeklickt.");
-            //label_u1.setText("Button " + transportLineName.toUpperCase() + " has been pressed.");
-            openTrafficMonitorWindow(transportLineName, btn_u1, label_u1);
-
-
-        }
 
     }
 
