@@ -1,5 +1,5 @@
 
-##Updates
+## Updates
 1. Buttons zusammengeführ zu einer vereinten Get/Refresh Funktion
 2. Automatisches Refresh jede 2 Minuten
 3. Networking + Zugriffsrechte: Exceptionhandling bei Serverfehlern, zu schneller Eingabe, Serverüberladung, 
