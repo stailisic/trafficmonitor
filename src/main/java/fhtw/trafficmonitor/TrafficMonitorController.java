@@ -152,6 +152,10 @@ public class TrafficMonitorController implements Initializable {
     @FXML
     private Label uxLabel;
 
+    /**
+     * Method to search for user input and open the corresponding window. If multiple options apply, a hint is printed
+     * @param event e.g. u1, u2, u3, u4, u6
+     */
 
     @FXML
     void takeUserInput(MouseEvent event) {
@@ -335,6 +339,10 @@ public class TrafficMonitorController implements Initializable {
 
 
             }
+            else
+                uxLabel.setText("fehlerhafte Eingabe");
+
+
 
 
 

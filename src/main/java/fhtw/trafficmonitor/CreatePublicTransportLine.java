@@ -417,21 +417,13 @@ public class CreatePublicTransportLine {
                 super.updateItem(item, empty);
                 setText(item);
 
-                setTextFill(item != null && item.contains("0") ? Color.RED : Color.BLACK);
+                setTextFill(item != null  ? Color.RED : Color.BLACK);
 
 
 
             }
         });
 
-
-        /*
-        if (departureTimePlanned1.equals(1)) {
-            departureTimePlanned1.setStyle("-fx-background-color: green; -fx-text-fill: white;");
-        } else
-            departureTimePlanned1.setStyle("-fx-background-color: red; -fx-text-fill: white;");
-
-         */
 
         TableColumn departureTimePlanned2 = new TableColumn<>("Abfahrtszeiten");
         departureTimePlanned2.setPrefWidth(200);

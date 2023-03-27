@@ -3,27 +3,35 @@
     <output-path>$PROJECT_DIR$/out/artifacts/trafficmonitor_jar</output-path>
     <root id="archive" name="trafficmonitor.jar">
       <element id="module-output" name="trafficmonitor" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/19/javafx-fxml-19.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/19/javafx-fxml-19-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/19/javafx-controls-19.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19/javafx-base-19-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19/javafx-graphics-19-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20220924/json-20220924.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19/javafx-graphics-19.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/19/javafx-controls-19-win.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19/javafx-base-19.jar" path-in-jar="/" />
-      <element id="library" level="project" name="json-20220924-javadoc" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/../json-20220924.jar" path-in-jar="/" />
-      <element id="library" level="project" name="Maven: org.json:json:20220924" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:19" />
-      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:19" />
-      <element id="library" level="project" name="json-20220924" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PATH_TO_FX$/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../javaall/jdk-20_windows-x64_bin/jdk-20/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../../javaall/jdk-20_windows-x64_bin/jdk-20/lib/jrt-fs.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20230227/json-20230227.jar" path-in-jar="/" />
+      <element id="library" level="project" name="lib" />
+      <element id="library" level="project" name="Maven: org.json:json:20230227" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19.0.2.1/javafx-base-19.0.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/19.0.2.1/javafx-base-19.0.2.1-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/19.0.2.1/javafx-controls-19.0.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/19.0.2.1/javafx-controls-19.0.2.1-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/19.0.2.1/javafx-fxml-19.0.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-fxml/19.0.2.1/javafx-fxml-19.0.2.1-win.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19.0.2.1/javafx-graphics-19.0.2.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-graphics/19.0.2.1/javafx-graphics-19.0.2.1-win.jar" path-in-jar="/" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:19.0.2.1" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:19.0.2.1" />
     </root>
   </artifact>
 </component>

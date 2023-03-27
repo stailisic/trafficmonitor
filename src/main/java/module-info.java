@@ -7,6 +7,8 @@
 module fhtw.trafficmonitor {
     requires javafx.controls;
     requires javafx.fxml;
+    requires javafx.base;
+    requires javafx.graphics;
     //requires json;
     requires org.json;
     requires java.logging;
