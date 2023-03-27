@@ -14,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -145,6 +146,13 @@ public class TrafficMonitorController implements Initializable {
     }
 
 
+
+
+
+    @FXML
+    private Label uxLabel;
+
+
     @FXML
     void takeUserInput(MouseEvent event) {
 
@@ -159,11 +167,11 @@ public class TrafficMonitorController implements Initializable {
 
         System.out.println("PATH1 "+path1);
 
+
         File[] files = { new File(path1), new File(path2), new File(path3), new File(path4), new File(path6)};
 
 
         ArrayList<String> stringList = new ArrayList<>();
-
 
         int loopflag=0;
 
@@ -177,9 +185,94 @@ public class TrafficMonitorController implements Initializable {
 
             loopflag +=1;
 
-            if(stringList.size()==1 && loopflag == files.length)
+            System.out.println("BZZZ" + loopflag);
+
+            boolean lastU = stringList.contains(path6);
+
+
+
+            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+
+                    if (line.contains(userInput)) {
+                        System.out.println("--- Found " + userInput + " in file: " + file.getName()+" ---");
+                        System.out.println("--- Found path to " + userInput + " in file: " + filePath+" ---");
+                        stringList.add(filePath);
+
+
+                        break;
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error reading file: " + file.getName());
+                e.printStackTrace();
+            }
+
+
+            //here:
+
+            if(stringList.size()>1 && loopflag==files.length) {
+
+                ArrayList<String> linien = new ArrayList<>();
+
+                for(String s: stringList){
+
+                    switch (s)
+                    {
+                        case path1:{
+                            s = "U1";
+                            linien.add(s);
+                            break;
+
+                        }
+
+                        case path2:{
+
+                            s = "U2";
+                            linien.add(s);
+                            break;
+
+                        }
+
+                        case path3:{
+
+                            s = "U3";
+                            linien.add(s);
+                            break;
+                        }
+
+                        case path4:{
+
+                            s = "U4";
+                            linien.add(s);
+                            break;
+                        }
+
+                        case path6:{
+
+                            s = "U6";
+                            linien.add(s);
+                            System.out.println("TEST6 ");
+                            System.out.println(linien);
+                            break;
+
+                        }
+                    }
+
+                }
+
+                String allLines = String.join(",", linien);
+
+
+                uxLabel.setText("Mehrere Linien möglich: "+ allLines);
+
+
+
+            }
+
+            else if(stringList.size()==1 && loopflag == files.length)
             {
-                System.out.println("true!!!!!");
                 filePath = stringList.get(0);
 
                 switch (filePath) {
@@ -241,29 +334,9 @@ public class TrafficMonitorController implements Initializable {
                 }
 
 
-            } else if (stringList.size()>1 && loopflag==files.length) {
-
-                System.out.println("More than two");
-
             }
 
-            try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-                String line;
-                while ((line = reader.readLine()) != null) {
 
-                    if (line.contains(userInput)) {
-                        System.out.println("--- Found " + userInput + " in file: " + file.getName()+" ---");
-                        System.out.println("--- Found path to " + userInput + " in file: " + filePath+" ---");
-                        stringList.add(filePath);
-
-
-                        break;
-                    }
-                }
-            } catch (IOException e) {
-                System.err.println("Error reading file: " + file.getName());
-                e.printStackTrace();
-            }
 
         }
 
